@@ -1,6 +1,6 @@
 {
   "name": "lol",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "LOL JS Utils",
   "types": "js",
   "scripts": {
