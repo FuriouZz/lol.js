@@ -1,0 +1,26 @@
+{
+  "name": "utils",
+  "version": "0.0.1",
+  "description": "Javascript Utils",
+  "types": "js",
+  "scripts": {
+    "tsc": "tsc",
+    "test": "mocha -r ts-node/register ./test/**/*.spec.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "repository": {
+    "url": "https://github.com/wk-js/utils"
+  },
+  "dependencies": {
+    "filelist": "github:FuriouZz/filelist",
+    "lol": "github:makemepulse/lol.js#latest",
+    "ts-node": "^8.3.0"
+  },
+  "devDependencies": {
+    "@types/mocha": "^5.2.7",
+    "@types/node": "9.4.0",
+    "mocha": "^6.1.4",
+    "typescript": "3.4.3"
+  }
+}
