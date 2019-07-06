@@ -1,7 +1,7 @@
 import * as Fs from "fs";
 import { FileList } from "filelist";
 import { normalize, dirname, isAbsolute, join } from "path";
-import { promise } from "./promise";
+import { promise } from "../promise";
 import { spawnSync } from "child_process";
 
 FileList.debug = false

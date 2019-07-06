@@ -45,7 +45,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var Fs = __importStar(require("fs"));
 var filelist_1 = require("filelist");
 var path_1 = require("path");
-var promise_1 = require("./promise");
+var promise_1 = require("../promise");
 var child_process_1 = require("child_process");
 filelist_1.FileList.debug = false;
 function isFile(path) {
