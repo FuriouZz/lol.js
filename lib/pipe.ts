@@ -23,7 +23,7 @@ function _pipe_async<T, S>(value: T | Promise<T>, action: (v: T, ...parameters: 
 
   return {
     pipe<U>(callback: (v: S, ...parameters: any[]) => U, ...parameters: any[]) {
-      return _pipe_async(promise, callback, ...parameters)
+      return _pipe_async(promise, callback, parameters)
     },
 
     value: () => promise
@@ -37,7 +37,7 @@ function _pipe_sync<T, S>(value: T, action: (v: T, ...parameters: any[]) => S, p
 
   return {
     pipe<U>(callback: (v: S, ...parameters: any[]) => U, ...parameters: any[]) {
-      return _pipe_sync(result, callback, ...parameters)
+      return _pipe_sync(result, callback, parameters)
     },
 
     value: () => result

@@ -38,7 +38,7 @@ function _pipe_async(value, action, parameters) {
             for (var _i = 1; _i < arguments.length; _i++) {
                 parameters[_i - 1] = arguments[_i];
             }
-            return _pipe_async.apply(void 0, __spread([promise, callback], parameters));
+            return _pipe_async(promise, callback, parameters);
         },
         value: function () { return promise; }
     };
@@ -52,7 +52,7 @@ function _pipe_sync(value, action, parameters) {
             for (var _i = 1; _i < arguments.length; _i++) {
                 parameters[_i - 1] = arguments[_i];
             }
-            return _pipe_sync.apply(void 0, __spread([result, callback], parameters));
+            return _pipe_sync(result, callback, parameters);
         },
         value: function () { return result; }
     };

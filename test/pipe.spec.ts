@@ -33,15 +33,15 @@ describe('Pipe', () => {
       }
     )
 
-    function doSomething(s: string, nothing: boolean) {
-      return s
+    function doSomething(s: string, ss: string) {
+      return s.replace(ss, '')
     }
 
     assert.equal(
       await hello
-      .pipe(doSomething, false)
+      .pipe(doSomething, "World")
       .value(),
-      'Hello World'
+      'Hello '
     )
   })
 
