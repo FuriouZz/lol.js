@@ -20,7 +20,7 @@ var __spread = (this && this.__spread) || function () {
     return ar;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-function _pipe(value, action, parameters) {
+function _pipe_async(value, action, parameters) {
     parameters = parameters || [];
     var promise = new Promise(function (resolve) {
         if (value instanceof Promise) {
@@ -38,12 +38,30 @@ function _pipe(value, action, parameters) {
             for (var _i = 1; _i < arguments.length; _i++) {
                 parameters[_i - 1] = arguments[_i];
             }
-            return _pipe.apply(void 0, __spread([promise, callback], parameters));
+            return _pipe_async.apply(void 0, __spread([promise, callback], parameters));
         },
         value: function () { return promise; }
     };
 }
-function pipe(value) {
-    return _pipe(value, function (v) { return v; });
+function _pipe_sync(value, action, parameters) {
+    parameters = parameters || [];
+    var result = action.apply(void 0, __spread([value], parameters));
+    return {
+        pipe: function (callback) {
+            var parameters = [];
+            for (var _i = 1; _i < arguments.length; _i++) {
+                parameters[_i - 1] = arguments[_i];
+            }
+            return _pipe_sync.apply(void 0, __spread([result, callback], parameters));
+        },
+        value: function () { return result; }
+    };
 }
-exports.pipe = pipe;
+function pipe_async(value) {
+    return _pipe_async(value, function (v) { return v; });
+}
+exports.pipe_async = pipe_async;
+function pipe_sync(value) {
+    return _pipe_sync(value, function (v) { return v; });
+}
+exports.pipe_sync = pipe_sync;

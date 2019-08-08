@@ -1,9 +1,14 @@
-interface Pipe<S> {
-  pipe<U>(callback: (v: S, ...parameters: any[]) => U, ...parameters: any[]) : Pipe<U>
+interface PipeAsync<S> {
+  pipe<U>(callback: (v: S, ...parameters: any[]) => U, ...parameters: any[]) : PipeAsync<U>
   value() : Promise<S>
 }
 
-function _pipe<T, S>(value: T | Promise<T>, action: (v: T, ...parameters: any[]) => S | Promise<S>, parameters?: any[]) : Pipe<S> {
+interface PipeSync<S> {
+  pipe<U>(callback: (v: S, ...parameters: any[]) => U, ...parameters: any[]) : PipeSync<U>
+  value() : S
+}
+
+function _pipe_async<T, S>(value: T | Promise<T>, action: (v: T, ...parameters: any[]) => S | Promise<S>, parameters?: any[]) : PipeAsync<S> {
   parameters = parameters || []
 
   const promise = new Promise<S>((resolve) => {
@@ -18,13 +23,31 @@ function _pipe<T, S>(value: T | Promise<T>, action: (v: T, ...parameters: any[])
 
   return {
     pipe<U>(callback: (v: S, ...parameters: any[]) => U, ...parameters: any[]) {
-      return _pipe(promise, callback, ...parameters)
+      return _pipe_async(promise, callback, ...parameters)
     },
 
     value: () => promise
   }
 }
 
-export function pipe<T>(value: T) {
-  return _pipe(value, (v) => v)
+function _pipe_sync<T, S>(value: T, action: (v: T, ...parameters: any[]) => S, parameters?: any[]) : PipeSync<S> {
+  parameters = parameters || []
+
+  const result = action(value, ...parameters)
+
+  return {
+    pipe<U>(callback: (v: S, ...parameters: any[]) => U, ...parameters: any[]) {
+      return _pipe_sync(result, callback, ...parameters)
+    },
+
+    value: () => result
+  }
+}
+
+export function pipe_async<T>(value: T) {
+  return _pipe_async(value, (v) => v)
+}
+
+export function pipe_sync<T>(value: T) {
+  return _pipe_sync(value, (v) => v)
 }

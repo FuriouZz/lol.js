@@ -1,13 +1,13 @@
 import "mocha";
 import * as assert from "assert";
-import { pipe } from "../lib/pipe";
+import { pipe_async } from "../lib/pipe";
 import { toUnderscore } from "../lib/string"
 
 describe('Pipe', () => {
 
   it('pipe', async () => {
 
-    const hello = pipe('Hello World')
+    const hello = pipe_async('Hello World')
 
     assert.equal(
       await hello
