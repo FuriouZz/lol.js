@@ -32,6 +32,17 @@ describe('Pipe', () => {
         value: 'hello world'
       }
     )
+
+    function doSomething(s: string, nothing: boolean) {
+      return s
+    }
+
+    assert.equal(
+      await hello
+      .pipe(doSomething, false)
+      .value(),
+      'Hello World'
+    )
   })
 
 })

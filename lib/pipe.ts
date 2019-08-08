@@ -1,5 +1,5 @@
 interface Pipe<S> {
-  pipe<U>(callback: (v: S) => U, ...parameters: any[]) : Pipe<U>
+  pipe<U>(callback: (v: S, ...parameters: any[]) => U, ...parameters: any[]) : Pipe<U>
   value() : Promise<S>
 }
 
@@ -17,7 +17,7 @@ function _pipe<T, S>(value: T | Promise<T>, action: (v: T, ...parameters: any[])
   })
 
   return {
-    pipe<U>(callback: (v: S) => U, ...parameters: any[]) {
+    pipe<U>(callback: (v: S, ...parameters: any[]) => U, ...parameters: any[]) {
       return _pipe(promise, callback, ...parameters)
     },
 
