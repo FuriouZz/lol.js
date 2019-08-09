@@ -1,9 +1,9 @@
-interface PipeAsync<S> {
+export interface PipeAsync<S> {
   pipe<U>(callback: (v: S, ...parameters: any[]) => U, ...parameters: any[]) : PipeAsync<U>
   value() : Promise<S>
 }
 
-interface PipeSync<S> {
+export interface PipeSync<S> {
   pipe<U>(callback: (v: S, ...parameters: any[]) => U, ...parameters: any[]) : PipeSync<U>
   value() : S
 }
