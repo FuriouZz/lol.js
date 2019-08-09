@@ -7,9 +7,10 @@ export interface CacheItem<T> {
 export declare class Cache<T> {
     items: Record<string, DeferredPromise<T>>;
     get(key: string): DeferredPromise<T>;
-    set(key: string, resolve: () => T | Promise<T>): Promise<T | DeferredPromise<T>>;
+    set(key: string, resolve: () => T | Promise<T>): Promise<T>;
     create(key: string): DeferredPromise<T>;
-    createBatch(keys: string[], to_object?: boolean): Record<string, DeferredPromise<T>> | DeferredPromise<T>[];
+    createBatch(keys: string[], to_object?: boolean): DeferredPromise<T>[];
+    createBatchByKey(keys: string[]): Record<string, DeferredPromise<T>>;
     remove(key: string): void;
     removeBatch(keys: string[]): void;
     resolve(key: string, value: T): void;

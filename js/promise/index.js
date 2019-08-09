@@ -18,3 +18,7 @@ function defer() {
     return def;
 }
 exports.defer = defer;
+function defer_all(promises) {
+    return Promise.all(promises.map(function (p) { return p.promise; }));
+}
+exports.defer_all = defer_all;

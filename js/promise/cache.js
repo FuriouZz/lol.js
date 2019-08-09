@@ -50,7 +50,7 @@ var Cache = /** @class */ (function () {
                 switch (_c.label) {
                     case 0:
                         if (this.items[key])
-                            return [2 /*return*/, this.items[key]];
+                            return [2 /*return*/, this.items[key].promise];
                         d = this.create(key);
                         _b = (_a = d).resolve;
                         return [4 /*yield*/, resolve()];
@@ -68,22 +68,16 @@ var Cache = /** @class */ (function () {
     };
     Cache.prototype.createBatch = function (keys, to_object) {
         if (to_object === void 0) { to_object = false; }
-        var records;
-        if (to_object) {
-            records = {};
-        }
-        else {
-            records = [];
-        }
+        var records = [];
         for (var i = 0; i < keys.length; i++) {
-            var key = keys[i];
-            var item = this.create(key);
-            if (to_object) {
-                records[key] = item;
-            }
-            else {
-                records.push(item);
-            }
+            records.push(this.create(keys[i]));
+        }
+        return records;
+    };
+    Cache.prototype.createBatchByKey = function (keys) {
+        var records = {};
+        for (var i = 0; i < keys.length; i++) {
+            records[keys[i]] = this.create(keys[i]);
         }
         return records;
     };

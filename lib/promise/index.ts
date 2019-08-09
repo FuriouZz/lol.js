@@ -28,3 +28,7 @@ export function defer<T>(): DeferredPromise<T> {
 
   return def as DeferredPromise<T>
 }
+
+export function defer_all<T>( promises: DeferredPromise<T>[] ) {
+  return Promise.all(promises.map(p => p.promise))
+}

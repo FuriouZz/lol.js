@@ -15,7 +15,7 @@ export class Cache<T> {
   }
 
   async set( key: string, resolve: () => T | Promise<T> ) {
-    if (this.items[key]) return this.items[key]
+    if (this.items[key]) return this.items[key].promise
 
     const d = this.create( key )
     d.resolve( await resolve() )
@@ -29,22 +29,20 @@ export class Cache<T> {
   }
 
   createBatch( keys: string[], to_object = false ) {
-    let records: Record<string, DeferredPromise<T>> | DeferredPromise<T>[]
-    if (to_object) {
-      records = {}
-    } else {
-      records = []
-    }
+    let records: DeferredPromise<T>[] = []
 
     for (let i = 0; i < keys.length; i++) {
-      const key = keys[i]
-      const item = this.create(key)
+      records.push( this.create(keys[i]) )
+    }
 
-      if (to_object) {
-        (records as Record<string, DeferredPromise<T>>)[key] = item
-      } else {
-        (records as DeferredPromise<T>[]).push( item )
-      }
+    return records
+  }
+
+  createBatchByKey( keys: string[] ) {
+    let records: Record<string, DeferredPromise<T>> = {}
+
+    for (let i = 0; i < keys.length; i++) {
+      records[keys[i]] = this.create(keys[i])
     }
 
     return records
