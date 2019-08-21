@@ -17,12 +17,15 @@ export function metadata($video: HTMLVideoElement) : VideoMetadata {
 }
 
 export function load(url: string) {
-  return new Promise<VideoMetadata>((resolve, reject) => {
+  return new Promise<VideoMetadata & { element: HTMLVideoElement }>((resolve, reject) => {
     const $video = document.createElement('video')
 
     function onLoadedMetaData() {
       $video.removeEventListener('loadedmetadata', onLoadedMetaData)
-      resolve(metadata($video))
+      resolve({
+        element: $video,
+        ...metadata($video)
+      })
     }
 
     $video.addEventListener('loadedmetadata', onLoadedMetaData)

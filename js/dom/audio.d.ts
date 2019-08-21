@@ -3,4 +3,6 @@ export interface AudioMetadata {
     duration: number;
 }
 export declare function metadata($audio: HTMLAudioElement): AudioMetadata;
-export declare function load(url: string): Promise<AudioMetadata>;
+export declare function load(url: string): Promise<AudioMetadata & {
+    element: HTMLAudioElement;
+}>;

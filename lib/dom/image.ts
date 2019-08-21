@@ -15,10 +15,13 @@ export function metadata($img: HTMLImageElement) : ImageMetadata {
 }
 
 export function load(url: string) {
-  return new Promise<ImageMetadata>((resolve, reject) => {
+  return new Promise<ImageMetadata & { element: HTMLImageElement }>((resolve, reject) => {
     const $img = new Image()
     $img.onload = () => {
-      resolve(metadata($img))
+      resolve({
+        element: $img,
+        ...metadata($img)
+      })
     }
     $img.onerror = (e) => {
       reject(e)

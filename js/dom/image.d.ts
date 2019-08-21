@@ -5,4 +5,6 @@ export interface ImageMetadata {
     ratio: number;
 }
 export declare function metadata($img: HTMLImageElement): ImageMetadata;
-export declare function load(url: string): Promise<ImageMetadata>;
+export declare function load(url: string): Promise<ImageMetadata & {
+    element: HTMLImageElement;
+}>;

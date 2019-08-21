@@ -11,12 +11,15 @@ export function metadata($audio: HTMLAudioElement) : AudioMetadata {
 }
 
 export function load(url: string) {
-  return new Promise<AudioMetadata>((resolve, reject) => {
+  return new Promise<AudioMetadata & { element: HTMLAudioElement }>((resolve, reject) => {
     const $audio = document.createElement('audio')
 
     function onLoadedMetaData() {
       $audio.removeEventListener('loadedmetadata', onLoadedMetaData)
-      resolve(metadata($audio))
+      resolve({
+        element: $audio,
+        ...metadata($audio)
+      })
     }
 
     $audio.addEventListener('loadedmetadata', onLoadedMetaData)

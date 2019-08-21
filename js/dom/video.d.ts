@@ -6,4 +6,6 @@ export interface VideoMetadata {
     poster?: string;
 }
 export declare function metadata($video: HTMLVideoElement): VideoMetadata;
-export declare function load(url: string): Promise<VideoMetadata>;
+export declare function load(url: string): Promise<VideoMetadata & {
+    element: HTMLVideoElement;
+}>;
