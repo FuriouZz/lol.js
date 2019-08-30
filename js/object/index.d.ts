@@ -23,3 +23,4 @@ export declare function deflat<T>(obj: any): T;
  */
 export declare function immutable<T>(obj: any): T;
 export declare function clone<T>(obj: any): T;
+export declare function deep_clone<T>(obj: any): T;

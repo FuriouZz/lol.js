@@ -155,3 +155,7 @@ export function clone<T>(obj: any) : T {
 
  return cloneObj
 }
+
+export function deep_clone<T>(obj: any) : T {
+  return JSON.parse(JSON.stringify(obj))
+}

@@ -141,3 +141,7 @@ function clone(obj) {
     return cloneObj;
 }
 exports.clone = clone;
+function deep_clone(obj) {
+    return JSON.parse(JSON.stringify(obj));
+}
+exports.deep_clone = deep_clone;
