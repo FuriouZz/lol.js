@@ -172,3 +172,23 @@ export function difference<T>(arr0: T[], arr1: T[]) {
 
   return arr
 }
+
+/**
+ * Transform an array into an KeyValue object
+ */
+export function to_record<T>(arr: T[], cb: (item: T) => string) : Record<string, T> {
+  const record: Record<string, T> = {}
+
+  for (let i = 0; i < arr.length; i++) {
+    const item = arr[i];
+    const key = cb(item)
+    record[key] = item
+  }
+
+  return record
+}
+
+/**
+ * Transform an array into an KeyValue object
+ */
+export const to_object = to_record

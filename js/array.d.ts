@@ -38,3 +38,11 @@ export declare function similarity<T>(arr0: T[], arr1: T[]): T[];
  * Find different elements between two arrays
  */
 export declare function difference<T>(arr0: T[], arr1: T[]): T[];
+/**
+ * Transform an array into an KeyValue object
+ */
+export declare function to_record<T>(arr: T[], cb: (item: T) => string): Record<string, T>;
+/**
+ * Transform an array into an KeyValue object
+ */
+export declare const to_object: typeof to_record;

@@ -152,3 +152,20 @@ function difference(arr0, arr1) {
     return arr;
 }
 exports.difference = difference;
+/**
+ * Transform an array into an KeyValue object
+ */
+function to_record(arr, cb) {
+    var record = {};
+    for (var i = 0; i < arr.length; i++) {
+        var item = arr[i];
+        var key = cb(item);
+        record[key] = item;
+    }
+    return record;
+}
+exports.to_record = to_record;
+/**
+ * Transform an array into an KeyValue object
+ */
+exports.to_object = to_record;

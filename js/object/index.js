@@ -122,12 +122,28 @@ function immutable(obj) {
     return Object.isFrozen(obj) ? obj : Object.freeze(obj);
 }
 exports.immutable = immutable;
+/**
+ * Clone an object
+ */
 function clone(obj) {
     var cloneObj = {};
     for (var key in obj) {
         // Clone array
         if (Array.isArray(obj[key])) {
-            cloneObj[key] = obj[key].slice(0);
+            cloneObj[key] = [];
+            for (var i = 0; i < obj[key].length; i++) {
+                var element = obj[key][i];
+                if (Array.isArray(element)) {
+                    var n = clone({ array: element });
+                    cloneObj[key].push(n.array);
+                }
+                else if (typeof element == 'object' && element !== null) {
+                    cloneObj[key].push(clone(element));
+                }
+                else {
+                    cloneObj[key].push(element);
+                }
+            }
         }
         // Clone object
         else if (typeof obj[key] === 'object' && obj[key] !== null) {
@@ -141,7 +157,19 @@ function clone(obj) {
     return cloneObj;
 }
 exports.clone = clone;
+/**
+ * Do a clone with JSON.parse/JSON.stringify.
+ */
 function deep_clone(obj) {
     return JSON.parse(JSON.stringify(obj));
 }
 exports.deep_clone = deep_clone;
+/**
+ * Transform an KeyValue object into an array
+ */
+function to_array(obj) {
+    return Object.keys(obj).map(function (key) {
+        return obj[key];
+    });
+}
+exports.to_array = to_array;

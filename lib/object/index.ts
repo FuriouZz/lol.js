@@ -131,6 +131,9 @@ export function immutable<T>(obj: any) : T {
   return Object.isFrozen(obj) ? obj : Object.freeze(obj)
 }
 
+/**
+ * Clone an object
+ */
 export function clone<T>(obj: any) : T {
  var cloneObj: any = {}
 
@@ -138,7 +141,20 @@ export function clone<T>(obj: any) : T {
 
    // Clone array
    if (Array.isArray(obj[key])) {
-     cloneObj[key] = obj[key].slice(0)
+    cloneObj[key] = []
+
+    for (let i = 0; i < obj[key].length; i++) {
+       const element = obj[key][i]
+
+       if (Array.isArray(element)) {
+         const n = clone({ array: element }) as any
+         cloneObj[key].push( n.array )
+       } else if (typeof element == 'object' && element !== null) {
+         cloneObj[key].push( clone(element) )
+        } else {
+          cloneObj[key].push( element )
+       }
+     }
    }
 
    // Clone object
@@ -156,6 +172,18 @@ export function clone<T>(obj: any) : T {
  return cloneObj
 }
 
+/**
+ * Do a clone with JSON.parse/JSON.stringify.
+ */
 export function deep_clone<T>(obj: any) : T {
   return JSON.parse(JSON.stringify(obj))
+}
+
+/**
+ * Transform an KeyValue object into an array
+ */
+export function to_array<T>(obj: Record<string, T>) : T[] {
+  return Object.keys(obj).map((key) => {
+    return obj[key]
+  })
 }
