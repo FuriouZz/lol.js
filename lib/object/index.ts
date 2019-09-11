@@ -29,8 +29,8 @@ function _merge(obj0: any, obj1: any) {
 /**
  * Merge objects
  */
-export function merge<T>(obj: any, ...objs: any[]) : T {
-  var i   = 0
+export function merge<T>(obj: any, ...objs: any[]): T {
+  var i = 0
   var len = objs.length
 
   for (i = 0; i < len; i++) {
@@ -43,7 +43,7 @@ export function merge<T>(obj: any, ...objs: any[]) : T {
 /**
  * Create an object with only property keys
  */
-export function expose<T>(obj: any, ...keys: string[]) : T {
+export function expose<T>(obj: any, ...keys: string[]): T {
   var xprt: any = {}
 
   for (var i = 0, ilen = keys.length; i < ilen; i++) {
@@ -58,7 +58,7 @@ export function expose<T>(obj: any, ...keys: string[]) : T {
 /**
  * Create a new object without listed property keys
  */
-export function omit<T>(obj: any, ...keys: string[]) : T {
+export function omit<T>(obj: any, ...keys: string[]): T {
   var xprt: any = {}
 
   for (var key in obj) {
@@ -74,7 +74,7 @@ export function omit<T>(obj: any, ...keys: string[]) : T {
 /**
  * Flatten object to one level
  */
-export function flat(obj: any) : Record<string, any> {
+export function flat(obj: any): Record<string, any> {
   var xprt: any = {}
 
   for (var key in obj) {
@@ -94,33 +94,34 @@ export function flat(obj: any) : Record<string, any> {
 /**
  * Transform a flatten object to a deflatten object
  */
-export function deflat<T>(obj: any) : T {
+export function deflat<T>(obj: any): T {
   var xprt: any = {}
 
-  var i: number,
-   ilen: number,
-   keys: string[]
+  Object.keys(obj).forEach((id) => {
+    const keys = id.split('.')
+    let current = xprt
 
-  for (var key in obj) {
-    keys = key.split('.')
+    keys.forEach((key, i) => {
+      if (i == keys.length - 1) {
+        current[key] = obj[id]
+      } else {
+        current[key] = current[key] || {}
+      }
 
-    for (i = 0, ilen = keys.length; i < ilen; i++) {
-      xprt[keys[i]] = xprt[keys[i]] || {}
-    }
+      current = current[key]
+    })
+  })
 
-    xprt[keys[ilen-1]] = obj[key]
-  }
-
-  return xprt
+  return xprt as T
 }
 
 /**
  * Freeze object
  */
-export function immutable<T>(obj: any) : T {
+export function immutable<T>(obj: any): T {
   var propNames = Object.getOwnPropertyNames(obj)
 
-  propNames.forEach(function(name) {
+  propNames.forEach(function (name) {
     var prop = obj[name]
 
     if (typeof prop == 'object' && prop !== null) {
@@ -134,55 +135,55 @@ export function immutable<T>(obj: any) : T {
 /**
  * Clone an object
  */
-export function clone<T>(obj: any) : T {
- var cloneObj: any = {}
+export function clone<T>(obj: any): T {
+  var cloneObj: any = {}
 
- for (var key in obj) {
+  for (var key in obj) {
 
-   // Clone array
-   if (Array.isArray(obj[key])) {
-    cloneObj[key] = []
+    // Clone array
+    if (Array.isArray(obj[key])) {
+      cloneObj[key] = []
 
-    for (let i = 0; i < obj[key].length; i++) {
-       const element = obj[key][i]
+      for (let i = 0; i < obj[key].length; i++) {
+        const element = obj[key][i]
 
-       if (Array.isArray(element)) {
-         const n = clone({ array: element }) as any
-         cloneObj[key].push( n.array )
-       } else if (typeof element == 'object' && element !== null) {
-         cloneObj[key].push( clone(element) )
+        if (Array.isArray(element)) {
+          const n = clone({ array: element }) as any
+          cloneObj[key].push(n.array)
+        } else if (typeof element == 'object' && element !== null) {
+          cloneObj[key].push(clone(element))
         } else {
-          cloneObj[key].push( element )
-       }
-     }
-   }
+          cloneObj[key].push(element)
+        }
+      }
+    }
 
-   // Clone object
-   else if (typeof obj[key] === 'object' && obj[key] !== null) {
-     cloneObj[key] = clone(obj[key])
-   }
+    // Clone object
+    else if (typeof obj[key] === 'object' && obj[key] !== null) {
+      cloneObj[key] = clone(obj[key])
+    }
 
-   // Copy Number / String / Boolean
-   else {
-     cloneObj[key] = obj[key]
-   }
+    // Copy Number / String / Boolean
+    else {
+      cloneObj[key] = obj[key]
+    }
 
- }
+  }
 
- return cloneObj
+  return cloneObj
 }
 
 /**
  * Do a clone with JSON.parse/JSON.stringify.
  */
-export function deep_clone<T>(obj: any) : T {
+export function deep_clone<T>(obj: any): T {
   return JSON.parse(JSON.stringify(obj))
 }
 
 /**
  * Transform an KeyValue object into an array
  */
-export function to_array<T>(obj: Record<string, T>) : T[] {
+export function to_array<T>(obj: Record<string, T>): T[] {
   return Object.keys(obj).map((key) => {
     return obj[key]
   })

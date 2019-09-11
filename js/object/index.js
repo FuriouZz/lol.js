@@ -97,14 +97,19 @@ exports.flat = flat;
  */
 function deflat(obj) {
     var xprt = {};
-    var i, ilen, keys;
-    for (var key in obj) {
-        keys = key.split('.');
-        for (i = 0, ilen = keys.length; i < ilen; i++) {
-            xprt[keys[i]] = xprt[keys[i]] || {};
-        }
-        xprt[keys[ilen - 1]] = obj[key];
-    }
+    Object.keys(obj).forEach(function (id) {
+        var keys = id.split('.');
+        var current = xprt;
+        keys.forEach(function (key, i) {
+            if (i == keys.length - 1) {
+                current[key] = obj[id];
+            }
+            else {
+                current[key] = current[key] || {};
+            }
+            current = current[key];
+        });
+    });
     return xprt;
 }
 exports.deflat = deflat;
