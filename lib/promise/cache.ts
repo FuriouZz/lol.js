@@ -8,11 +8,17 @@ export class Cache {
     return this.items[key] as DeferredPromise<T>
   }
 
-  async set<T>( key: string, resolve: () => T | Promise<T> ) {
+  async set<T>( key: string, resolve: (() => T | Promise<T>) | T | Promise<T> ) {
     if (this.items[key]) return this.items[key].promise
 
     const d = this.create( key )
-    d.resolve( await resolve() )
+
+    if (typeof resolve == 'function') {
+      const res = resolve as () => T | Promise<T>
+      d.resolve( await res() )
+    } else {
+      d.resolve( resolve )
+    }
 
     return d.promise as Promise<T>
   }

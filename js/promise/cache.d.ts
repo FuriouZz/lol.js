@@ -2,7 +2,7 @@ import { DeferredPromise } from ".";
 export declare class Cache {
     items: Record<string, DeferredPromise<any>>;
     get<T>(key: string): DeferredPromise<T>;
-    set<T>(key: string, resolve: () => T | Promise<T>): Promise<any>;
+    set<T>(key: string, resolve: (() => T | Promise<T>) | T | Promise<T>): Promise<any>;
     create(key: string): DeferredPromise<any>;
     createBatch<T>(keys: string[]): DeferredPromise<T>[];
     createBatchByKey<T>(keys: string[]): Record<string, DeferredPromise<T>>;

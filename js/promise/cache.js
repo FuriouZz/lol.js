@@ -45,18 +45,24 @@ var Cache = /** @class */ (function () {
     };
     Cache.prototype.set = function (key, resolve) {
         return __awaiter(this, void 0, void 0, function () {
-            var d, _a, _b;
+            var d, res, _a, _b;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
                         if (this.items[key])
                             return [2 /*return*/, this.items[key].promise];
                         d = this.create(key);
+                        if (!(typeof resolve == 'function')) return [3 /*break*/, 2];
+                        res = resolve;
                         _b = (_a = d).resolve;
-                        return [4 /*yield*/, resolve()];
+                        return [4 /*yield*/, res()];
                     case 1:
                         _b.apply(_a, [_c.sent()]);
-                        return [2 /*return*/, d.promise];
+                        return [3 /*break*/, 3];
+                    case 2:
+                        d.resolve(resolve);
+                        _c.label = 3;
+                    case 3: return [2 /*return*/, d.promise];
                 }
             });
         });
