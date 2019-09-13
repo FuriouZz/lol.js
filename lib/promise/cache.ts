@@ -9,7 +9,7 @@ export class Cache {
   }
 
   async set<T>( key: string, resolve: (() => T | Promise<T>) | T | Promise<T> ) {
-    if (this.items[key]) return this.items[key].promise
+    if (this.items[key]) return this.items[key].promise as Promise<T>
 
     const d = this.create( key )
 
