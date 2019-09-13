@@ -1,26 +1,20 @@
 import { DeferredPromise, defer } from ".";
 
-export interface CacheItem<T> {
-  item?: T
-  promise: Promise<T>
-  resolve: (item: T) => void
-}
+export class Cache {
 
-export class Cache<T> {
+  items: Record<string, DeferredPromise<any>> = {}
 
-  items: Record<string, DeferredPromise<T>> = {}
-
-  get( key: string ) {
-    return this.items[key]
+  get<T>( key: string ) {
+    return this.items[key] as DeferredPromise<T>
   }
 
-  async set( key: string, resolve: () => T | Promise<T> ) {
+  async set<T>( key: string, resolve: () => T | Promise<T> ) {
     if (this.items[key]) return this.items[key].promise
 
     const d = this.create( key )
     d.resolve( await resolve() )
 
-    return d.promise
+    return d.promise as Promise<T>
   }
 
   create( key: string ) {
@@ -28,7 +22,7 @@ export class Cache<T> {
     return this.items[key] = defer()
   }
 
-  createBatch( keys: string[], to_object = false ) {
+  createBatch<T>( keys: string[] ) {
     let records: DeferredPromise<T>[] = []
 
     for (let i = 0; i < keys.length; i++) {
@@ -38,7 +32,7 @@ export class Cache<T> {
     return records
   }
 
-  createBatchByKey( keys: string[] ) {
+  createBatchByKey<T>( keys: string[] ) {
     let records: Record<string, DeferredPromise<T>> = {}
 
     for (let i = 0; i < keys.length; i++) {
@@ -59,7 +53,7 @@ export class Cache<T> {
     }
   }
 
-  resolve( key: string, value: T ) {
+  resolve<T>( key: string, value: T ) {
     if (!this.items[key]) {
       throw new Error(`[Cache] No item with key "${key}" found`)
     }
@@ -67,14 +61,14 @@ export class Cache<T> {
     this.items[key].resolve( value )
   }
 
-  resolveBatch( items: Record<string, string|T>[], keys: [string, string] = [ 'key', 'value' ] ) {
+  resolveBatch<T>( items: Record<string, string|T>[], keys: [string, string] = [ 'key', 'value' ] ) {
     for (let i = 0; i < items.length; i++) {
       const item = items[i]
       this.resolve( item[keys[0]] as string, item[keys[1]] as T )
     }
   }
 
-  reject( key: string, value: T ) {
+  reject<T>( key: string, value: T ) {
     if (!this.items[key]) {
       throw new Error(`[Cache] No item with key "${key}" found`)
     }
@@ -82,7 +76,7 @@ export class Cache<T> {
     this.items[key].reject( value )
   }
 
-  rejectBatch( items: Record<string, string|T>[], keys: [string, string] = [ 'key', 'value' ] ) {
+  rejectBatch<T>( items: Record<string, string|T>[], keys: [string, string] = [ 'key', 'value' ] ) {
     for (let i = 0; i < items.length; i++) {
       const item = items[i]
       this.reject( item[keys[0]] as string, item[keys[1]] as T )

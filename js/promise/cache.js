@@ -66,8 +66,7 @@ var Cache = /** @class */ (function () {
             return this.items[key];
         return this.items[key] = _1.defer();
     };
-    Cache.prototype.createBatch = function (keys, to_object) {
-        if (to_object === void 0) { to_object = false; }
+    Cache.prototype.createBatch = function (keys) {
         var records = [];
         for (var i = 0; i < keys.length; i++) {
             records.push(this.create(keys[i]));
