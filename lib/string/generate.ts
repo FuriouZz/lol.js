@@ -1,9 +1,8 @@
 import { iterator } from "../array/iterator"
 
-const vowels = iterator("aeiouy".split(""), { loop: true, random: true })
-const consonants = iterator("bcdfghjklmnpqrstvwxz".split(''), { loop: true, random: true })
-
 export function word(min = 2, max = 15) {
+  const vowels = iterator("aeiouy".split(""), { loop: true, random: true })
+  const consonants = iterator("bcdfghjklmnpqrstvwxz".split(''), { loop: true, random: true })
 
   let length = min + (Math.random() * (max - min))
   let isVowel = 0
@@ -37,4 +36,23 @@ export function word(min = 2, max = 15) {
 
   return generate(Math.random() > 0.5 ? vowels : consonants, "")
 
+}
+
+export function phone() {
+  const numbers = iterator("0123456789".split(''), { loop: true, random: true })
+  const p = iterator("123456789".split(''), { loop: true, random: true })
+
+  let phone = [ p.next().value ]
+
+  for (let i = 0; i < 4; i++) {
+    phone.push([ numbers.next().value, numbers.next().value ].join(''))
+  }
+
+  let prefix = '+'
+  const count = 2 + Math.floor(Math.random() * 3)
+  for (let j = 0; j < count; j++) {
+    prefix += numbers.next().value
+  }
+
+  return prefix + '(0)' + phone.join(' ')
 }
