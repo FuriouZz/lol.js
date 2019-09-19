@@ -2,6 +2,7 @@
  * Shuffle an array
  */
 export declare function shuffle<T>(arr: T[]): T[];
+export declare const randomize: typeof shuffle;
 /**
  * Sort an array
  */
@@ -46,3 +47,15 @@ export declare function to_record<T>(arr: T[], cb: (item: T) => string): Record<
  * Transform an array into an KeyValue object
  */
 export declare const to_object: typeof to_record;
+/**
+ * Multi dimensional array to one
+ */
+export declare function flat<T>(arr: T[][]): T[];
+/**
+ * Select an item into an array
+ */
+export declare function select<T>(arr: T[], index: number): T;
+/**
+ * Select a random item into an array
+ */
+export declare function random<T>(arr: T[]): T;

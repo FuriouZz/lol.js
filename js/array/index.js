@@ -1,4 +1,24 @@
 "use strict";
+var __read = (this && this.__read) || function (o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+    }
+    catch (error) { e = { error: error }; }
+    finally {
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        }
+        finally { if (e) throw e.error; }
+    }
+    return ar;
+};
+var __spread = (this && this.__spread) || function () {
+    for (var ar = [], i = 0; i < arguments.length; i++) ar = ar.concat(__read(arguments[i]));
+    return ar;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Shuffle an array
@@ -16,6 +36,7 @@ function shuffle(arr) {
     return arr;
 }
 exports.shuffle = shuffle;
+exports.randomize = shuffle;
 /**
  * Sort an array
  */
@@ -169,3 +190,26 @@ exports.to_record = to_record;
  * Transform an array into an KeyValue object
  */
 exports.to_object = to_record;
+/**
+ * Multi dimensional array to one
+ */
+function flat(arr) {
+    var _a;
+    return (_a = []).concat.apply(_a, __spread(arr));
+}
+exports.flat = flat;
+/**
+ * Select an item into an array
+ */
+function select(arr, index) {
+    return arr[index];
+}
+exports.select = select;
+/**
+ * Select a random item into an array
+ */
+function random(arr) {
+    var index = Math.floor(Math.random() * arr.length);
+    return select(arr, index);
+}
+exports.random = random;
