@@ -3,8 +3,12 @@
   "version": "0.0.7",
   "description": "LOL JS Utils",
   "types": "js",
+  "main": "dist/lol.cjs.js",
+  "module": "dist/lol.esm.js",
   "scripts": {
     "tsc": "tsc",
+    "tsc:esm": "tsc -p tsconfig.esm.json",
+    "build": "npm run tsc && node build.js",
     "test": "mocha -r ts-node/register ./test/**/*.spec.ts"
   },
   "author": "",
@@ -14,6 +18,7 @@
   },
   "dependencies": {
     "filelist": "github:FuriouZz/filelist",
+    "rollup": "^1.21.4",
     "ts-node": "^8.3.0"
   },
   "devDependencies": {

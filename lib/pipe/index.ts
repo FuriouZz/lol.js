@@ -9,21 +9,21 @@ export interface PipeSync<S> {
 }
 
 function _pipe_async<T, S>(value: T | Promise<T>, action: (v: T, ...parameters: any[]) => S | Promise<S>, parameters?: any[]) : PipeAsync<S> {
-  parameters = parameters || []
+  const _params = parameters || []
 
   const promise = new Promise<S>((resolve) => {
     if (value instanceof Promise) {
       value.then((newValue) => {
-        resolve(action(newValue, ...parameters))
+        resolve(action(newValue, ..._params))
       })
     } else {
-      resolve(action(value, ...parameters))
+      resolve(action(value, ..._params))
     }
   })
 
   return {
-    pipe<U>(callback: (v: S, ...parameters: any[]) => U, ...parameters: any[]) {
-      return _pipe_async(promise, callback, parameters)
+    pipe<U>(callback: (v: S, ...parameters: any[]) => U, ...params: any[]) {
+      return _pipe_async(promise, callback, params)
     },
 
     value: () => promise

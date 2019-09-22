@@ -1,4 +1,4 @@
-import { PipeSync, PipeAsync } from ".";
+import { PipeSync, PipeAsync } from "./index";
 export declare class PipeArray<T> {
     private async;
     pipeSync: PipeSync<T[]>;

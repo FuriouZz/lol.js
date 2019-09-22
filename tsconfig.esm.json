@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "es6",
+    "declaration": true,
+    "outDir": "./tmp/esm",
+    "strict": true,
+    "esModuleInterop": true,
+    "lib": [
+      "dom",
+      "es6"
+    ],
+    "downlevelIteration": true
+  },
+
+  "include": [
+    "./lib/**/*",
+    "./node_modules/filelist/index.d.ts"
+  ]
+}

@@ -1,4 +1,4 @@
-import { DeferredPromise, defer } from ".";
+import { DeferredPromise, defer } from "./index";
 
 export class Cache {
 

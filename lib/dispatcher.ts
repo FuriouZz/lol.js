@@ -1,4 +1,4 @@
-import { List } from "./list";
+import { List } from "./list/index";
 import { toIterable } from "./list/utils";
 
 export type DispatcherListener<T> = (value?: T) => void

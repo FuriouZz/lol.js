@@ -1,5 +1,5 @@
-import { PipeSync, pipe_sync, PipeAsync, pipe_async } from ".";
-import { sort, shuffle, inverse, unique, similarity, difference } from "../array";
+import { PipeSync, pipe_sync, PipeAsync, pipe_async } from "./index";
+import { sort, shuffle, inverse, unique, similarity, difference } from "../array/index";
 
 export class PipeArray<T> {
 
@@ -16,63 +16,63 @@ export class PipeArray<T> {
 
   filter(cb: (value: T, index: number, array: T[]) => boolean) {
     if (this.async) {
-      this.pipeAsync.pipe((items) => items.filter(cb))
+      this.pipeAsync.pipe((items: T[]) => items.filter(cb))
     } else {
-      this.pipeSync.pipe((items) => items.filter(cb))
+      this.pipeSync.pipe((items: T[]) => items.filter(cb))
     }
     return this
   }
 
   sort() {
     if (this.async) {
-      this.pipeAsync.pipe((items) => sort(items))
+      this.pipeAsync.pipe((items: T[]) => sort(items))
     } else {
-      this.pipeSync.pipe((items) => sort(items))
+      this.pipeSync.pipe((items: T[]) => sort(items))
     }
     return this
   }
 
   shuffle() {
     if (this.async) {
-      this.pipeAsync.pipe((items) => shuffle(items))
+      this.pipeAsync.pipe((items: T[]) => shuffle(items))
     } else {
-      this.pipeSync.pipe((items) => shuffle(items))
+      this.pipeSync.pipe((items: T[]) => shuffle(items))
     }
     return this
   }
 
   inverse() {
     if (this.async) {
-      this.pipeAsync.pipe((items) => inverse(items))
+      this.pipeAsync.pipe((items: T[]) => inverse(items))
     } else {
-      this.pipeSync.pipe((items) => inverse(items))
+      this.pipeSync.pipe((items: T[]) => inverse(items))
     }
     return this
   }
 
   unique() {
     if (this.async) {
-      this.pipeAsync.pipe((items) => unique(items))
+      this.pipeAsync.pipe((items: T[]) => unique(items))
     } else {
-      this.pipeSync.pipe((items) => unique(items))
+      this.pipeSync.pipe((items: T[]) => unique(items))
     }
     return this
   }
 
   similarity(arr0: T[]) {
     if (this.async) {
-      this.pipeAsync.pipe((items) => similarity(items, arr0))
+      this.pipeAsync.pipe((items: T[]) => similarity(items, arr0))
     } else {
-      this.pipeSync.pipe((items) => similarity(items, arr0))
+      this.pipeSync.pipe((items: T[]) => similarity(items, arr0))
     }
     return this
   }
 
   difference(arr0: T[]) {
     if (this.async) {
-      this.pipeAsync.pipe((items) => difference(items, arr0))
+      this.pipeAsync.pipe((items: T[]) => difference(items, arr0))
     } else {
-      this.pipeSync.pipe((items) => difference(items, arr0))
+      this.pipeSync.pipe((items: T[]) => difference(items, arr0))
     }
     return this
   }

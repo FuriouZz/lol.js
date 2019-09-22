@@ -35,7 +35,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var _1 = require(".");
+var index_1 = require("./index");
 var Cache = /** @class */ (function () {
     function Cache() {
         this.items = {};
@@ -70,7 +70,7 @@ var Cache = /** @class */ (function () {
     Cache.prototype.create = function (key) {
         if (this.items[key])
             return this.items[key];
-        return this.items[key] = _1.defer();
+        return this.items[key] = index_1.defer();
     };
     Cache.prototype.createBatch = function (keys) {
         var records = [];

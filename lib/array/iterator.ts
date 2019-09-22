@@ -1,4 +1,4 @@
-import { shuffle } from "."
+import { shuffle } from "./index"
 
 export function iterator<T>(arr: T[], options = { loop: false, random: false }) : Iterator<T> {
   let index = -1

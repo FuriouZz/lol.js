@@ -45,7 +45,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var Fs = __importStar(require("fs"));
 var filelist_1 = require("filelist");
 var path_1 = require("path");
-var promise_1 = require("../promise");
+var index_1 = require("../promise/index");
 var child_process_1 = require("child_process");
 filelist_1.FileList.debug = false;
 function isFile(path) {
@@ -339,7 +339,7 @@ function symlink(fromPath, toPath) {
                     return [4 /*yield*/, ensureDir(path_1.dirname(toPath))];
                 case 1:
                     _a.sent();
-                    return [2 /*return*/, promise_1.promise(function (resolve, reject) {
+                    return [2 /*return*/, index_1.promise(function (resolve, reject) {
                             Fs.symlink(fromPath, toPath, function (err) {
                                 if (err) {
                                     reject(err);
@@ -376,7 +376,7 @@ function symlink2(fromPath, toPath, shell) {
                     else {
                         command = "ln -s " + fromPath + " " + toPath;
                     }
-                    return [2 /*return*/, promise_1.promise(function (resolve, reject) {
+                    return [2 /*return*/, index_1.promise(function (resolve, reject) {
                             var cmd = command.split(' ');
                             var cli = cmd.shift();
                             var ps = child_process_1.spawnSync(cli, cmd, { shell: shell });

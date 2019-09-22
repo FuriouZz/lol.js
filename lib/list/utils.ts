@@ -1,4 +1,4 @@
-import { List } from ".";
+import { List } from "./index";
 
 export function toIterable<T>(list: List<T>) : Iterable<T> {
   return {

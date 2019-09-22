@@ -21,24 +21,24 @@ var __spread = (this && this.__spread) || function () {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 function _pipe_async(value, action, parameters) {
-    parameters = parameters || [];
+    var _params = parameters || [];
     var promise = new Promise(function (resolve) {
         if (value instanceof Promise) {
             value.then(function (newValue) {
-                resolve(action.apply(void 0, __spread([newValue], parameters)));
+                resolve(action.apply(void 0, __spread([newValue], _params)));
             });
         }
         else {
-            resolve(action.apply(void 0, __spread([value], parameters)));
+            resolve(action.apply(void 0, __spread([value], _params)));
         }
     });
     return {
         pipe: function (callback) {
-            var parameters = [];
+            var params = [];
             for (var _i = 1; _i < arguments.length; _i++) {
-                parameters[_i - 1] = arguments[_i];
+                params[_i - 1] = arguments[_i];
             }
-            return _pipe_async(promise, callback, parameters);
+            return _pipe_async(promise, callback, params);
         },
         value: function () { return promise; }
     };

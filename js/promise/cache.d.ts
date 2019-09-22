@@ -1,4 +1,4 @@
-import { DeferredPromise } from ".";
+import { DeferredPromise } from "./index";
 export declare class Cache {
     items: Record<string, DeferredPromise<any>>;
     get<T>(key: string): DeferredPromise<T>;

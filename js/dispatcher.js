@@ -10,11 +10,11 @@ var __values = (this && this.__values) || function (o) {
     };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var list_1 = require("./list");
+var index_1 = require("./list/index");
 var utils_1 = require("./list/utils");
 var Dispatcher = /** @class */ (function () {
     function Dispatcher() {
-        this.listeners = new list_1.List();
+        this.listeners = new index_1.List();
     }
     Dispatcher.prototype.on = function (listener) {
         this.listeners.add({ once: false, fn: listener });
