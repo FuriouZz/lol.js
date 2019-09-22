@@ -1,6 +1,6 @@
 {
   "name": "lol",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "LOL JS Utils",
   "types": "js",
   "main": "dist/lol.cjs.js",
