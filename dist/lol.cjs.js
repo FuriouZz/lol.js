@@ -822,6 +822,40 @@ var _Function = /*#__PURE__*/Object.freeze({
     bind: bind
 });
 
+function parse(argv) {
+    const parameters = {};
+    let key = '';
+    let keyRegex = /^-{1,2}/;
+    let index = 0;
+    for (let i = 0; i < argv.length; i++) {
+        const arg = argv[i];
+        if (arg.match(keyRegex)) {
+            const split = arg.split(/=/);
+            key = split[0].replace(keyRegex, '');
+            if (split[1]) {
+                parameters[key] = split[1];
+            }
+            else if (argv[i + 1] && !argv[i + 1].match(keyRegex)) {
+                parameters[key] = argv[i + 1];
+                i++;
+            }
+            else {
+                parameters[key] = true;
+            }
+            continue;
+        }
+        else {
+            parameters[index] = arg;
+            index++;
+        }
+    }
+    return parameters;
+}
+
+var _ObjectArgv = /*#__PURE__*/Object.freeze({
+    parse: parse
+});
+
 function $enumerable(obj, property, value) {
     return Object.defineProperty(obj, property, {
         enumerable: value
@@ -1628,6 +1662,7 @@ const Function = _Function;
 const List$1 = _ListIndex;
 const ListUtils = _ListUtils;
 const Math$1 = _Math;
+const ObjectArgv = _ObjectArgv;
 const ObjectDefine = _ObjectDefine;
 const Object$1 = _ObjectIndex;
 const PipeArray$1 = _PipeArray;
@@ -1658,6 +1693,7 @@ exports.List = List$1;
 exports.ListUtils = ListUtils;
 exports.Math = Math$1;
 exports.Object = Object$1;
+exports.ObjectArgv = ObjectArgv;
 exports.ObjectDefine = ObjectDefine;
 exports.Pipe = Pipe;
 exports.PipeArray = PipeArray$1;

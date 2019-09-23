@@ -818,6 +818,40 @@ var _Function = /*#__PURE__*/Object.freeze({
     bind: bind
 });
 
+function parse(argv) {
+    const parameters = {};
+    let key = '';
+    let keyRegex = /^-{1,2}/;
+    let index = 0;
+    for (let i = 0; i < argv.length; i++) {
+        const arg = argv[i];
+        if (arg.match(keyRegex)) {
+            const split = arg.split(/=/);
+            key = split[0].replace(keyRegex, '');
+            if (split[1]) {
+                parameters[key] = split[1];
+            }
+            else if (argv[i + 1] && !argv[i + 1].match(keyRegex)) {
+                parameters[key] = argv[i + 1];
+                i++;
+            }
+            else {
+                parameters[key] = true;
+            }
+            continue;
+        }
+        else {
+            parameters[index] = arg;
+            index++;
+        }
+    }
+    return parameters;
+}
+
+var _ObjectArgv = /*#__PURE__*/Object.freeze({
+    parse: parse
+});
+
 function $enumerable(obj, property, value) {
     return Object.defineProperty(obj, property, {
         enumerable: value
@@ -1624,6 +1658,7 @@ const Function = _Function;
 const List$1 = _ListIndex;
 const ListUtils = _ListUtils;
 const Math$1 = _Math;
+const ObjectArgv = _ObjectArgv;
 const ObjectDefine = _ObjectDefine;
 const Object$1 = _ObjectIndex;
 const PipeArray$1 = _PipeArray;
@@ -1638,4 +1673,4 @@ const StringPath = _StringPath;
 const StringTemplate = _StringTemplate;
 const Url = _Url;
 
-export { Array$1 as Array, ArrayIterator, Canvas, Dispatcher$1 as Dispatcher, DomAudio, DomFile, DomImage, DomNet, DomRaf, DomVideo, Error$1 as Error, Function, List$1 as List, ListUtils, Math$1 as Math, Object$1 as Object, ObjectDefine, Pipe, PipeArray$1 as PipeArray, Promise$1 as Promise, PromiseCache, PromiseTime, String, StringGenerate, StringGuid, StringPath, StringTemplate, Url };
+export { Array$1 as Array, ArrayIterator, Canvas, Dispatcher$1 as Dispatcher, DomAudio, DomFile, DomImage, DomNet, DomRaf, DomVideo, Error$1 as Error, Function, List$1 as List, ListUtils, Math$1 as Math, Object$1 as Object, ObjectArgv, ObjectDefine, Pipe, PipeArray$1 as PipeArray, Promise$1 as Promise, PromiseCache, PromiseTime, String, StringGenerate, StringGuid, StringPath, StringTemplate, Url };
