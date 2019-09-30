@@ -6,6 +6,7 @@
     "tsc": "tsc",
     "tsc:esm": "tsc -p tsconfig.esm.json",
     "tsc:cjs": "tsc -p tsconfig.cjs.json",
+    "build": "node compose.js && npm run tsc && npm run tsc:esm && npm run tsc:cjs",
     "test": "mocha -r ts-node/register ./test/**/*.spec.ts"
   },
   "author": "",
