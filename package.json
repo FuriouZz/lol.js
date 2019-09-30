@@ -2,13 +2,10 @@
   "name": "lol",
   "version": "0.0.8",
   "description": "LOL JS Utils",
-  "types": "js",
-  "main": "dist/lol.cjs.js",
-  "module": "dist/lol.esm.js",
   "scripts": {
     "tsc": "tsc",
     "tsc:esm": "tsc -p tsconfig.esm.json",
-    "build": "npm run tsc && node build.js",
+    "tsc:cjs": "tsc -p tsconfig.cjs.json",
     "test": "mocha -r ts-node/register ./test/**/*.spec.ts"
   },
   "author": "",
@@ -18,7 +15,6 @@
   },
   "dependencies": {
     "filelist": "github:FuriouZz/filelist",
-    "rollup": "^1.21.4",
     "ts-node": "^8.3.0"
   },
   "devDependencies": {

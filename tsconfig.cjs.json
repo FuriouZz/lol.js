@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
-    "target": "es6",
-    "module": "es6",
+    "target": "es5",
+    "module": "commonjs",
     "declaration": true,
-    "outDir": "./dist/esm",
+    "outDir": "./dist/cjs",
     "strict": true,
     "esModuleInterop": true,
     "lib": [
@@ -14,7 +14,6 @@
   },
 
   "include": [
-    "./lib/**/*",
-    "./node_modules/filelist/index.d.ts"
+    "./lib/**/*"
   ]
 }
