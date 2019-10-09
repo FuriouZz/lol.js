@@ -1,28 +1,18 @@
-import { Writable, WritableOptions } from 'stream'
+import { Transform } from 'stream'
 
-const memStore:{ [key:string]: Buffer } = {}
+export class MemoryStream extends Transform {
 
-export class MemoryStream extends Writable {
+  private _buffer = new Buffer('')
 
-  constructor(public key:string, options?:WritableOptions) {
-    super(options)
-    memStore[this.key] = new Buffer('')
-  }
-
-  _write( chunk: Buffer|string, encoding: string, callback: (err?: Error) => void ) {
+  _transform( chunk: Buffer|string, encoding: string, callback: (err?: Error) => void ) {
     var bf = Buffer.isBuffer(chunk) ? chunk : new Buffer(chunk)
-    memStore[this.key] = Buffer.concat([memStore[this.key], bf])
+    this._buffer = Buffer.concat([this._buffer, bf])
+    this.push( chunk, encoding )
     callback()
   }
 
-  getData(encoding?: string) {
-    return encoding ? memStore[this.key].toString(encoding) : memStore[this.key]
-  }
-
-  clean() {
-    if (memStore[this.key]) {
-      delete memStore[this.key]
-    }
+  data(encoding?: string) {
+    return encoding ? this._buffer.toString(encoding) : this._buffer
   }
 
 }
