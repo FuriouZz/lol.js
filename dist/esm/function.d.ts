@@ -1,8 +1,8 @@
 /**
  * Scope a function inside another one. Prevent from binding.
  */
-export declare function scope(fn: Function, context?: any): (...args: any[]) => any;
+export declare function scope<R>(fn: (...args: any[]) => R, context?: any): (...args: any[]) => R;
 /**
  * Bind a list methods to the context
  */
-export declare function bind(context: any, ...methods: string[]): void;
+export declare function bind<T extends string>(context: any, ...methods: T[]): void;

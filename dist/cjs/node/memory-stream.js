@@ -14,28 +14,22 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var stream_1 = require("stream");
-var memStore = {};
 var MemoryStream = /** @class */ (function (_super) {
     __extends(MemoryStream, _super);
-    function MemoryStream(key, options) {
-        var _this = _super.call(this, options) || this;
-        _this.key = key;
-        memStore[_this.key] = new Buffer('');
+    function MemoryStream() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this._buffer = new Buffer('');
         return _this;
     }
-    MemoryStream.prototype._write = function (chunk, encoding, callback) {
+    MemoryStream.prototype._transform = function (chunk, encoding, callback) {
         var bf = Buffer.isBuffer(chunk) ? chunk : new Buffer(chunk);
-        memStore[this.key] = Buffer.concat([memStore[this.key], bf]);
+        this._buffer = Buffer.concat([this._buffer, bf]);
+        this.push(chunk, encoding);
         callback();
     };
-    MemoryStream.prototype.getData = function (encoding) {
-        return encoding ? memStore[this.key].toString(encoding) : memStore[this.key];
-    };
-    MemoryStream.prototype.clean = function () {
-        if (memStore[this.key]) {
-            delete memStore[this.key];
-        }
+    MemoryStream.prototype.data = function (encoding) {
+        return encoding ? this._buffer.toString(encoding) : this._buffer;
     };
     return MemoryStream;
-}(stream_1.Writable));
+}(stream_1.Transform));
 exports.MemoryStream = MemoryStream;
