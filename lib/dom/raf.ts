@@ -46,7 +46,7 @@ export class RAF {
   static dt = 0
   static framerate = 16
 
-  private static _now = Date.now();
+  private static _now = performance.now();
   private static _lt = RAF._now;
   private static _elapsedInterval = 0;
   private static _raf = requestAnimFrame(RAF._update)

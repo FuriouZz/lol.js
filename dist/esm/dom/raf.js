@@ -89,7 +89,7 @@ export class RAF {
 RAF.subscribers = [];
 RAF.dt = 0;
 RAF.framerate = 16;
-RAF._now = Date.now();
+RAF._now = performance.now();
 RAF._lt = RAF._now;
 RAF._elapsedInterval = 0;
 RAF._raf = requestAnimFrame(RAF._update);
