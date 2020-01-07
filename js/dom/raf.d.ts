@@ -31,7 +31,7 @@ export declare class RAF {
     /**
      * Register a new subscriber
      */
-    static subscribe(id: string, fn: () => void): void;
+    static subscribe(id: string, fn: (dt: number, now: number) => void): void;
     /**
     * Unregister a subscriber
     */

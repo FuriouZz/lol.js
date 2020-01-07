@@ -85,7 +85,7 @@ export class RAF {
   /**
    * Register a new subscriber
    */
-  static subscribe(id: string, fn: () => void) {
+  static subscribe(id: string, fn: (dt: number, now: number) => void) {
     RAF.subscribers.push([id, fn])
   }
 
