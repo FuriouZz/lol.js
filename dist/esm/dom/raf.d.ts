@@ -14,7 +14,7 @@
  * RAF.start()
  * RAF.stop()
  */
-export declare type Subscriber = [string, () => void];
+export declare type Subscriber = [string, (dt: number, now: number) => void];
 export declare class RAF {
     static subscribers: Subscriber[];
     static dt: number;

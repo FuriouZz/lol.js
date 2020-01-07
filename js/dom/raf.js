@@ -59,7 +59,7 @@ var RAF = /** @class */ (function () {
      * Run all subscribers
      */
     RAF._update = function () {
-        RAF._now = Date.now();
+        RAF._now = performance.now();
         RAF.dt = RAF._now - RAF._lt;
         RAF._elapsedInterval += RAF.dt;
         if (RAF._elapsedInterval >= RAF.framerate) {
@@ -73,7 +73,7 @@ var RAF = /** @class */ (function () {
         for (var i = 0; i < RAF.subscribers.length; i++) {
             var _a = __read(RAF.subscribers[i], 2), _ = _a[0], subscriber = _a[1];
             // execute handler
-            subscriber();
+            subscriber(RAF.dt, RAF._now);
         }
     };
     /**

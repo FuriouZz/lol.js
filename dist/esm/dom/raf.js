@@ -39,7 +39,7 @@ export class RAF {
      * Run all subscribers
      */
     static _update() {
-        RAF._now = Date.now();
+        RAF._now = performance.now();
         RAF.dt = RAF._now - RAF._lt;
         RAF._elapsedInterval += RAF.dt;
         if (RAF._elapsedInterval >= RAF.framerate) {
@@ -53,7 +53,7 @@ export class RAF {
         for (var i = 0; i < RAF.subscribers.length; i++) {
             var [_, subscriber] = RAF.subscribers[i];
             // execute handler
-            subscriber();
+            subscriber(RAF.dt, RAF._now);
         }
     }
     /**

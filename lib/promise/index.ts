@@ -5,7 +5,7 @@ export interface DeferredPromise<T> {
 }
 
 interface DeferredPromiseOptional<T> {
-  promise: Promise<T>
+  promise?: Promise<T>
   resolve?: (value?: T | PromiseLike<T>) => void
   reject?: (value?: any) => void
 }
@@ -19,13 +19,11 @@ export function resolve<T>(value: T) {
 }
 
 export function defer<T>(): DeferredPromise<T> {
-  const def: DeferredPromiseOptional<T> = {
-    promise: new Promise((resolve, reject) => {
-      def.resolve = resolve
-      def.reject = reject
-    })
-  }
-
+  const def: DeferredPromiseOptional<T> = {}
+  def.promise = new Promise(function (resolve, reject) {
+    def.resolve = resolve;
+    def.reject = reject;
+  })
   return def as DeferredPromise<T>
 }
 

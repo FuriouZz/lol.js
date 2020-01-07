@@ -38,7 +38,7 @@ const requestAnimFrame = (function () {
     window.msCancelRequestAnimationFrame
 })();
 
-export type Subscriber = [ string, () => void ]
+export type Subscriber = [ string, (dt: number, now: number) => void ]
 
 export class RAF {
 
@@ -56,7 +56,7 @@ export class RAF {
    */
   private static _update() {
 
-    RAF._now = Date.now()
+    RAF._now = performance.now()
 
     RAF.dt = RAF._now - RAF._lt
 
@@ -77,7 +77,7 @@ export class RAF {
     for (var i = 0; i < RAF.subscribers.length; i++) {
       var [ _, subscriber ] = RAF.subscribers[i]
       // execute handler
-      subscriber()
+      subscriber(RAF.dt, RAF._now)
     }
 
   }

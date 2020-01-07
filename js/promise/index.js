@@ -9,12 +9,11 @@ function resolve(value) {
 }
 exports.resolve = resolve;
 function defer() {
-    var def = {
-        promise: new Promise(function (resolve, reject) {
-            def.resolve = resolve;
-            def.reject = reject;
-        })
-    };
+    var def = {};
+    def.promise = new Promise(function (resolve, reject) {
+        def.resolve = resolve;
+        def.reject = reject;
+    });
     return def;
 }
 exports.defer = defer;
