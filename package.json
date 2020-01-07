@@ -1,6 +1,6 @@
 {
   "name": "lol",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "LOL JS Utils",
   "scripts": {
     "tsc": "tsc",
