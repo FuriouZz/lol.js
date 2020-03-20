@@ -10,7 +10,11 @@ export function scope(fn, context = null) {
  * Bind a list methods to the context
  */
 export function bind(context, ...methods) {
-    methods.forEach(function (str) {
-        context[str] = context[str].bind(context);
-    });
+    for (let i = 0; i < methods.length; i++) {
+        const method = methods[i];
+        const fn = context[method];
+        if (typeof fn === 'function') {
+            context[method] = fn.bind(context);
+        }
+    }
 }

@@ -5,4 +5,4 @@ export declare function scope<R>(fn: (...args: any[]) => R, context?: any): (...
 /**
  * Bind a list methods to the context
  */
-export declare function bind<T extends string>(context: any, ...methods: T[]): void;
+export declare function bind<T extends object>(context: T, ...methods: (keyof T)[]): void;

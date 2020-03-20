@@ -10,8 +10,12 @@ export function scope<R>( fn: (...args: any[]) => R, context: any = null ) {
 /**
  * Bind a list methods to the context
  */
-export function bind<T extends string>(context: any, ...methods: T[]) {
-  methods.forEach(function(str: string) {
-    context[str] = context[str].bind(context)
-  })
+export function bind<T extends object>(context: T, ...methods: (keyof T)[]) {
+  for (let i = 0; i < methods.length; i++) {
+    const method = methods[i]
+    const fn = context[method]
+    if (typeof fn === 'function') {
+      context[method] = fn.bind(context)
+    }
+  }
 }

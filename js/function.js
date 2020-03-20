@@ -22,8 +22,12 @@ function bind(context) {
     for (var _i = 1; _i < arguments.length; _i++) {
         methods[_i - 1] = arguments[_i];
     }
-    methods.forEach(function (str) {
-        context[str] = context[str].bind(context);
-    });
+    for (var i = 0; i < methods.length; i++) {
+        var method = methods[i];
+        var fn = context[method];
+        if (typeof fn === 'function') {
+            context[method] = fn.bind(context);
+        }
+    }
 }
 exports.bind = bind;
