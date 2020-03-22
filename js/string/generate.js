@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var iterator_1 = require("../array/iterator");
+var index_1 = require("./index");
 function word(min, max) {
     if (min === void 0) { min = 2; }
     if (max === void 0) { max = 15; }
@@ -49,3 +50,21 @@ function phone() {
     return prefix + '(0)' + phone.join(' ');
 }
 exports.phone = phone;
+/**
+* Generate version from datetime
+*/
+function date(pretty) {
+    if (pretty === void 0) { pretty = false; }
+    var now = new Date();
+    var date = index_1.pad(now.getDate() + "", 2, "0");
+    var month = index_1.pad((now.getMonth() + 1) + "", 2, "0");
+    var year = index_1.pad(now.getFullYear() + "", 4, "0");
+    var hours = index_1.pad(now.getHours() + "", 2, "0");
+    var minutes = index_1.pad(now.getMinutes() + "", 2, "0");
+    var seconds = index_1.pad(now.getSeconds() + "", 2, "0");
+    if (pretty) {
+        return year + "-" + month + "-" + date + "_" + hours + "-" + minutes + "-" + seconds;
+    }
+    return "" + year + month + date + hours + minutes + seconds;
+}
+exports.date = date;

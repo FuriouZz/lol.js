@@ -77,19 +77,3 @@ export function toCapitalize(str: string) {
 export function toUCFirst(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
-
-/**
- * Generate version from datetime
- */
-export function generateVersionFromDate() {
-  const now = new Date()
-
-  const date = pad(now.getDate() + "", 2, "0")
-  const month = pad((now.getMonth()+1) + "", 2, "0")
-  const year = pad(now.getFullYear() + "", 4, "0")
-  const hours = pad(now.getHours() + "", 2, "0")
-  const minutes = pad(now.getMinutes() + "", 2, "0")
-  const seconds = pad(now.getSeconds() + "", 2, "0")
-
-  return `${year}-${month}-${date}_${hours}-${minutes}-${seconds}`
-}

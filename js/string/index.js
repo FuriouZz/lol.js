@@ -74,17 +74,3 @@ function toUCFirst(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
 exports.toUCFirst = toUCFirst;
-/**
- * Generate version from datetime
- */
-function generateVersionFromDate() {
-    var now = new Date();
-    var date = pad(now.getDate() + "", 2, "0");
-    var month = pad((now.getMonth() + 1) + "", 2, "0");
-    var year = pad(now.getFullYear() + "", 4, "0");
-    var hours = pad(now.getHours() + "", 2, "0");
-    var minutes = pad(now.getMinutes() + "", 2, "0");
-    var seconds = pad(now.getSeconds() + "", 2, "0");
-    return year + "-" + month + "-" + date + "_" + hours + "-" + minutes + "-" + seconds;
-}
-exports.generateVersionFromDate = generateVersionFromDate;
