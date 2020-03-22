@@ -1,19 +1,20 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var KEY_REG = /^-{1,2}/;
+var EQUAL_REG = /=/;
 function parse(argv) {
     var parameters = {};
     var key = '';
-    var keyRegex = /^-{1,2}/;
     var index = 0;
     for (var i = 0; i < argv.length; i++) {
         var arg = argv[i];
-        if (arg.match(keyRegex)) {
-            var split = arg.split(/=/);
-            key = split[0].replace(keyRegex, '');
+        if (arg.match(KEY_REG)) {
+            var split = arg.split(EQUAL_REG);
+            key = split[0].replace(KEY_REG, '');
             if (split[1]) {
                 parameters[key] = split[1];
             }
-            else if (argv[i + 1] && !argv[i + 1].match(keyRegex)) {
+            else if (argv[i + 1] && !argv[i + 1].match(KEY_REG)) {
                 parameters[key] = argv[i + 1];
                 i++;
             }
