@@ -86,6 +86,9 @@ var List = /** @class */ (function () {
         }
         return -1;
     };
+    List.prototype.has = function (value) {
+        return this.indexOf(value) > -1;
+    };
     List.prototype.forEach = function (cb) {
         var next = this._root.next;
         var i = 0;

@@ -110,6 +110,10 @@ export class List<T> {
     return -1
   }
 
+  has(value: T) {
+    return this.indexOf(value) > -1
+  }
+
   forEach(cb: (value: T, index: number) => void) {
     let next = this._root.next
     let i = 0

@@ -80,6 +80,9 @@ export class List {
         }
         return -1;
     }
+    has(value) {
+        return this.indexOf(value) > -1;
+    }
     forEach(cb) {
         let next = this._root.next;
         let i = 0;

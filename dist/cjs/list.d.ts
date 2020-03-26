@@ -18,6 +18,7 @@ export declare class List<T> {
     add(value: T): number;
     remove(value: T): T | null;
     indexOf(value: T): number;
+    has(value: T): boolean;
     forEach(cb: (value: T, index: number) => void): void;
     map<U>(cb: (value: T, index: number) => U): List<U>;
     filter(cb: (value: T, index: number) => boolean): List<T>;
