@@ -129,6 +129,10 @@ describe("List", () => {
     for (const value of l) {
       console.log(value)
     }
+
+    for (const value of l.values()) {
+      console.log(value)
+    }
   })
 
 })

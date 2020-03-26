@@ -190,14 +190,16 @@ export class List<T> {
     return arr
   }
 
-  [Symbol.iterator](): Iterator<T> {
+  [Symbol.iterator](): IterableIterator<T> {
     return this.values()
   }
 
-  // @ts-ignore
-  values(): Iterator<T, null> {
+  values(): IterableIterator<T> {
     let current = this._root.next
     return {
+      [Symbol.iterator]: () => {
+        return this.values()
+      },
       next(): IteratorResult<T> {
         if (current) {
           const value = current.value
@@ -210,10 +212,15 @@ export class List<T> {
 
         return {
           done: true,
-          // @ts-ignore
-          value: null
+          value: null as any
         }
       }
+    }
+  }
+
+  clear() {
+    while (this.length > 0) {
+      this.pop()
     }
   }
 

@@ -25,7 +25,8 @@ export declare class List<T> {
     clone(): List<T>;
     inverse(): void;
     toArray(): T[];
-    [Symbol.iterator](): Iterator<T>;
-    values(): Iterator<T, null>;
+    [Symbol.iterator](): IterableIterator<T>;
+    values(): IterableIterator<T>;
+    clear(): void;
 }
 export {};

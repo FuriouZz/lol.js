@@ -153,11 +153,15 @@ var List = /** @class */ (function () {
     List.prototype[Symbol.iterator] = function () {
         return this.values();
     };
-    // @ts-ignore
     List.prototype.values = function () {
+        var _this = this;
+        var _a;
         var current = this._root.next;
-        return {
-            next: function () {
+        return _a = {},
+            _a[Symbol.iterator] = function () {
+                return _this.values();
+            },
+            _a.next = function () {
                 if (current) {
                     var value = current.value;
                     current = current.next;
@@ -168,11 +172,15 @@ var List = /** @class */ (function () {
                 }
                 return {
                     done: true,
-                    // @ts-ignore
                     value: null
                 };
-            }
-        };
+            },
+            _a;
+    };
+    List.prototype.clear = function () {
+        while (this.length > 0) {
+            this.pop();
+        }
     };
     return List;
 }());

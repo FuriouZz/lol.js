@@ -147,10 +147,12 @@ export class List {
     [Symbol.iterator]() {
         return this.values();
     }
-    // @ts-ignore
     values() {
         let current = this._root.next;
         return {
+            [Symbol.iterator]: () => {
+                return this.values();
+            },
             next() {
                 if (current) {
                     const value = current.value;
@@ -162,10 +164,14 @@ export class List {
                 }
                 return {
                     done: true,
-                    // @ts-ignore
                     value: null
                 };
             }
         };
+    }
+    clear() {
+        while (this.length > 0) {
+            this.pop();
+        }
     }
 }
