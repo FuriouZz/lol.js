@@ -10,11 +10,10 @@ var __values = (this && this.__values) || function (o) {
     };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var index_1 = require("./list/index");
-var utils_1 = require("./list/utils");
+var list_1 = require("./list");
 var Dispatcher = /** @class */ (function () {
     function Dispatcher() {
-        this.listeners = new index_1.List();
+        this.listeners = new list_1.List();
     }
     Dispatcher.prototype.on = function (listener) {
         this.listeners.add({ once: false, fn: listener });
@@ -25,7 +24,7 @@ var Dispatcher = /** @class */ (function () {
     Dispatcher.prototype.off = function (listener) {
         var e_1, _a;
         try {
-            for (var _b = __values(utils_1.toIterable(this.listeners)), _c = _b.next(); !_c.done; _c = _b.next()) {
+            for (var _b = __values(this.listeners), _c = _b.next(); !_c.done; _c = _b.next()) {
                 var l = _c.value;
                 if (l.fn == listener) {
                     this.listeners.remove(l);
@@ -44,7 +43,7 @@ var Dispatcher = /** @class */ (function () {
     Dispatcher.prototype.dispatch = function (value) {
         var e_2, _a;
         try {
-            for (var _b = __values(utils_1.toIterable(this.listeners)), _c = _b.next(); !_c.done; _c = _b.next()) {
+            for (var _b = __values(this.listeners), _c = _b.next(); !_c.done; _c = _b.next()) {
                 var listener = _c.value;
                 listener.fn(value);
                 if (listener.once) {

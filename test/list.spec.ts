@@ -1,7 +1,6 @@
 import "mocha";
 import * as assert from "assert";
 import { List } from "../lib/list"
-import { toIterator } from "../lib/list/utils"
 
 describe("List", () => {
 
@@ -118,7 +117,7 @@ describe("List", () => {
   it('Iterator', () => {
     const l = new List("hello".split(''));
 
-    const it = toIterator(l)
+    const it = l.values()
     assert.deepEqual(it.next(), { done: false, value: "h" })
     assert.deepEqual(it.next(), { done: false, value: "e" })
     assert.deepEqual(it.next(), { done: false, value: "l" })
@@ -126,6 +125,10 @@ describe("List", () => {
     assert.deepEqual(it.next(), { done: false, value: "o" })
     assert.deepEqual(it.next(), { done: true, value: null })
     assert.deepEqual(it.next(), { done: true, value: null })
+
+    for (const value of l) {
+      console.log(value)
+    }
   })
 
 })

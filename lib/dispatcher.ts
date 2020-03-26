@@ -1,5 +1,4 @@
-import { List } from "./list/index";
-import { toIterable } from "./list/utils";
+import { List } from "./list";
 
 export type DispatcherListener<T> = (value?: T) => void
 
@@ -21,7 +20,7 @@ export class Dispatcher<T> {
   }
 
   off(listener: DispatcherListener<T>) {
-    for (const l of toIterable(this.listeners)) {
+    for (const l of this.listeners) {
       if (l.fn == listener) {
         this.listeners.remove(l)
         break
@@ -30,7 +29,7 @@ export class Dispatcher<T> {
   }
 
   dispatch(value?: T) {
-    for (const listener of toIterable(this.listeners)) {
+    for (const listener of this.listeners) {
       listener.fn(value)
       if (listener.once) {
         this.listeners.remove(listener)

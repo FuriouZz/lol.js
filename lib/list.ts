@@ -1,11 +1,9 @@
-interface ItemValueOptional<T> {
-  value?: T
+interface ItemValue<T> {
+  value: T
   next?: ItemValue<T>
 }
 
-interface ItemValue<T> extends ItemValueOptional<T> {
-  value: T
-}
+interface ItemValueOptional<T> extends Partial<ItemValue<T>> {}
 
 export class List<T> {
   protected _root: ItemValueOptional<T> = {}
@@ -183,7 +181,36 @@ export class List<T> {
       i++
     }
 
+    arr.values
+
     return arr
+  }
+
+  [Symbol.iterator](): Iterator<T> {
+    return this.values()
+  }
+
+  // @ts-ignore
+  values(): Iterator<T, null> {
+    let current = this._root.next
+    return {
+      next(): IteratorResult<T> {
+        if (current) {
+          const value = current.value
+          current = current.next
+          return {
+            done: false,
+            value
+          }
+        }
+
+        return {
+          done: true,
+          // @ts-ignore
+          value: null
+        }
+      }
+    }
   }
 
 }

@@ -13,8 +13,8 @@ export interface ExecEntry {
     options: ExecOptions;
 }
 export interface ExecResult {
-    code: number;
-    signal: string;
+    code: number | null;
+    signal: NodeJS.Signals | null;
     stdout: Buffer;
     stderr: Buffer;
 }

@@ -10,7 +10,8 @@
       "dom",
       "es6"
     ],
-    "downlevelIteration": true
+    "downlevelIteration": true,
+    "skipLibCheck": true
   },
 
   "include": [

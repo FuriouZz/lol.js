@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "@types/mocha": "^5.2.7",
-    "@types/node": "9.4.0",
+    "@types/node": "12.12.31",
     "mocha": "^6.1.4",
     "typescript": "3.4.3"
   }

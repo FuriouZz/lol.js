@@ -6,12 +6,12 @@ import { spawnSync } from "child_process";
 
 FileList.debug = false
 
-export function isFile(path:string) {
+export function isFile(path: string) {
 
   try {
-    const stat = Fs.statSync( path )
+    const stat = Fs.statSync(path)
     if (!stat.isFile()) throw 'Not a file'
-  } catch(e) {
+  } catch (e) {
     return false
   }
 
@@ -19,12 +19,12 @@ export function isFile(path:string) {
 
 }
 
-export function isDirectory(path:string) {
+export function isDirectory(path: string) {
 
   try {
-    const stat = Fs.statSync( path )
+    const stat = Fs.statSync(path)
     if (!stat.isDirectory()) throw 'Not a file'
-  } catch(e) {
+  } catch (e) {
     return false
   }
 
@@ -32,18 +32,18 @@ export function isDirectory(path:string) {
 
 }
 
-export function exists(path:string) {
+export function exists(path: string) {
   try {
-    Fs.statSync( path )
-  } catch(e) {
+    Fs.statSync(path)
+  } catch (e) {
     return false
   }
 
   return true
 }
 
-export function copy(fromFile:string, toFile:string) {
-  return new Promise<boolean>(function(resolve:Function, reject:Function) {
+export function copy(fromFile: string, toFile: string) {
+  return new Promise<boolean>(function (resolve: Function, reject: Function) {
 
     let fileValid = fromFile !== toFile
     if (!fileValid) throw `Cannot copy '${fromFile}' to the same path`
@@ -51,34 +51,34 @@ export function copy(fromFile:string, toFile:string) {
     fileValid = isFile(fromFile)
     if (!fileValid) throw `'${fromFile}' is not a file`
 
-    ensureDir(dirname( toFile )).then(function() {
-      const rs = Fs.createReadStream( fromFile )
-      const ws = Fs.createWriteStream( toFile  )
+    ensureDir(dirname(toFile)).then(function () {
+      const rs = Fs.createReadStream(fromFile)
+      const ws = Fs.createWriteStream(toFile)
 
-      ws.on('error', function(error:Error) {
+      ws.on('error', function (error: Error) {
         reject(error)
       })
-      rs.on('error', function(error:Error) {
+      rs.on('error', function (error: Error) {
         reject(error)
       })
-      rs.on('end', function() {
+      rs.on('end', function () {
         resolve(true)
       })
 
-      rs.pipe( ws, { end: true })
+      rs.pipe(ws, { end: true })
     })
 
   })
 }
 
-export function remove(path:string) {
+export function remove(path: string) {
   if (isDirectory(path)) return removeDir(path)
 
   return new Promise<boolean>((resolve: Function, reject: Function) => {
 
     if (!isFile(path)) throw 'Cannot be removed. This is not a file.'
 
-    Fs.unlink(path, function(err) {
+    Fs.unlink(path, function (err) {
       if (err) {
         reject(err)
         return
@@ -109,8 +109,8 @@ export async function removeDir(dir: string) {
 }
 
 export function mkdir(dir: string) {
-  return new Promise<boolean>(function(resolve:Function, reject:Function) {
-    Fs.mkdir(dir, function(err) {
+  return new Promise<boolean>(function (resolve: Function, reject: Function) {
+    Fs.mkdir(dir, function (err) {
       if (err && err.code !== 'EEXIST') {
         reject(err)
         return
@@ -121,16 +121,16 @@ export function mkdir(dir: string) {
   })
 }
 
-export async function move(fromFile:string, toFile:string) {
+export async function move(fromFile: string, toFile: string) {
   await copy(fromFile, toFile)
   return remove(fromFile)
 }
 
-export function rename(fromFile:string, toFile:string) {
+export function rename(fromFile: string, toFile: string) {
   return move(fromFile, toFile)
 }
 
-export async function ensureDir(path:string) {
+export async function ensureDir(path: string) {
   path = normalize(path)
 
   if (isDirectory(path)) return new Promise<boolean>((resolve) => resolve(true))
@@ -153,49 +153,49 @@ export async function ensureDir(path:string) {
   }
 }
 
-export function fetch(include:string|string[], exclude?:string|string[]) {
+export function fetch(include: string | string[], exclude?: string | string[]) {
   const FL = new FileList
 
-  const includes = Array.isArray(include) ? include : [ include ]
-  const excludes = Array.isArray(exclude) ? exclude : exclude ? [ exclude ] : []
+  const includes = Array.isArray(include) ? include : [include]
+  const excludes = Array.isArray(exclude) ? exclude : exclude ? [exclude] : []
 
-  includes.forEach((inc) => FL.include( inc ))
-  excludes.forEach((exc) => FL.exclude( exc ))
+  includes.forEach((inc) => FL.include(inc))
+  excludes.forEach((exc) => FL.exclude(exc))
 
   let files: string[] = []
 
   try {
     files = FL.toArray()
-  } catch (e) {}
+  } catch (e) { }
 
-  files = files.filter(function(file:string) {
-    return isFile( file )
+  files = files.filter(function (file: string) {
+    return isFile(file)
   })
 
   return files
 }
 
-export function fetchDirs(include:string|string[], exclude?:string|string[]) {
+export function fetchDirs(include: string | string[], exclude?: string | string[]) {
   const FL = new FileList
 
-  const includes = Array.isArray(include) ? include : [ include ]
-  const excludes = Array.isArray(exclude) ? exclude : exclude ? [ exclude ] : []
+  const includes = Array.isArray(include) ? include : [include]
+  const excludes = Array.isArray(exclude) ? exclude : exclude ? [exclude] : []
 
-  includes.forEach((inc) => FL.include( inc ))
-  excludes.forEach((exc) => FL.exclude( exc ))
+  includes.forEach((inc) => FL.include(inc))
+  excludes.forEach((exc) => FL.exclude(exc))
 
-  const files = FL.toArray().filter(function(file:string) {
-    return isDirectory( file )
+  const files = FL.toArray().filter(function (file: string) {
+    return isDirectory(file)
   })
 
   return files
 }
 
-export async function writeFile(content:string | Buffer, file:string) {
+export async function writeFile(content: string | Buffer, file: string) {
   await ensureDir(dirname(file))
 
   return new Promise<boolean>((resolve, reject) => {
-    Fs.writeFile(file, content, function(err:Error) {
+    Fs.writeFile(file, content, function (err: Error | null) {
       if (err) {
         reject(err)
         return
@@ -207,11 +207,11 @@ export async function writeFile(content:string | Buffer, file:string) {
 
 }
 
-export function readFile(file:string, options?: { encoding?: string | null; flag?: string; } | string | undefined | null) {
+export function readFile(file: string, options?: { encoding?: string | null; flag?: string; } | string | undefined | null) {
   if (!isFile(file)) throw 'This is not a file.'
 
-  return new Promise<string|Buffer>((resolve:Function, reject:Function) => {
-    Fs.readFile(file, options, function(err:Error, data:string | Buffer) {
+  return new Promise<string | Buffer>((resolve: Function, reject: Function) => {
+    Fs.readFile(file, options, function (err: Error | null, data: string | Buffer) {
       if (err) {
         reject(err)
         return
@@ -220,17 +220,17 @@ export function readFile(file:string, options?: { encoding?: string | null; flag
       resolve(data)
     })
   })
-} 
+}
 
-export type EditFileCallback = (value: string | Buffer) => string | Buffer | Promise<string | Buffer>
+export type EditFileCallback = (value: string | Buffer) => string | Buffer | Promise<string | Buffer>
 
-export async function editFile(file:string, callback: EditFileCallback) {
+export async function editFile(file: string, callback: EditFileCallback) {
   const content = await readFile(file)
   const modified = await callback(content)
   return writeFile(modified, file)
 }
 
-export function appendFile(content:string | Buffer, file: string) {
+export function appendFile(content: string | Buffer, file: string) {
   return new Promise((resolve, reject) => {
     Fs.appendFile(file, content, (err) => {
       if (err) {
@@ -242,18 +242,18 @@ export function appendFile(content:string | Buffer, file: string) {
   })
 }
 
-export function isSymbolicLink(path:string) {
+export function isSymbolicLink(path: string) {
   try {
-    const stats = Fs.statSync( path )
+    const stats = Fs.statSync(path)
     if (!stats.isSymbolicLink()) throw 'Not a symbolic link'
-  } catch(e) {
+  } catch (e) {
     return false
   }
 
   return true
 }
 
-export async function symlink(fromPath:string, toPath:string) {
+export async function symlink(fromPath: string, toPath: string) {
   if (!isAbsolute(fromPath)) fromPath = join(process.cwd(), fromPath)
   if (!isAbsolute(toPath)) toPath = join(process.cwd(), toPath)
 
@@ -264,9 +264,9 @@ export async function symlink(fromPath:string, toPath:string) {
   await ensureDir(dirname(toPath))
 
   return promise<boolean>((resolve, reject) => {
-    Fs.symlink(fromPath, toPath, function(err) {
+    Fs.symlink(fromPath, toPath, function (err) {
       if (err) {
-        reject( err )
+        reject(err)
         return
       }
 
@@ -296,7 +296,7 @@ export async function symlink2(fromPath: string, toPath: string, shell: ShellTyp
   return promise<boolean>((resolve, reject) => {
     const cmd = command.split(' ')
     const cli = cmd.shift() as string
-    const ps  = spawnSync(cli, cmd, { shell: shell })
+    const ps = spawnSync(cli, cmd, { shell: shell })
 
     if (ps.error) {
       reject(ps.error)
