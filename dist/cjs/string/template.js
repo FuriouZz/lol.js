@@ -28,33 +28,28 @@ exports.template = template;
 /**
  * Interpolate string with the object
  */
-function template2(string, obj, options) {
+function template2(str, obj, options) {
     if (obj === void 0) { obj = {}; }
     if (options === void 0) { options = Template2DefaultOptions; }
     options = Object.assign({
         open: '${',
         body: '[a-z@$#-_?!]+',
-        close: '}'
+        close: '}',
+        defaultValue: ''
     }, options);
-    var value, str = string;
     var matches = str.match(new RegExp(_TEMPLATE_ESCAPE_REGEX(options.open) +
         options.body +
         _TEMPLATE_ESCAPE_REGEX(options.close), 'g')) || [];
-    var nmatches = matches.map(function (m) { return ''; });
-    for (var key in obj) {
-        value = obj[key];
-        if (typeof value === 'string') {
-            nmatches = nmatches.map(function (m, index) {
-                if (matches[index].match(new RegExp(key))) {
-                    var s = matches[index].replace(key, value);
-                    return s.slice(options.open.length, s.length - options.close.length);
-                }
-                return m;
-            });
+    matches.forEach(function (m) {
+        var key = m;
+        key = key.slice(options.open.length);
+        key = key.slice(0, key.length - options.close.length);
+        if (obj[key]) {
+            str = str.replace(m, obj[key]);
         }
-    }
-    matches.forEach(function (m, index) {
-        str = str.replace(m, nmatches[index]);
+        else {
+            str = str.replace(m, options.defaultValue ? options.defaultValue : m);
+        }
     });
     return str;
 }

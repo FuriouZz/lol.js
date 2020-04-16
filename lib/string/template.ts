@@ -1,5 +1,5 @@
-function _TEMPLATE_REGEX( key: string ) {
-  return new RegExp("\\$\\{"+key+"\\}", 'g')
+function _TEMPLATE_REGEX(key: string) {
+  return new RegExp("\\$\\{" + key + "\\}", 'g')
 }
 
 function _TEMPLATE_ESCAPE_REGEX(str: string) {
@@ -10,6 +10,7 @@ interface Template2Options {
   open: string
   close: string
   body: string
+  defaultValue?: string
 }
 
 const Template2DefaultOptions: Template2Options = {
@@ -21,12 +22,12 @@ const Template2DefaultOptions: Template2Options = {
 /**
  * Interpolate string with the object
  */
-export function template( string: string, obj: any = {}, regex: (key: string) => RegExp = _TEMPLATE_REGEX ) {
+export function template(string: string, obj: any = {}, regex: (key: string) => RegExp = _TEMPLATE_REGEX) {
   let value: any, str = string
 
   for (let key in obj) {
     value = obj[key]
-    str   = str.replace( regex(key), value )
+    str = str.replace(regex(key), value)
   }
 
   return str
@@ -35,40 +36,30 @@ export function template( string: string, obj: any = {}, regex: (key: string) =>
 /**
  * Interpolate string with the object
  */
-export function template2( string: string, obj: any = {}, options: Template2Options = Template2DefaultOptions ) {
+export function template2(str: string, obj: any = {}, options: Template2Options = Template2DefaultOptions) {
   options = Object.assign({
     open: '${',
     body: '[a-z@$#-_?!]+',
-    close: '}'
+    close: '}',
+    defaultValue: ''
   }, options)
 
-  var value: any, str = string
-
-  var matches  = str.match(new RegExp(
+  const matches = str.match(new RegExp(
     _TEMPLATE_ESCAPE_REGEX(options.open) +
     options.body +
     _TEMPLATE_ESCAPE_REGEX(options.close)
-  , 'g')) || []
+    , 'g')) || []
 
-  var nmatches = matches.map(function(m) { return '' })
+  matches.forEach((m) => {
+    let key = m
+    key = key.slice(options.open.length)
+    key = key.slice(0, key.length - options.close.length)
 
-  for (var key in obj) {
-    value = obj[key]
-
-    if (typeof value === 'string') {
-      nmatches = nmatches.map(function(m, index) {
-        if (matches[index].match(new RegExp(key))) {
-          var s = matches[index].replace( key, value )
-          return s.slice(options.open.length, s.length-options.close.length)
-        }
-
-        return m
-      })
+    if (obj[key]) {
+      str = str.replace(m, obj[key])
+    } else {
+      str = str.replace(m, options.defaultValue ? options.defaultValue : m)
     }
-  }
-
-  matches.forEach(function(m, index) {
-    str = str.replace(m, nmatches[index])
   })
 
   return str
