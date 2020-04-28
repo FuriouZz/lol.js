@@ -51,15 +51,14 @@ export function template2(str: string, obj: any = {}, options: Template2Options 
     , 'g')) || []
 
   matches.forEach((m) => {
-    const reg = new RegExp(m, 'g')
     let key = m
     key = key.slice(options.open.length)
     key = key.slice(0, key.length - options.close.length)
 
     if (obj[key]) {
-      str = str.replace(reg, obj[key])
+      str = str.split(m).join(obj[key])
     } else {
-      str = str.replace(reg, typeof options.defaultValue === "string" ? options.defaultValue : m)
+      str = str.split(m).join(typeof options.defaultValue === "string" ? options.defaultValue : m)
     }
   })
 
