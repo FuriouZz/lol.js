@@ -34,14 +34,15 @@ export function template2(str, obj = {}, options = Template2DefaultOptions) {
         options.body +
         _TEMPLATE_ESCAPE_REGEX(options.close), 'g')) || [];
     matches.forEach((m) => {
+        const reg = new RegExp(m, 'g');
         let key = m;
         key = key.slice(options.open.length);
         key = key.slice(0, key.length - options.close.length);
         if (obj[key]) {
-            str = str.replace(m, obj[key]);
+            str = str.replace(reg, obj[key]);
         }
         else {
-            str = str.replace(m, options.defaultValue ? options.defaultValue : m);
+            str = str.replace(reg, typeof options.defaultValue === "string" ? options.defaultValue : m);
         }
     });
     return str;
