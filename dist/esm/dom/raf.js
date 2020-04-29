@@ -1,39 +1,4 @@
-/**
- * raf.js
- *
- * Global RequestAnimationFrame
- *
- * ----------------------------
- *
- * use example
- *
- * var RAF = require('./libs/raf)'
- *
- * RAF.subscribe( 'mySubscriberId', mySubscriberFn )
- * RAF.unsubscribe( 'mySubscriberId' )
- * RAF.start()
- * RAF.stop()
- */
-const requestAnimFrame = (function () {
-    return window.requestAnimationFrame ||
-        window.webkitRequestAnimationFrame ||
-        // @ts-ignore
-        window.mozRequestAnimationFrame ||
-        function (callback) {
-            window.setTimeout(callback, 1000 / 60);
-        };
-})();
-const cancelRequestAnimFrame = (function () {
-    return window.cancelAnimationFrame ||
-        // @ts-ignore
-        window.webkitCancelRequestAnimationFrame ||
-        // @ts-ignore
-        window.mozCancelRequestAnimationFrame ||
-        // @ts-ignore
-        window.oCancelRequestAnimationFrame ||
-        // @ts-ignore
-        window.msCancelRequestAnimationFrame;
-})();
+/// <reference lib="dom" />
 export class RAF {
     /**
      * Run all subscribers
@@ -47,7 +12,7 @@ export class RAF {
             RAF._processUpdate();
         }
         RAF._lt = RAF._now;
-        RAF._raf = requestAnimFrame(RAF._update);
+        RAF._raf = window.requestAnimationFrame(RAF._update);
     }
     static _processUpdate() {
         for (var i = 0; i < RAF.subscribers.length; i++) {
@@ -77,13 +42,13 @@ export class RAF {
      * Start globally the RAF
      */
     static start() {
-        RAF._raf = requestAnimFrame(RAF._update);
+        RAF._raf = window.requestAnimationFrame(RAF._update);
     }
     /**
      * Stop globally the RAF
      */
     static stop() {
-        cancelRequestAnimFrame(RAF._raf);
+        window.cancelAnimationFrame(RAF._raf);
     }
 }
 RAF.subscribers = [];
@@ -92,4 +57,4 @@ RAF.framerate = 16;
 RAF._now = performance.now();
 RAF._lt = RAF._now;
 RAF._elapsedInterval = 0;
-RAF._raf = requestAnimFrame(RAF._update);
+RAF._raf = window.requestAnimationFrame(RAF._update);
