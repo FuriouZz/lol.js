@@ -1,3 +1,5 @@
+/// <reference lib="dom" />
+
 /**
  * raf.js
  *
@@ -15,28 +17,6 @@
  * RAF.stop()
  */
 
-const requestAnimFrame = (function () {
-  return window.requestAnimationFrame ||
-    window.webkitRequestAnimationFrame ||
-    // @ts-ignore
-    window.mozRequestAnimationFrame ||
-    function (callback) {
-      window.setTimeout(callback, 1000 / 60);
-    };
-  })();
-
-
-  const cancelRequestAnimFrame = (function () {
-    return window.cancelAnimationFrame ||
-    // @ts-ignore
-    window.webkitCancelRequestAnimationFrame ||
-    // @ts-ignore
-    window.mozCancelRequestAnimationFrame ||
-    // @ts-ignore
-    window.oCancelRequestAnimationFrame ||
-    // @ts-ignore
-    window.msCancelRequestAnimationFrame
-})();
 
 export type Subscriber = [ string, (dt: number, now: number) => void ]
 
@@ -49,7 +29,7 @@ export class RAF {
   private static _now = performance.now();
   private static _lt = RAF._now;
   private static _elapsedInterval = 0;
-  private static _raf = requestAnimFrame(RAF._update)
+  private static _raf = window.requestAnimationFrame(RAF._update)
 
   /**
    * Run all subscribers
@@ -68,7 +48,7 @@ export class RAF {
     }
 
     RAF._lt = RAF._now
-    RAF._raf = requestAnimFrame(RAF._update)
+    RAF._raf = window.requestAnimationFrame(RAF._update)
 
   }
 
@@ -107,13 +87,13 @@ export class RAF {
    * Start globally the RAF
    */
   static start() {
-    RAF._raf = requestAnimFrame(RAF._update)
+    RAF._raf = window.requestAnimationFrame(RAF._update)
   }
 
   /**
    * Stop globally the RAF
    */
   static stop() {
-    cancelRequestAnimFrame(RAF._raf)
+    window.cancelAnimationFrame(RAF._raf)
   }
 }
