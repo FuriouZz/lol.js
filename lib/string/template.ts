@@ -64,3 +64,24 @@ export function template2(str: string, obj: any = {}, options: Template2Options 
 
   return str
 }
+
+export function template3(str: string, obj: Record<string, any> = {}) {
+  if (typeof str !== 'string' || !str) {
+    throw new Error('[template] template is missing')
+  }
+
+  if (typeof obj !== "object" || obj === null) {
+    throw new Error('[template] object is missing')
+  }
+
+  const keys: string[] = []
+  const values: any[] = []
+
+  for (const key in obj) {
+    keys.push(key)
+    values.push(obj[key])
+  }
+
+  const f = new Function(...keys, `return \`${str}\``)
+  return f.apply(null, values)
+}
