@@ -5,6 +5,10 @@ export interface ImageMetadata {
   ratio: number
 }
 
+export interface ImageData extends ImageMetadata {
+  element: HTMLImageElement
+}
+
 export function metadata($img: HTMLImageElement) : ImageMetadata {
   return {
     url: $img.src,
@@ -15,7 +19,7 @@ export function metadata($img: HTMLImageElement) : ImageMetadata {
 }
 
 export function load(url: string) {
-  return new Promise<ImageMetadata & { element: HTMLImageElement }>((resolve, reject) => {
+  return new Promise<ImageData>((resolve, reject) => {
     const $img = new Image()
     $img.onload = () => {
       resolve({

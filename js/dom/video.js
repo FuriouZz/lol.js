@@ -28,6 +28,9 @@ function load(url) {
             $video.removeEventListener('loadedmetadata', onLoadedMetaData);
             resolve(__assign({ element: $video }, metadata($video)));
         }
+        $video.onerror = function (e) {
+            reject(e);
+        };
         $video.addEventListener('loadedmetadata', onLoadedMetaData);
         $video.src = url;
     });

@@ -3,6 +3,10 @@ export interface AudioMetadata {
   duration: number
 }
 
+export interface AudioData extends AudioMetadata {
+  element: HTMLAudioElement
+}
+
 export function metadata($audio: HTMLAudioElement) : AudioMetadata {
   return {
     url: $audio.src,
@@ -11,7 +15,7 @@ export function metadata($audio: HTMLAudioElement) : AudioMetadata {
 }
 
 export function load(url: string) {
-  return new Promise<AudioMetadata & { element: HTMLAudioElement }>((resolve, reject) => {
+  return new Promise<AudioData>((resolve, reject) => {
     const $audio = document.createElement('audio')
 
     function onLoadedMetaData() {
@@ -20,6 +24,10 @@ export function load(url: string) {
         element: $audio,
         ...metadata($audio)
       })
+    }
+
+    $audio.onerror = (e) => {
+      reject(e)
     }
 
     $audio.addEventListener('loadedmetadata', onLoadedMetaData)

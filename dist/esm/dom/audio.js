@@ -11,6 +11,9 @@ export function load(url) {
             $audio.removeEventListener('loadedmetadata', onLoadedMetaData);
             resolve(Object.assign({ element: $audio }, metadata($audio)));
         }
+        $audio.onerror = (e) => {
+            reject(e);
+        };
         $audio.addEventListener('loadedmetadata', onLoadedMetaData);
         $audio.src = url;
     });

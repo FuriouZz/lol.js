@@ -14,6 +14,9 @@ export function load(url) {
             $video.removeEventListener('loadedmetadata', onLoadedMetaData);
             resolve(Object.assign({ element: $video }, metadata($video)));
         }
+        $video.onerror = (e) => {
+            reject(e);
+        };
         $video.addEventListener('loadedmetadata', onLoadedMetaData);
         $video.src = url;
     });

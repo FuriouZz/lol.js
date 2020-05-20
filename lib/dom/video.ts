@@ -6,6 +6,10 @@ export interface VideoMetadata {
   poster?: string
 }
 
+export interface VideoData extends VideoMetadata {
+  element: HTMLVideoElement
+}
+
 export function metadata($video: HTMLVideoElement) : VideoMetadata {
   return {
     url: $video.src,
@@ -17,7 +21,7 @@ export function metadata($video: HTMLVideoElement) : VideoMetadata {
 }
 
 export function load(url: string) {
-  return new Promise<VideoMetadata & { element: HTMLVideoElement }>((resolve, reject) => {
+  return new Promise<VideoData>((resolve, reject) => {
     const $video = document.createElement('video')
 
     function onLoadedMetaData() {
@@ -26,6 +30,10 @@ export function load(url: string) {
         element: $video,
         ...metadata($video)
       })
+    }
+
+    $video.onerror = (e) => {
+      reject(e)
     }
 
     $video.addEventListener('loadedmetadata', onLoadedMetaData)
