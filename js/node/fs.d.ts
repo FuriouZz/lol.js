@@ -24,8 +24,9 @@ export declare function symlink(fromPath: string, toPath: string): Promise<boole
 declare type ShellType = 'cmd' | 'bash' | 'powershell' | 'zsh';
 export declare function symlink2(fromPath: string, toPath: string, shell?: ShellType): Promise<boolean>;
 export declare function touch(path: string): boolean;
-export declare function mkdirSync(dir: string, throwOnError?: boolean): boolean;
-export declare function ensureDirSync(path: string, throwOnError?: boolean): true | undefined;
-export declare function writeFileSync(content: string | Buffer, file: string, throwOnError?: boolean): boolean;
-export declare function editFileSync(file: string, callback: (value: string | Buffer) => string | Buffer, throwOnError?: boolean): boolean;
+export declare function ensureDirSync(path: string): void;
+export declare function writeFileSync(content: string | Buffer, file: string): void;
+export declare function editFileSync(file: string, callback: (value: string | Buffer) => string | Buffer): void;
+export declare function removeSync(path: string): void;
+export declare function removeDirSync(dir: string): void;
 export {};

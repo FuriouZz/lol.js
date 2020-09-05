@@ -312,21 +312,10 @@ export function touch(path: string) {
   return true
 }
 
-export function mkdirSync(dir: string, throwOnError?: boolean) {
-  try {
-    Fs.mkdirSync(dir)
-  } catch (e) {
-    if (throwOnError) throw e
-    return false
-  }
-
-  return true
-}
-
-export function ensureDirSync(path: string, throwOnError?: boolean) {
+export function ensureDirSync(path: string) {
   path = normalize(path)
 
-  if (isDirectory(path)) return true
+  if (isDirectory(path)) return
 
   const dirs = path.split(/\\|\//)
   const initial = isAbsolute(path) ? dirs.shift() as string : '.'
@@ -342,25 +331,39 @@ export function ensureDirSync(path: string, throwOnError?: boolean) {
 
     res += slash + d
 
-    if (!isDirectory(res)) mkdirSync(res, throwOnError)
+    if (!isDirectory(res)) Fs.mkdirSync(res)
   }
 }
 
-export function writeFileSync(content: string | Buffer, file: string, throwOnError?: boolean) {
+export function writeFileSync(content: string | Buffer, file: string) {
   ensureDirSync(dirname(file))
-
-  try {
-    Fs.writeFileSync(file, content)
-  } catch (e) {
-    if (throwOnError) throw e
-    return false
-  }
-
-  return true
+  Fs.writeFileSync(file, content)
 }
 
-export function editFileSync(file: string, callback: (value: string | Buffer) => string | Buffer, throwOnError?: boolean) {
+export function editFileSync(file: string, callback: (value: string | Buffer) => string | Buffer) {
   const content = Fs.readFileSync(file)
   const modified = callback(content)
-  return writeFileSync(modified, file, throwOnError)
+  return writeFileSync(modified, file)
+}
+
+export function removeSync(path: string) {
+  if (isDirectory(path)) return removeDirSync(path)
+  if (!isFile(path)) throw 'Cannot be removed. This is not a file.'
+  Fs.unlinkSync(path)
+}
+
+export function removeDirSync(dir: string) {
+  const files = fetch(join(dir, '**/*'))
+
+  for (let i = 0; i < files.length; i++) {
+    removeSync(files[i])
+  }
+
+  const dirs = fetchDirs(join(dir, '**/*')).reverse()
+
+  for (let j = 0; j < dirs.length; j++) {
+    Fs.rmdirSync(dirs[j])
+  }
+
+  Fs.rmdirSync(dir)
 }

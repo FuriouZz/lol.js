@@ -275,21 +275,10 @@ export function touch(path) {
     Fs.closeSync(id);
     return true;
 }
-export function mkdirSync(dir, throwOnError) {
-    try {
-        Fs.mkdirSync(dir);
-    }
-    catch (e) {
-        if (throwOnError)
-            throw e;
-        return false;
-    }
-    return true;
-}
-export function ensureDirSync(path, throwOnError) {
+export function ensureDirSync(path) {
     path = normalize(path);
     if (isDirectory(path))
-        return true;
+        return;
     const dirs = path.split(/\\|\//);
     const initial = isAbsolute(path) ? dirs.shift() : '.';
     const slash = process.platform == 'win32' ? '\\' : '/';
@@ -301,23 +290,33 @@ export function ensureDirSync(path, throwOnError) {
             continue;
         res += slash + d;
         if (!isDirectory(res))
-            mkdirSync(res, throwOnError);
+            Fs.mkdirSync(res);
     }
 }
-export function writeFileSync(content, file, throwOnError) {
+export function writeFileSync(content, file) {
     ensureDirSync(dirname(file));
-    try {
-        Fs.writeFileSync(file, content);
-    }
-    catch (e) {
-        if (throwOnError)
-            throw e;
-        return false;
-    }
-    return true;
+    Fs.writeFileSync(file, content);
 }
-export function editFileSync(file, callback, throwOnError) {
+export function editFileSync(file, callback) {
     const content = Fs.readFileSync(file);
     const modified = callback(content);
-    return writeFileSync(modified, file, throwOnError);
+    return writeFileSync(modified, file);
+}
+export function removeSync(path) {
+    if (isDirectory(path))
+        return removeDirSync(path);
+    if (!isFile(path))
+        throw 'Cannot be removed. This is not a file.';
+    Fs.unlinkSync(path);
+}
+export function removeDirSync(dir) {
+    const files = fetch(join(dir, '**/*'));
+    for (let i = 0; i < files.length; i++) {
+        removeSync(files[i]);
+    }
+    const dirs = fetchDirs(join(dir, '**/*')).reverse();
+    for (let j = 0; j < dirs.length; j++) {
+        Fs.rmdirSync(dirs[j]);
+    }
+    Fs.rmdirSync(dir);
 }

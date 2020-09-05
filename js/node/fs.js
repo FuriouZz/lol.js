@@ -398,22 +398,10 @@ function touch(path) {
     return true;
 }
 exports.touch = touch;
-function mkdirSync(dir, throwOnError) {
-    try {
-        Fs.mkdirSync(dir);
-    }
-    catch (e) {
-        if (throwOnError)
-            throw e;
-        return false;
-    }
-    return true;
-}
-exports.mkdirSync = mkdirSync;
-function ensureDirSync(path, throwOnError) {
+function ensureDirSync(path) {
     path = path_1.normalize(path);
     if (isDirectory(path))
-        return true;
+        return;
     var dirs = path.split(/\\|\//);
     var initial = path_1.isAbsolute(path) ? dirs.shift() : '.';
     var slash = process.platform == 'win32' ? '\\' : '/';
@@ -425,26 +413,38 @@ function ensureDirSync(path, throwOnError) {
             continue;
         res += slash + d;
         if (!isDirectory(res))
-            mkdirSync(res, throwOnError);
+            Fs.mkdirSync(res);
     }
 }
 exports.ensureDirSync = ensureDirSync;
-function writeFileSync(content, file, throwOnError) {
+function writeFileSync(content, file) {
     ensureDirSync(path_1.dirname(file));
-    try {
-        Fs.writeFileSync(file, content);
-    }
-    catch (e) {
-        if (throwOnError)
-            throw e;
-        return false;
-    }
-    return true;
+    Fs.writeFileSync(file, content);
 }
 exports.writeFileSync = writeFileSync;
-function editFileSync(file, callback, throwOnError) {
+function editFileSync(file, callback) {
     var content = Fs.readFileSync(file);
     var modified = callback(content);
-    return writeFileSync(modified, file, throwOnError);
+    return writeFileSync(modified, file);
 }
 exports.editFileSync = editFileSync;
+function removeSync(path) {
+    if (isDirectory(path))
+        return removeDirSync(path);
+    if (!isFile(path))
+        throw 'Cannot be removed. This is not a file.';
+    Fs.unlinkSync(path);
+}
+exports.removeSync = removeSync;
+function removeDirSync(dir) {
+    var files = fetch(path_1.join(dir, '**/*'));
+    for (var i = 0; i < files.length; i++) {
+        removeSync(files[i]);
+    }
+    var dirs = fetchDirs(path_1.join(dir, '**/*')).reverse();
+    for (var j = 0; j < dirs.length; j++) {
+        Fs.rmdirSync(dirs[j]);
+    }
+    Fs.rmdirSync(dir);
+}
+exports.removeDirSync = removeDirSync;
