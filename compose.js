@@ -12,7 +12,7 @@ async function compose(files, input = './', output) {
     const mi = toCamelCase(f.dir)
     const alias = '_' + m
 
-    imprts.push(`import * as ${alias} from "${input}${file.replace(f.ext, '')}"`);
+    imprts.push(`import * as ${alias} from "${input}${file.replace(f.ext, '').replace(/\\/, "/")}"`);
 
     if (f.name == 'index') {
       exprts.push(`export const ${mi} = ${alias};`)

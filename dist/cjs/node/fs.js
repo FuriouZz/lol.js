@@ -398,3 +398,53 @@ function touch(path) {
     return true;
 }
 exports.touch = touch;
+function mkdirSync(dir, throwOnError) {
+    try {
+        Fs.mkdirSync(dir);
+    }
+    catch (e) {
+        if (throwOnError)
+            throw e;
+        return false;
+    }
+    return true;
+}
+exports.mkdirSync = mkdirSync;
+function ensureDirSync(path, throwOnError) {
+    path = path_1.normalize(path);
+    if (isDirectory(path))
+        return true;
+    var dirs = path.split(/\\|\//);
+    var initial = path_1.isAbsolute(path) ? dirs.shift() : '.';
+    var slash = process.platform == 'win32' ? '\\' : '/';
+    var res = initial;
+    var d = '';
+    for (var i = 0; i < dirs.length; i++) {
+        d = dirs[i];
+        if (d === '.')
+            continue;
+        res += slash + d;
+        if (!isDirectory(res))
+            mkdirSync(res, throwOnError);
+    }
+}
+exports.ensureDirSync = ensureDirSync;
+function writeFileSync(content, file, throwOnError) {
+    ensureDirSync(path_1.dirname(file));
+    try {
+        Fs.writeFileSync(file, content);
+    }
+    catch (e) {
+        if (throwOnError)
+            throw e;
+        return false;
+    }
+    return true;
+}
+exports.writeFileSync = writeFileSync;
+function editFileSync(file, callback, throwOnError) {
+    var content = Fs.readFileSync(file);
+    var modified = callback(content);
+    return writeFileSync(modified, file, throwOnError);
+}
+exports.editFileSync = editFileSync;

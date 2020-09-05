@@ -311,3 +311,56 @@ export function touch(path: string) {
   Fs.closeSync(id)
   return true
 }
+
+export function mkdirSync(dir: string, throwOnError?: boolean) {
+  try {
+    Fs.mkdirSync(dir)
+  } catch (e) {
+    if (throwOnError) throw e
+    return false
+  }
+
+  return true
+}
+
+export function ensureDirSync(path: string, throwOnError?: boolean) {
+  path = normalize(path)
+
+  if (isDirectory(path)) return true
+
+  const dirs = path.split(/\\|\//)
+  const initial = isAbsolute(path) ? dirs.shift() as string : '.'
+  const slash = process.platform == 'win32' ? '\\' : '/'
+
+  let res = initial
+  let d = ''
+
+  for (let i = 0; i < dirs.length; i++) {
+    d = dirs[i];
+
+    if (d === '.') continue
+
+    res += slash + d
+
+    if (!isDirectory(res)) mkdirSync(res, throwOnError)
+  }
+}
+
+export function writeFileSync(content: string | Buffer, file: string, throwOnError?: boolean) {
+  ensureDirSync(dirname(file))
+
+  try {
+    Fs.writeFileSync(file, content)
+  } catch (e) {
+    if (throwOnError) throw e
+    return false
+  }
+
+  return true
+}
+
+export function editFileSync(file: string, callback: (value: string | Buffer) => string | Buffer, throwOnError?: boolean) {
+  const content = Fs.readFileSync(file)
+  const modified = callback(content)
+  return writeFileSync(modified, file, throwOnError)
+}
