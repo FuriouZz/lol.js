@@ -5,5 +5,6 @@ export interface AudioMetadata {
 export interface AudioData extends AudioMetadata {
     element: HTMLAudioElement;
 }
-export declare function metadata($audio: HTMLAudioElement): AudioMetadata;
-export declare function load(url: string): Promise<AudioData>;
+export declare function getAudioMetadata($audio: HTMLAudioElement): AudioMetadata;
+export declare type AudioBeforeLoad = (element: HTMLAudioElement) => void;
+export declare function loadAudio(url: string, beforeLoad?: AudioBeforeLoad): Promise<AudioData>;

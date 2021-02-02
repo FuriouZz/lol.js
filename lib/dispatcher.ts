@@ -1,4 +1,4 @@
-import { List } from "./list";
+import { List } from "./collections/list";
 
 export type DispatcherListener<T> = (value?: T) => void
 

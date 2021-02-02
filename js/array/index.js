@@ -19,6 +19,9 @@ var __spread = (this && this.__spread) || function () {
     for (var ar = [], i = 0; i < arguments.length; i++) ar = ar.concat(__read(arguments[i]));
     return ar;
 };
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Shuffle an array
@@ -213,3 +216,4 @@ function random(arr) {
     return select(arr, index);
 }
 exports.random = random;
+__export(require("./iterator"));

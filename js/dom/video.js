@@ -11,7 +11,7 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-function metadata($video) {
+function getVideoMetadata($video) {
     return {
         url: $video.src,
         width: $video.videoWidth,
@@ -20,18 +20,16 @@ function metadata($video) {
         poster: $video.poster
     };
 }
-exports.metadata = metadata;
-function load(url) {
+exports.getVideoMetadata = getVideoMetadata;
+function load(url, beforeLoad) {
     return new Promise(function (resolve, reject) {
         var $video = document.createElement('video');
-        function onLoadedMetaData() {
-            $video.removeEventListener('loadedmetadata', onLoadedMetaData);
-            resolve(__assign({ element: $video }, metadata($video)));
-        }
-        $video.onerror = function (e) {
-            reject(e);
-        };
-        $video.addEventListener('loadedmetadata', onLoadedMetaData);
+        if (typeof beforeLoad === "function")
+            beforeLoad($video);
+        $video.addEventListener("error", reject, { once: true });
+        $video.addEventListener('loadedmetadata', function () {
+            resolve(__assign({ element: $video }, getVideoMetadata($video)));
+        }, { once: true });
         $video.src = url;
     });
 }

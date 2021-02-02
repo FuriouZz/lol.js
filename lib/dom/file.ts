@@ -7,11 +7,14 @@ export interface FileResponse {
   response: string | ArrayBuffer
 }
 
-export function load(file: File, type: TFileResponse) {
+export type FileBeforeLoad = (element: FileReader) => void
+
+export function loadFile(file: File, type: TFileResponse, beforeLoad?: FileBeforeLoad) {
   return new Promise<FileResponse>((resolve, reject) => {
     const reader = new FileReader()
-    reader.onerror = reject
-    reader.onload = () => {
+    if (typeof beforeLoad === "function") beforeLoad(reader)
+    reader.addEventListener("error", reject, { once: true })
+    reader.addEventListener("load", () => {
       if (!reader.result) {
         reject('[FileReader] No result found')
         return
@@ -23,11 +26,7 @@ export function load(file: File, type: TFileResponse) {
         reader,
         response: reader.result
       })
-    }
-
-    reader.onerror = function(e) {
-      reject(e)
-    }
+    }, { once: true })
 
     if (type == 'arraybuffer') {
       reader.readAsArrayBuffer(file)

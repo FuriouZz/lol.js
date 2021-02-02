@@ -11,25 +11,23 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-function metadata($audio) {
+function getAudioMetadata($audio) {
     return {
         url: $audio.src,
         duration: $audio.duration
     };
 }
-exports.metadata = metadata;
-function load(url) {
+exports.getAudioMetadata = getAudioMetadata;
+function loadAudio(url, beforeLoad) {
     return new Promise(function (resolve, reject) {
         var $audio = document.createElement('audio');
-        function onLoadedMetaData() {
-            $audio.removeEventListener('loadedmetadata', onLoadedMetaData);
-            resolve(__assign({ element: $audio }, metadata($audio)));
-        }
-        $audio.onerror = function (e) {
-            reject(e);
-        };
-        $audio.addEventListener('loadedmetadata', onLoadedMetaData);
+        if (typeof beforeLoad === "function")
+            beforeLoad($audio);
+        $audio.addEventListener("error", reject, { once: true });
+        $audio.addEventListener('loadedmetadata', function () {
+            resolve(__assign({ element: $audio }, getAudioMetadata($audio)));
+        }, { once: true });
         $audio.src = url;
     });
 }
-exports.load = load;
+exports.loadAudio = loadAudio;

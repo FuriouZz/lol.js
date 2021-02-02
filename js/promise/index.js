@@ -1,16 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-function promise(callback) {
-    return new Promise(callback);
-}
-exports.promise = promise;
-function resolve(value) {
-    return new Promise(function (r) { return r(value); });
-}
-exports.resolve = resolve;
 function defer() {
     var def = {};
     def.promise = new Promise(function (resolve, reject) {
+        // @ts-ignore
         def.resolve = resolve;
         def.reject = reject;
     });

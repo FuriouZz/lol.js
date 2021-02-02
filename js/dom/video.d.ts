@@ -8,5 +8,6 @@ export interface VideoMetadata {
 export interface VideoData extends VideoMetadata {
     element: HTMLVideoElement;
 }
-export declare function metadata($video: HTMLVideoElement): VideoMetadata;
-export declare function load(url: string): Promise<VideoData>;
+export declare function getVideoMetadata($video: HTMLVideoElement): VideoMetadata;
+export declare type VideoBeforeLoad = (element: HTMLVideoElement) => void;
+export declare function load(url: string, beforeLoad?: VideoBeforeLoad): Promise<VideoData>;

@@ -5,5 +5,6 @@ export interface FileResponse {
     reader: FileReader;
     response: string | ArrayBuffer;
 }
-export declare function load(file: File, type: TFileResponse): Promise<FileResponse>;
+export declare type FileBeforeLoad = (element: FileReader) => void;
+export declare function loadFile(file: File, type: TFileResponse, beforeLoad?: FileBeforeLoad): Promise<FileResponse>;
 export {};

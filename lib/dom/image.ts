@@ -9,7 +9,7 @@ export interface ImageData extends ImageMetadata {
   element: HTMLImageElement
 }
 
-export function metadata($img: HTMLImageElement) : ImageMetadata {
+export function getImageMetadata($img: HTMLImageElement) : ImageMetadata {
   return {
     url: $img.src,
     width: $img.naturalWidth,
@@ -18,18 +18,19 @@ export function metadata($img: HTMLImageElement) : ImageMetadata {
   }
 }
 
-export function load(url: string) {
+export type ImageBeforeLoad = (element: HTMLImageElement) => void
+
+export function loadImage(url: string, beforeLoad?: ImageBeforeLoad) {
   return new Promise<ImageData>((resolve, reject) => {
     const $img = new Image()
-    $img.onload = () => {
+    if (typeof beforeLoad === "function") beforeLoad($img)
+    $img.addEventListener("load", () => {
       resolve({
         element: $img,
-        ...metadata($img)
+        ...getImageMetadata($img)
       })
-    }
-    $img.onerror = (e) => {
-      reject(e)
-    }
+    }, { once: true })
+    $img.addEventListener("error", reject, { once: true })
     $img.src = url
   })
 }

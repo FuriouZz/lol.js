@@ -10,7 +10,7 @@ export interface VideoData extends VideoMetadata {
   element: HTMLVideoElement
 }
 
-export function metadata($video: HTMLVideoElement) : VideoMetadata {
+export function getVideoMetadata($video: HTMLVideoElement) : VideoMetadata {
   return {
     url: $video.src,
     width: $video.videoWidth,
@@ -20,23 +20,19 @@ export function metadata($video: HTMLVideoElement) : VideoMetadata {
   }
 }
 
-export function load(url: string) {
+export type VideoBeforeLoad = (element: HTMLVideoElement) => void
+
+export function load(url: string, beforeLoad?: VideoBeforeLoad) {
   return new Promise<VideoData>((resolve, reject) => {
     const $video = document.createElement('video')
-
-    function onLoadedMetaData() {
-      $video.removeEventListener('loadedmetadata', onLoadedMetaData)
+    if (typeof beforeLoad === "function") beforeLoad($video)
+    $video.addEventListener("error", reject, { once: true })
+    $video.addEventListener('loadedmetadata', () => {
       resolve({
         element: $video,
-        ...metadata($video)
+        ...getVideoMetadata($video)
       })
-    }
-
-    $video.onerror = (e) => {
-      reject(e)
-    }
-
-    $video.addEventListener('loadedmetadata', onLoadedMetaData)
+    }, { once: true })
     $video.src = url
   })
 }

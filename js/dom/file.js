@@ -1,10 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-function load(file, type) {
+function loadFile(file, type, beforeLoad) {
     return new Promise(function (resolve, reject) {
         var reader = new FileReader();
-        reader.onerror = reject;
-        reader.onload = function () {
+        if (typeof beforeLoad === "function")
+            beforeLoad(reader);
+        reader.addEventListener("error", reject, { once: true });
+        reader.addEventListener("load", function () {
             if (!reader.result) {
                 reject('[FileReader] No result found');
                 return;
@@ -15,10 +17,7 @@ function load(file, type) {
                 reader: reader,
                 response: reader.result
             });
-        };
-        reader.onerror = function (e) {
-            reject(e);
-        };
+        }, { once: true });
         if (type == 'arraybuffer') {
             reader.readAsArrayBuffer(file);
         }
@@ -33,4 +32,4 @@ function load(file, type) {
         }
     });
 }
-exports.load = load;
+exports.loadFile = loadFile;

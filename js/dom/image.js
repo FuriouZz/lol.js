@@ -11,7 +11,7 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-function metadata($img) {
+function getImageMetadata($img) {
     return {
         url: $img.src,
         width: $img.naturalWidth,
@@ -19,17 +19,17 @@ function metadata($img) {
         ratio: $img.naturalWidth / $img.naturalHeight
     };
 }
-exports.metadata = metadata;
-function load(url) {
+exports.getImageMetadata = getImageMetadata;
+function loadImage(url, beforeLoad) {
     return new Promise(function (resolve, reject) {
         var $img = new Image();
-        $img.onload = function () {
-            resolve(__assign({ element: $img }, metadata($img)));
-        };
-        $img.onerror = function (e) {
-            reject(e);
-        };
+        if (typeof beforeLoad === "function")
+            beforeLoad($img);
+        $img.addEventListener("load", function () {
+            resolve(__assign({ element: $img }, getImageMetadata($img)));
+        }, { once: true });
+        $img.addEventListener("error", reject, { once: true });
         $img.src = url;
     });
 }
-exports.load = load;
+exports.loadImage = loadImage;

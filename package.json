@@ -2,11 +2,10 @@
   "name": "lol",
   "version": "0.0.19",
   "description": "LOL JS Utils",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
   "scripts": {
-    "tsc": "tsc",
-    "tsc:esm": "tsc -p tsconfig.esm.json",
-    "tsc:cjs": "tsc -p tsconfig.cjs.json",
-    "build": "node compose.js && npm run tsc && npm run tsc:esm && npm run tsc:cjs",
+    "build": "tsc && node build.js",
     "test": "mocha -r ts-node/register ./test/**/*.spec.ts"
   },
   "author": "",
@@ -20,7 +19,8 @@
   },
   "devDependencies": {
     "@types/mocha": "^5.2.7",
-    "@types/node": "12.12.31",
+    "@types/node": "^14.14.22",
+    "esbuild": "^0.8.39",
     "mocha": "^6.1.4",
     "typescript": "3.4.3"
   }

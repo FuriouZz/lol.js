@@ -1,25 +1,27 @@
-export interface EmitterListener {
+export interface EmitterListener<K = any, V = any> {
     once: boolean;
-    cb: (value?: any) => void;
+    cb: EmitterCallback<K, V>;
 }
-export declare class Emitter<T> {
+export interface EmitterEvent<K = string, V = any> {
+    event: K;
+    value: V;
+}
+export declare type EmitterCallback<K = string, V = any> = (event: EmitterEvent<K, V>) => void;
+export declare class Emitter<T = any> {
     private listeners;
     private getOrCreateListener;
     /**
      * Listen from native
-     * eg.: "WebNative.on('message', msg => console.log(msg))"
      */
-    on<K extends keyof T>(name: K, cb: (value?: T[K]) => void): void;
+    on<K extends keyof T>(name: K, cb: EmitterCallback<K, T[K]>): void;
     /**
      * Listen from native, once
-     * eg.: "WebNative.once('message', msg => console.log(msg))"
      */
-    once<K extends keyof T>(name: K, cb: (value?: T[K]) => void): void;
+    once<K extends keyof T>(name: K, cb: EmitterCallback<K, T[K]>): void;
     /**
      * Stop listening native event
-     * eg.: "WebNative.off('message', myListener)"
      */
-    off<K extends keyof T>(name: K, cb: (value?: T[K]) => void): void;
+    off<K extends keyof T>(name: K, cb: EmitterCallback<K, T[K]>): void;
     /**
      * Called by the native to dispatch an event
      */

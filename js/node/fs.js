@@ -45,7 +45,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var Fs = __importStar(require("fs"));
 var filelist_1 = require("filelist");
 var path_1 = require("path");
-var index_1 = require("../promise/index");
 var child_process_1 = require("child_process");
 filelist_1.FileList.debug = false;
 function isFile(path) {
@@ -247,7 +246,7 @@ function fetchDirs(include, exclude) {
     return files;
 }
 exports.fetchDirs = fetchDirs;
-function writeFile(content, file) {
+function writeFile(file, content) {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -293,13 +292,13 @@ function editFile(file, callback) {
                     return [4 /*yield*/, callback(content)];
                 case 2:
                     modified = _a.sent();
-                    return [2 /*return*/, writeFile(modified, file)];
+                    return [2 /*return*/, writeFile(file, modified)];
             }
         });
     });
 }
 exports.editFile = editFile;
-function appendFile(content, file) {
+function appendFile(file, content) {
     return new Promise(function (resolve, reject) {
         Fs.appendFile(file, content, function (err) {
             if (err) {
@@ -339,7 +338,7 @@ function symlink(fromPath, toPath) {
                     return [4 /*yield*/, ensureDir(path_1.dirname(toPath))];
                 case 1:
                     _a.sent();
-                    return [2 /*return*/, index_1.promise(function (resolve, reject) {
+                    return [2 /*return*/, new Promise(function (resolve, reject) {
                             Fs.symlink(fromPath, toPath, function (err) {
                                 if (err) {
                                     reject(err);
@@ -376,7 +375,7 @@ function symlink2(fromPath, toPath, shell) {
                     else {
                         command = "ln -s " + fromPath + " " + toPath;
                     }
-                    return [2 /*return*/, index_1.promise(function (resolve, reject) {
+                    return [2 /*return*/, new Promise(function (resolve, reject) {
                             var cmd = command.split(' ');
                             var cli = cmd.shift();
                             var ps = child_process_1.spawnSync(cli, cmd, { shell: shell });
@@ -417,7 +416,7 @@ function ensureDirSync(path) {
     }
 }
 exports.ensureDirSync = ensureDirSync;
-function writeFileSync(content, file) {
+function writeFileSync(file, content) {
     ensureDirSync(path_1.dirname(file));
     Fs.writeFileSync(file, content);
 }
@@ -425,7 +424,7 @@ exports.writeFileSync = writeFileSync;
 function editFileSync(file, callback) {
     var content = Fs.readFileSync(file);
     var modified = callback(content);
-    return writeFileSync(modified, file);
+    return writeFileSync(file, modified);
 }
 exports.editFileSync = editFileSync;
 function removeSync(path) {

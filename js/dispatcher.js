@@ -10,7 +10,7 @@ var __values = (this && this.__values) || function (o) {
     };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var list_1 = require("./list");
+var list_1 = require("./collections/list");
 var Dispatcher = /** @class */ (function () {
     function Dispatcher() {
         this.listeners = new list_1.List();

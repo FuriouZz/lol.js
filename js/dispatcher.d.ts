@@ -1,4 +1,4 @@
-import { List } from "./list";
+import { List } from "./collections/list";
 export declare type DispatcherListener<T> = (value?: T) => void;
 interface ListenerObject<T> {
     once: boolean;

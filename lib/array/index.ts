@@ -216,3 +216,5 @@ export function random<T>(arr: T[]) : T {
   const index = Math.floor(Math.random() * arr.length)
   return select(arr, index)
 }
+
+export * from "./iterator"

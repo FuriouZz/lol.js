@@ -59,3 +59,4 @@ export declare function select<T>(arr: T[], index: number): T;
  * Select a random item into an array
  */
 export declare function random<T>(arr: T[]): T;
+export * from "./iterator";

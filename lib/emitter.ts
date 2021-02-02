@@ -1,11 +1,18 @@
-import { List } from "./list"
+import { List } from "./collections/list"
 
-export interface EmitterListener {
+export interface EmitterListener<K=any, V=any> {
   once: boolean,
-  cb: (value?: any) => void
+  cb: EmitterCallback<K, V>
 }
 
-export class Emitter<T> {
+export interface EmitterEvent<K=string, V=any> {
+  event: K
+  value: V
+}
+
+export type EmitterCallback<K=string, V=any> = (event: EmitterEvent<K, V>) => void
+
+export class Emitter<T=any> {
   private listeners: Record<string, List<EmitterListener>> = {}
 
   private getOrCreateListener<K extends keyof T>(name: K) {
@@ -15,25 +22,22 @@ export class Emitter<T> {
 
   /**
    * Listen from native
-   * eg.: "WebNative.on('message', msg => console.log(msg))"
    */
-  on<K extends keyof T>(name: K, cb: (value?: T[K]) => void) {
+  on<K extends keyof T>(name: K, cb: EmitterCallback<K, T[K]>) {
     this.getOrCreateListener(name).push({ once: false, cb })
   }
 
   /**
    * Listen from native, once
-   * eg.: "WebNative.once('message', msg => console.log(msg))"
    */
-  once<K extends keyof T>(name: K, cb: (value?: T[K]) => void) {
+  once<K extends keyof T>(name: K, cb: EmitterCallback<K, T[K]>) {
     this.getOrCreateListener(name).push({ once: true, cb })
   }
 
   /**
    * Stop listening native event
-   * eg.: "WebNative.off('message', myListener)"
    */
-  off<K extends keyof T>(name: K, cb: (value?: T[K]) => void) {
+  off<K extends keyof T>(name: K, cb: EmitterCallback<K, T[K]>) {
     const listeners = this.getOrCreateListener(name)
 
     for (const listener of listeners) {
@@ -53,7 +57,10 @@ export class Emitter<T> {
 
     if (listeners) {
       for (const listener of listeners) {
-        listener.cb(value)
+        listener.cb({
+          event: name,
+          value
+        })
         if (listener.once) listeners.remove(listener)
       }
     }

@@ -1,5 +1,5 @@
 export function saveAs(data: any, filename = 'file.json', type = 'application/json') {
-  return new Promise((resolve) => {
+  return new Promise<void>((resolve) => {
     const blob = new Blob([ data ], { type })
     const $a = document.createElement('a')
     const url = URL.createObjectURL(blob)

@@ -1,4 +1,7 @@
 "use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
 Object.defineProperty(exports, "__esModule", { value: true });
 function _merge(obj0, obj1) {
     for (var key in obj1) {
@@ -178,3 +181,5 @@ function to_array(obj) {
     });
 }
 exports.to_array = to_array;
+__export(require("./argv"));
+__export(require("./url"));

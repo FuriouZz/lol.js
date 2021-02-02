@@ -1,7 +1,6 @@
 import * as Fs from "fs";
 import { FileList } from "filelist";
 import { normalize, dirname, isAbsolute, join } from "path";
-import { promise } from "../promise/index";
 import { spawnSync } from "child_process";
 
 FileList.debug = false
@@ -191,7 +190,7 @@ export function fetchDirs(include: string | string[], exclude?: string | string[
   return files
 }
 
-export async function writeFile(content: string | Buffer, file: string) {
+export async function writeFile(file: string, content: string | Buffer) {
   await ensureDir(dirname(file))
 
   return new Promise<boolean>((resolve, reject) => {
@@ -207,7 +206,9 @@ export async function writeFile(content: string | Buffer, file: string) {
 
 }
 
-export function readFile(file: string, options?: { encoding?: string | null; flag?: string; } | string | undefined | null) {
+export function readFile(file: string, options?: { encoding: "utf8"; flag?: string; } | string | undefined | null): Promise<string>
+export function readFile(file: string, options?: { encoding: "utf-8"; flag?: string; } | string | undefined | null): Promise<string>
+export function readFile(file: string, options?: { encoding?: BufferEncoding; flag?: string; } | string | undefined | null) {
   if (!isFile(file)) throw 'This is not a file.'
 
   return new Promise<string | Buffer>((resolve: Function, reject: Function) => {
@@ -227,10 +228,10 @@ export type EditFileCallback = (value: string | Buffer) => string | Buffer | Pro
 export async function editFile(file: string, callback: EditFileCallback) {
   const content = await readFile(file)
   const modified = await callback(content)
-  return writeFile(modified, file)
+  return writeFile(file, modified)
 }
 
-export function appendFile(content: string | Buffer, file: string) {
+export function appendFile(file: string, content: string | Buffer, ) {
   return new Promise((resolve, reject) => {
     Fs.appendFile(file, content, (err) => {
       if (err) {
@@ -263,7 +264,7 @@ export async function symlink(fromPath: string, toPath: string) {
 
   await ensureDir(dirname(toPath))
 
-  return promise<boolean>((resolve, reject) => {
+  return new Promise<boolean>((resolve, reject) => {
     Fs.symlink(fromPath, toPath, function (err) {
       if (err) {
         reject(err)
@@ -293,7 +294,7 @@ export async function symlink2(fromPath: string, toPath: string, shell: ShellTyp
     command = `ln -s ${fromPath} ${toPath}`
   }
 
-  return promise<boolean>((resolve, reject) => {
+  return new Promise<boolean>((resolve, reject) => {
     const cmd = command.split(' ')
     const cli = cmd.shift() as string
     const ps = spawnSync(cli, cmd, { shell: shell })
@@ -335,7 +336,7 @@ export function ensureDirSync(path: string) {
   }
 }
 
-export function writeFileSync(content: string | Buffer, file: string) {
+export function writeFileSync(file: string, content: string | Buffer, ) {
   ensureDirSync(dirname(file))
   Fs.writeFileSync(file, content)
 }
@@ -343,7 +344,7 @@ export function writeFileSync(content: string | Buffer, file: string) {
 export function editFileSync(file: string, callback: (value: string | Buffer) => string | Buffer) {
   const content = Fs.readFileSync(file)
   const modified = callback(content)
-  return writeFileSync(modified, file)
+  return writeFileSync(file, modified)
 }
 
 export function removeSync(path: string) {

@@ -1,63 +1,23 @@
-import * as _ArrayIndex from "./array/index"
-import * as _ArrayIterator from "./array/iterator"
-import * as _Canvas from "./canvas"
+import * as _Array from "./array"
+import * as _Collections from "./collections"
+import * as _Object from "./object"
+import * as _Pipe from "./pipe"
+import * as _Promise from "./promise"
+import * as _String from "./string"
 import * as _Dispatcher from "./dispatcher"
-import * as _DomAudio from "./dom/audio"
-import * as _DomDownload from "./dom/download"
-import * as _DomFile from "./dom/file"
-import * as _DomImage from "./dom/image"
-import * as _DomNet from "./dom/net"
-import * as _DomRaf from "./dom/raf"
-import * as _DomVideo from "./dom/video"
 import * as _Emitter from "./emitter"
 import * as _Error from "./error"
 import * as _Function from "./function"
-import * as _List from "./list"
-import * as _Math from "./math"
-import * as _ObjectArgv from "./object/argv"
-import * as _ObjectDefine from "./object/define"
-import * as _ObjectIndex from "./object/index"
-import * as _OrderedSet from "./ordered-set"
-import * as _PipeArray from "./pipe/array"
-import * as _PipeIndex from "./pipe/index"
-import * as _PromiseCache from "./promise/cache"
-import * as _PromiseIndex from "./promise/index"
-import * as _PromiseTime from "./promise/time"
-import * as _StringGenerate from "./string/generate"
-import * as _StringGuid from "./string/guid"
-import * as _StringIndex from "./string/index"
-import * as _StringPath from "./string/path"
-import * as _StringTemplate from "./string/template"
-import * as _Url from "./url"
 
-export const Array = _ArrayIndex;
-export const ArrayIterator = _ArrayIterator;
-export const Canvas = _Canvas;
-export const Dispatcher = _Dispatcher;
-export const DomAudio = _DomAudio;
-export const DomDownload = _DomDownload;
-export const DomFile = _DomFile;
-export const DomImage = _DomImage;
-export const DomNet = _DomNet;
-export const DomRaf = _DomRaf;
-export const DomVideo = _DomVideo;
-export const Emitter = _Emitter;
-export const Error = _Error;
-export const Function = _Function;
-export const List = _List;
-export const Math = _Math;
-export const ObjectArgv = _ObjectArgv;
-export const ObjectDefine = _ObjectDefine;
-export const Object = _ObjectIndex;
-export const OrderedSet = _OrderedSet;
-export const PipeArray = _PipeArray;
-export const Pipe = _PipeIndex;
-export const PromiseCache = _PromiseCache;
-export const Promise = _PromiseIndex;
-export const PromiseTime = _PromiseTime;
-export const StringGenerate = _StringGenerate;
-export const StringGuid = _StringGuid;
-export const String = _StringIndex;
-export const StringPath = _StringPath;
-export const StringTemplate = _StringTemplate;
-export const Url = _Url;
+export const _ = {
+  array: _Array,
+  collections: _Collections,
+  object: _Object,
+  pipe: _Pipe,
+  promise: _Promise,
+  string: _String,
+  dispatcher: _Dispatcher,
+  emitter: _Emitter,
+  error: _Error,
+  function: _Function,
+}

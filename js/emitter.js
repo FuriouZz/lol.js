@@ -10,7 +10,7 @@ var __values = (this && this.__values) || function (o) {
     };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var list_1 = require("./list");
+var list_1 = require("./collections/list");
 var Emitter = /** @class */ (function () {
     function Emitter() {
         this.listeners = {};
@@ -21,21 +21,18 @@ var Emitter = /** @class */ (function () {
     };
     /**
      * Listen from native
-     * eg.: "WebNative.on('message', msg => console.log(msg))"
      */
     Emitter.prototype.on = function (name, cb) {
         this.getOrCreateListener(name).push({ once: false, cb: cb });
     };
     /**
      * Listen from native, once
-     * eg.: "WebNative.once('message', msg => console.log(msg))"
      */
     Emitter.prototype.once = function (name, cb) {
         this.getOrCreateListener(name).push({ once: true, cb: cb });
     };
     /**
      * Stop listening native event
-     * eg.: "WebNative.off('message', myListener)"
      */
     Emitter.prototype.off = function (name, cb) {
         var e_1, _a;
@@ -68,7 +65,10 @@ var Emitter = /** @class */ (function () {
             try {
                 for (var listeners_2 = __values(listeners), listeners_2_1 = listeners_2.next(); !listeners_2_1.done; listeners_2_1 = listeners_2.next()) {
                     var listener = listeners_2_1.value;
-                    listener.cb(value);
+                    listener.cb({
+                        event: name,
+                        value: value
+                    });
                     if (listener.once)
                         listeners.remove(listener);
                 }
