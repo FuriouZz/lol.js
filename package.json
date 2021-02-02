@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.json && tsc -p tsconfig.esm.json"
   },
-  "author": "",
+  "author": "FuriouZz",
   "license": "ISC",
   "repository": {
     "url": "https://github.com/wk-js/lol.js"
