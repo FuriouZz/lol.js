@@ -1,6 +1,6 @@
 {
   "name": "lol",
-  "version": "0.0.21",
+  "version": "0.0.22",
   "description": "LOL JS Utils",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
