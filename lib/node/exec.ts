@@ -1,5 +1,5 @@
 import { spawn, SpawnOptions } from 'child_process'
-import { defer } from '../promise/index'
+import { defer } from '../promise/defer'
 import { Readable, Writable } from 'stream'
 
 export interface ExecOptions extends SpawnOptions {

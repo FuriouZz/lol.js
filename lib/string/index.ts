@@ -7,25 +7,6 @@ export function trimWhiteSpace(str: string) {
   return str.replace(TRIM_SPACE_REGEX, '')
 }
 
-
-/**
- * Append or preprend a character to a string
- */
-export function pad(str: string, limit: number = 2, char: string = "0", insertAfter: boolean = false) : string {
-  var s = str.toString()
-
-  if (s.length < limit) {
-    if (insertAfter) s = s + char
-    else s = char + s
-
-    return pad(s, limit, char, insertAfter)
-  }
-
-  return s
-}
-
-
-
 /**
  * Slug string
  */
@@ -37,7 +18,6 @@ export function toSlug(str: string) {
     .replace(/^-+/, '')             // Trim - from start of text
     .replace(/-+$/, '');            // Trim - from end of text
 }
-
 
 /**
  * Camel case
@@ -51,7 +31,6 @@ export function toCamelCase(str: string) {
 
   return words.join('')
 }
-
 
 /**
  * Slugify a string and replace tiret to underscore

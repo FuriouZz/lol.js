@@ -36,10 +36,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var child_process_1 = require("child_process");
-var index_1 = require("../promise/index");
+var defer_1 = require("../promise/defer");
 var Exec = /** @class */ (function () {
     function Exec() {
-        this.defer = index_1.defer();
+        this.defer = defer_1.defer();
         this.stdio = [undefined, undefined, undefined];
     }
     Exec.prototype.then = function (onfulfilled, onrejected) {

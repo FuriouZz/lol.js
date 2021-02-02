@@ -1,9 +1,8 @@
-import { iterator } from "../array/iterator"
-import { pad } from "./index"
+import { createIterator } from "../array/iterator"
 
 export function word(min = 2, max = 15) {
-  const vowels = iterator("aeiouy".split(""), { loop: true, random: true })
-  const consonants = iterator("bcdfghjklmnpqrstvwxz".split(''), { loop: true, random: true })
+  const vowels = createIterator("aeiouy".split(""), { loop: true, random: true })
+  const consonants = createIterator("bcdfghjklmnpqrstvwxz".split(''), { loop: true, random: true })
 
   let length = min + (Math.random() * (max - min))
   let isVowel = 0
@@ -40,8 +39,8 @@ export function word(min = 2, max = 15) {
 }
 
 export function phone() {
-  const numbers = iterator("0123456789".split(''), { loop: true, random: true })
-  const p = iterator("123456789".split(''), { loop: true, random: true })
+  const numbers = createIterator("0123456789".split(''), { loop: true, random: true })
+  const p = createIterator("123456789".split(''), { loop: true, random: true })
 
   let phone = [ p.next().value ]
 
@@ -64,12 +63,12 @@ export function phone() {
 export function date(pretty = false) {
  const now = new Date()
 
- const date = pad(now.getDate() + "", 2, "0")
- const month = pad((now.getMonth()+1) + "", 2, "0")
- const year = pad(now.getFullYear() + "", 4, "0")
- const hours = pad(now.getHours() + "", 2, "0")
- const minutes = pad(now.getMinutes() + "", 2, "0")
- const seconds = pad(now.getSeconds() + "", 2, "0")
+ const date = now.getDate().toString().padStart(2, "0")
+ const month = (now.getMonth()+1).toString().padStart(2, "0")
+ const year = now.getFullYear().toString().padStart(4, "0")
+ const hours = now.getHours().toString().padStart(2, "0")
+ const minutes = now.getMinutes().toString().padStart(2, "0")
+ const seconds = now.getSeconds().toString().padStart(2, "0")
 
  if (pretty) {
    return `${year}-${month}-${date}_${hours}-${minutes}-${seconds}`

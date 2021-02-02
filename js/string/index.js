@@ -9,24 +9,6 @@ function trimWhiteSpace(str) {
 }
 exports.trimWhiteSpace = trimWhiteSpace;
 /**
- * Append or preprend a character to a string
- */
-function pad(str, limit, char, insertAfter) {
-    if (limit === void 0) { limit = 2; }
-    if (char === void 0) { char = "0"; }
-    if (insertAfter === void 0) { insertAfter = false; }
-    var s = str.toString();
-    if (s.length < limit) {
-        if (insertAfter)
-            s = s + char;
-        else
-            s = char + s;
-        return pad(s, limit, char, insertAfter);
-    }
-    return s;
-}
-exports.pad = pad;
-/**
  * Slug string
  */
 function toSlug(str) {

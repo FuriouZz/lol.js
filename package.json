@@ -5,7 +5,7 @@
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "scripts": {
-    "build": "tsc && node build.js",
+    "build": "tsc -p tsconfig.json && tsc -p tsconfig.esm.json",
     "test": "mocha -r ts-node/register ./test/**/*.spec.ts"
   },
   "author": "",

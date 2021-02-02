@@ -1,6 +1,6 @@
-import { shuffle } from "./index"
+import { shuffle } from "./array"
 
-export function iterator<T>(arr: T[], options = { loop: false, random: false }) : Iterator<T> {
+export function createIterator<T>(arr: T[], options = { loop: false, random: false }) : Iterator<T> {
   let index = -1
   const end = arr.length
   arr = options.random ? shuffle(arr) : arr

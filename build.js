@@ -1,33 +1,13 @@
 const { build } = require("esbuild")
+const { fetch } = require("./js/node/fs")
 
-build({
-  entryPoints: [
-    "lib/index.ts",
-    "lib/index-dom.ts",
-  ],
-  bundle: true,
-  format: "esm",
-  outdir: "dist/esm"
-})
+const files = fetch("**/*.ts")
 
-build({
-  entryPoints: [
-    "lib/index.ts",
-    "lib/index-dom.ts",
-  ],
-  bundle: true,
-  format: "cjs",
-  outdir: "dist/cjs"
-})
-
-build({
-  entryPoints: [
-    "lib/index-node.ts",
-  ],
-  external: [ "filelist" ],
-  bundle: true,
-  format: "cjs",
-  platform: "node",
-  target: ["node14.9"],
-  outdir: "dist/cjs"
-})
+for (const file of files) {
+  if (file.match("node")) continue
+  build({
+    entryPoints: [file],
+    format: "esm",
+    outdir: "dist/esm"
+  })
+}
