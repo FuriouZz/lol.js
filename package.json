@@ -5,8 +5,7 @@
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "scripts": {
-    "build": "tsc -p tsconfig.json && tsc -p tsconfig.esm.json",
-    "test": "mocha -r ts-node/register ./test/**/*.spec.ts"
+    "build": "tsc -p tsconfig.json && tsc -p tsconfig.esm.json"
   },
   "author": "",
   "license": "ISC",
@@ -14,8 +13,7 @@
     "url": "https://github.com/wk-js/lol.js"
   },
   "dependencies": {
-    "filelist": "github:FuriouZz/filelist",
-    "ts-node": "^8.3.0"
+    "filelist": "github:FuriouZz/filelist"
   },
   "devDependencies": {
     "@types/mocha": "^5.2.7",
