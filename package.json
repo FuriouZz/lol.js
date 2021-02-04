@@ -1,6 +1,6 @@
 {
   "name": "lol",
-  "version": "0.0.23",
+  "version": "0.0.24",
   "description": "LOL JS Utils",
   "scripts": {
     "build": "tsc -p tsconfig.json && tsc -p tsconfig.esm.json && node exports.js"
