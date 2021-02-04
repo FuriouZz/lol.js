@@ -20,6 +20,7 @@ var __spread = (this && this.__spread) || function () {
     return ar;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.template3 = exports.template2 = exports.template = void 0;
 function _TEMPLATE_REGEX(key) {
     return new RegExp("\\$\\{" + key + "\\}", 'g');
 }

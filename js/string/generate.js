@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.date = exports.phone = exports.word = void 0;
 var iterator_1 = require("../array/iterator");
 function word(min, max) {
     if (min === void 0) { min = 2; }

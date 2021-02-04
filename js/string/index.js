@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.toUCFirst = exports.toCapitalize = exports.toUnderscore = exports.toCamelCase = exports.toSlug = exports.trimWhiteSpace = void 0;
 var TRIM_SPACE_REGEX = new RegExp('(^\\s+|\\s+$)', 'g');
 /**
  * Remove white spaces at the beginning and at the end of the string

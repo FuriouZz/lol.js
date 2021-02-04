@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.removeChildren = exports.createDocument = exports.createElements = exports.createElement = void 0;
 var PARSER = new DOMParser();
 function createElement(template) {
     var is_text_node = false;

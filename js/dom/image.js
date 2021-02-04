@@ -11,6 +11,7 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.loadImage = exports.getImageMetadata = void 0;
 function getImageMetadata($img) {
     return {
         url: $img.src,

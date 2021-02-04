@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Net = void 0;
 function response_format(request, options) {
     var response;
     if (options.responseType && options.responseType.match(/json/gi) && request.hasOwnProperty('responseText')) {

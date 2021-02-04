@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.drawEllipse = void 0;
 var math_1 = require("../math");
 function drawEllipse(ctx, centerX, centerY, width, height) {
     ctx.save();

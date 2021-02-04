@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.bind = exports.scope = void 0;
 /**
  * Scope a function inside another one. Prevent from binding.
  */

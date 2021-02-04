@@ -2,10 +2,8 @@
   "name": "lol",
   "version": "0.0.22",
   "description": "LOL JS Utils",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
   "scripts": {
-    "build": "tsc -p tsconfig.json && tsc -p tsconfig.esm.json"
+    "build": "tsc -p tsconfig.json && tsc -p tsconfig.esm.json && node exports.js"
   },
   "author": "FuriouZz",
   "license": "ISC",
@@ -20,10 +18,288 @@
     "@types/node": "^14.14.22",
     "esbuild": "^0.8.39",
     "mocha": "^6.1.4",
-    "typescript": "3.4.3"
+    "typescript": "^4.1.3"
   },
   "exports": {
-    "./": "./js",
-    "./esm": "./esm"
+    "./array/array.js": {
+      "require": "./js/array/array.js",
+      "import": "./esm/array/array.js"
+    },
+    "./array/array": {
+      "require": "./js/array/array.js",
+      "import": "./esm/array/array.js"
+    },
+    "./array/iterator.js": {
+      "require": "./js/array/iterator.js",
+      "import": "./esm/array/iterator.js"
+    },
+    "./array/iterator": {
+      "require": "./js/array/iterator.js",
+      "import": "./esm/array/iterator.js"
+    },
+    "./collections/list.js": {
+      "require": "./js/collections/list.js",
+      "import": "./esm/collections/list.js"
+    },
+    "./collections/list": {
+      "require": "./js/collections/list.js",
+      "import": "./esm/collections/list.js"
+    },
+    "./collections/ordered-set.js": {
+      "require": "./js/collections/ordered-set.js",
+      "import": "./esm/collections/ordered-set.js"
+    },
+    "./collections/ordered-set": {
+      "require": "./js/collections/ordered-set.js",
+      "import": "./esm/collections/ordered-set.js"
+    },
+    "./collections/queue.js": {
+      "require": "./js/collections/queue.js",
+      "import": "./esm/collections/queue.js"
+    },
+    "./collections/queue": {
+      "require": "./js/collections/queue.js",
+      "import": "./esm/collections/queue.js"
+    },
+    "./dispatcher.js": {
+      "require": "./js/dispatcher.js",
+      "import": "./esm/dispatcher.js"
+    },
+    "./dispatcher": {
+      "require": "./js/dispatcher.js",
+      "import": "./esm/dispatcher.js"
+    },
+    "./dom/audio.js": {
+      "require": "./js/dom/audio.js",
+      "import": "./esm/dom/audio.js"
+    },
+    "./dom/audio": {
+      "require": "./js/dom/audio.js",
+      "import": "./esm/dom/audio.js"
+    },
+    "./dom/canvas.js": {
+      "require": "./js/dom/canvas.js",
+      "import": "./esm/dom/canvas.js"
+    },
+    "./dom/canvas": {
+      "require": "./js/dom/canvas.js",
+      "import": "./esm/dom/canvas.js"
+    },
+    "./dom/download.js": {
+      "require": "./js/dom/download.js",
+      "import": "./esm/dom/download.js"
+    },
+    "./dom/download": {
+      "require": "./js/dom/download.js",
+      "import": "./esm/dom/download.js"
+    },
+    "./dom/elements.js": {
+      "require": "./js/dom/elements.js",
+      "import": "./esm/dom/elements.js"
+    },
+    "./dom/elements": {
+      "require": "./js/dom/elements.js",
+      "import": "./esm/dom/elements.js"
+    },
+    "./dom/file.js": {
+      "require": "./js/dom/file.js",
+      "import": "./esm/dom/file.js"
+    },
+    "./dom/file": {
+      "require": "./js/dom/file.js",
+      "import": "./esm/dom/file.js"
+    },
+    "./dom/image.js": {
+      "require": "./js/dom/image.js",
+      "import": "./esm/dom/image.js"
+    },
+    "./dom/image": {
+      "require": "./js/dom/image.js",
+      "import": "./esm/dom/image.js"
+    },
+    "./dom/net.js": {
+      "require": "./js/dom/net.js",
+      "import": "./esm/dom/net.js"
+    },
+    "./dom/net": {
+      "require": "./js/dom/net.js",
+      "import": "./esm/dom/net.js"
+    },
+    "./dom/raf.js": {
+      "require": "./js/dom/raf.js",
+      "import": "./esm/dom/raf.js"
+    },
+    "./dom/raf": {
+      "require": "./js/dom/raf.js",
+      "import": "./esm/dom/raf.js"
+    },
+    "./dom/video.js": {
+      "require": "./js/dom/video.js",
+      "import": "./esm/dom/video.js"
+    },
+    "./dom/video": {
+      "require": "./js/dom/video.js",
+      "import": "./esm/dom/video.js"
+    },
+    "./emitter.js": {
+      "require": "./js/emitter.js",
+      "import": "./esm/emitter.js"
+    },
+    "./emitter": {
+      "require": "./js/emitter.js",
+      "import": "./esm/emitter.js"
+    },
+    "./function.js": {
+      "require": "./js/function.js",
+      "import": "./esm/function.js"
+    },
+    "./function": {
+      "require": "./js/function.js",
+      "import": "./esm/function.js"
+    },
+    "./math.js": {
+      "require": "./js/math.js",
+      "import": "./esm/math.js"
+    },
+    "./math": {
+      "require": "./js/math.js",
+      "import": "./esm/math.js"
+    },
+    "./node/env.js": {
+      "require": "./js/node/env.js",
+      "import": "./esm/node/env.js"
+    },
+    "./node/env": {
+      "require": "./js/node/env.js",
+      "import": "./esm/node/env.js"
+    },
+    "./node/exec.js": {
+      "require": "./js/node/exec.js",
+      "import": "./esm/node/exec.js"
+    },
+    "./node/exec": {
+      "require": "./js/node/exec.js",
+      "import": "./esm/node/exec.js"
+    },
+    "./node/fs.js": {
+      "require": "./js/node/fs.js",
+      "import": "./esm/node/fs.js"
+    },
+    "./node/fs": {
+      "require": "./js/node/fs.js",
+      "import": "./esm/node/fs.js"
+    },
+    "./node/memory-stream.js": {
+      "require": "./js/node/memory-stream.js",
+      "import": "./esm/node/memory-stream.js"
+    },
+    "./node/memory-stream": {
+      "require": "./js/node/memory-stream.js",
+      "import": "./esm/node/memory-stream.js"
+    },
+    "./node/require-string.js": {
+      "require": "./js/node/require-string.js",
+      "import": "./esm/node/require-string.js"
+    },
+    "./node/require-string": {
+      "require": "./js/node/require-string.js",
+      "import": "./esm/node/require-string.js"
+    },
+    "./object/argv.js": {
+      "require": "./js/object/argv.js",
+      "import": "./esm/object/argv.js"
+    },
+    "./object/argv": {
+      "require": "./js/object/argv.js",
+      "import": "./esm/object/argv.js"
+    },
+    "./object/index.js": {
+      "require": "./js/object/index.js",
+      "import": "./esm/object/index.js"
+    },
+    "./object/index": {
+      "require": "./js/object/index.js",
+      "import": "./esm/object/index.js"
+    },
+    "./object": {
+      "require": "./js/object/index.js",
+      "import": "./esm/object/index.js"
+    },
+    "./object/url.js": {
+      "require": "./js/object/url.js",
+      "import": "./esm/object/url.js"
+    },
+    "./object/url": {
+      "require": "./js/object/url.js",
+      "import": "./esm/object/url.js"
+    },
+    "./promise/defer.js": {
+      "require": "./js/promise/defer.js",
+      "import": "./esm/promise/defer.js"
+    },
+    "./promise/defer": {
+      "require": "./js/promise/defer.js",
+      "import": "./esm/promise/defer.js"
+    },
+    "./promise/loadable.js": {
+      "require": "./js/promise/loadable.js",
+      "import": "./esm/promise/loadable.js"
+    },
+    "./promise/loadable": {
+      "require": "./js/promise/loadable.js",
+      "import": "./esm/promise/loadable.js"
+    },
+    "./promise/time.js": {
+      "require": "./js/promise/time.js",
+      "import": "./esm/promise/time.js"
+    },
+    "./promise/time": {
+      "require": "./js/promise/time.js",
+      "import": "./esm/promise/time.js"
+    },
+    "./string/generate.js": {
+      "require": "./js/string/generate.js",
+      "import": "./esm/string/generate.js"
+    },
+    "./string/generate": {
+      "require": "./js/string/generate.js",
+      "import": "./esm/string/generate.js"
+    },
+    "./string/guid.js": {
+      "require": "./js/string/guid.js",
+      "import": "./esm/string/guid.js"
+    },
+    "./string/guid": {
+      "require": "./js/string/guid.js",
+      "import": "./esm/string/guid.js"
+    },
+    "./string/index.js": {
+      "require": "./js/string/index.js",
+      "import": "./esm/string/index.js"
+    },
+    "./string/index": {
+      "require": "./js/string/index.js",
+      "import": "./esm/string/index.js"
+    },
+    "./string": {
+      "require": "./js/string/index.js",
+      "import": "./esm/string/index.js"
+    },
+    "./string/path.js": {
+      "require": "./js/string/path.js",
+      "import": "./esm/string/path.js"
+    },
+    "./string/path": {
+      "require": "./js/string/path.js",
+      "import": "./esm/string/path.js"
+    },
+    "./string/template.js": {
+      "require": "./js/string/template.js",
+      "import": "./esm/string/template.js"
+    },
+    "./string/template": {
+      "require": "./js/string/template.js",
+      "import": "./esm/string/template.js"
+    }
   }
 }

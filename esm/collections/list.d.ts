@@ -8,7 +8,7 @@ export declare class List<T> {
     protected _root: ItemValueOptional<T>;
     protected _count: number;
     constructor(array?: T[]);
-    readonly length: number;
+    get length(): number;
     insertAt(index: number, value: T): number;
     removeAt(index: number): T | null;
     unshift(value: T): number;

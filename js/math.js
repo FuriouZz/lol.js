@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.map = exports.toPrecision = exports.toRadian = exports.toDegree = exports.clamp01 = exports.clamp = exports.DEG2RAD = exports.RAG2DEG = exports.PI2 = void 0;
 exports.PI2 = Math.PI * 2;
 exports.RAG2DEG = 180 / Math.PI;
 exports.DEG2RAD = Math.PI / 180;

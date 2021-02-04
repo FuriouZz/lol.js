@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.createIterator = void 0;
 var array_1 = require("./array");
 function createIterator(arr, options) {
     if (options === void 0) { options = { loop: false, random: false }; }

@@ -11,6 +11,7 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.loadAudio = exports.getAudioMetadata = void 0;
 function getAudioMetadata($audio) {
     return {
         url: $audio.src,

@@ -1,6 +1,6 @@
 export declare class OrderedSet<T> {
     private items;
-    readonly size: number;
+    get size(): number;
     add(v: T): void;
     insertAt(v: T, index: number): void;
     index(v: T): number;

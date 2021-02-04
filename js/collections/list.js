@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.List = void 0;
 var List = /** @class */ (function () {
     function List(array) {
         this._root = {};
@@ -14,7 +15,7 @@ var List = /** @class */ (function () {
         get: function () {
             return this._count;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     List.prototype.insertAt = function (index, value) {
@@ -154,8 +155,8 @@ var List = /** @class */ (function () {
         return this.values();
     };
     List.prototype.values = function () {
-        var _this = this;
         var _a;
+        var _this = this;
         var current = this._root.next;
         return _a = {},
             _a[Symbol.iterator] = function () {

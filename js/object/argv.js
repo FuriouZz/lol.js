@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.parse = void 0;
 var KEY_REG = /^-{1,2}/;
 var EQUAL_REG = /=/;
 function parse(argv) {

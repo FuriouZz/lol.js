@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.saveAs = void 0;
 function saveAs(data, filename, type) {
     if (filename === void 0) { filename = 'file.json'; }
     if (type === void 0) { type = 'application/json'; }

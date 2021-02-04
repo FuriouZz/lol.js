@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.hours = exports.minutes = exports.seconds = exports.milliseconds = void 0;
 function milliseconds(ms) {
     return new Promise(function (resolve) {
         setTimeout(resolve, ms);

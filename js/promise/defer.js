@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.defer_all = exports.defer = void 0;
 function defer() {
     var def = {};
     def.promise = new Promise(function (resolve, reject) {

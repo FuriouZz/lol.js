@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.guid = exports.s4 = void 0;
 /**
  * Generate a random string chain
  */

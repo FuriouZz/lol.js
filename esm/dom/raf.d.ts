@@ -8,8 +8,8 @@ export declare class RAF {
     private static _elapsedInterval;
     private static _raf;
     private static _running;
-    static readonly time: number;
-    static readonly deltaTime: number;
+    static get time(): number;
+    static get deltaTime(): number;
     static getFramerate(): number;
     static setFramerate(value: number): void;
     private static _update;

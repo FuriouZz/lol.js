@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.OrderedSet = void 0;
 var OrderedSet = /** @class */ (function () {
     function OrderedSet() {
         this.items = [];
@@ -8,7 +9,7 @@ var OrderedSet = /** @class */ (function () {
         get: function () {
             return this.items.length;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     OrderedSet.prototype.add = function (v) {

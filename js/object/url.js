@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.toObject = exports.toString = void 0;
 function toString(parameters) {
     return Object.keys(parameters).map(function (key) {
         return key + "=" + parameters[key];

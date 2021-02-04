@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.loadFile = void 0;
 function loadFile(file, type, beforeLoad) {
     return new Promise(function (resolve, reject) {
         var reader = new FileReader();

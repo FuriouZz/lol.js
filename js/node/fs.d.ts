@@ -22,7 +22,7 @@ export declare function readFile(file: string, options?: {
 } | string | undefined | null): Promise<string>;
 export declare type EditFileCallback = (value: string | Buffer) => string | Buffer | Promise<string | Buffer>;
 export declare function editFile(file: string, callback: EditFileCallback): Promise<boolean>;
-export declare function appendFile(file: string, content: string | Buffer): Promise<{}>;
+export declare function appendFile(file: string, content: string | Buffer): Promise<unknown>;
 export declare function isSymbolicLink(path: string): boolean;
 export declare function symlink(fromPath: string, toPath: string): Promise<boolean>;
 declare type ShellType = 'cmd' | 'bash' | 'powershell' | 'zsh';
