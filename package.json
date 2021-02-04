@@ -11,7 +11,8 @@
     "url": "https://github.com/wk-js/lol.js"
   },
   "dependencies": {
-    "filelist": "github:FuriouZz/filelist"
+    "filelist": "github:FuriouZz/filelist",
+    "semver": "^7.3.4"
   },
   "devDependencies": {
     "@types/node": "^14.14.22",
