@@ -40,7 +40,7 @@ var Queue = /** @class */ (function () {
         this.items = new ordered_set_1.OrderedSet();
         this.onresolve = new dispatcher_1.Dispatcher();
     }
-    Queue.prototype.pushFront = function () {
+    Queue.prototype.front = function () {
         var e_1, _a;
         var keys = [];
         for (var _i = 0; _i < arguments.length; _i++) {
@@ -62,7 +62,7 @@ var Queue = /** @class */ (function () {
         this.resolveDependencies();
         return this;
     };
-    Queue.prototype.pushBack = function () {
+    Queue.prototype.back = function () {
         var e_2, _a;
         var keys = [];
         for (var _i = 0; _i < arguments.length; _i++) {
@@ -84,7 +84,7 @@ var Queue = /** @class */ (function () {
         this.resolveDependencies();
         return this;
     };
-    Queue.prototype.pushBefore = function (before) {
+    Queue.prototype.before = function (before) {
         var e_3, _a;
         var keys = [];
         for (var _i = 1; _i < arguments.length; _i++) {
@@ -113,7 +113,7 @@ var Queue = /** @class */ (function () {
         }
         return this;
     };
-    Queue.prototype.pushAfter = function (after) {
+    Queue.prototype.after = function (after) {
         var e_4, _a;
         var keys = [];
         for (var _i = 1; _i < arguments.length; _i++) {
@@ -198,7 +198,7 @@ var Queue = /** @class */ (function () {
             try {
                 for (var keys_4 = __values(keys), keys_4_1 = keys_4.next(); !keys_4_1.done; keys_4_1 = keys_4.next()) {
                     var key = keys_4_1.value;
-                    this.pushAfter(key, prev);
+                    this.after(key, prev);
                     prev = key;
                 }
             }
@@ -254,10 +254,10 @@ var Queue = /** @class */ (function () {
                 continue;
             }
             if (pending.move === "before") {
-                this.pushBefore(pending.relative, pending.key);
+                this.before(pending.relative, pending.key);
             }
             else if (pending.move === "after") {
-                this.pushAfter(pending.relative, pending.key);
+                this.after(pending.relative, pending.key);
             }
             else if (pending.move === "replace") {
                 this.replace(pending.relative, pending.key);

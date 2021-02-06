@@ -13,7 +13,7 @@ export class Queue<T> {
   items = new OrderedSet<T>()
   onresolve = new Dispatcher<QueueUnresolvedEntry<T>>()
 
-  pushFront(...keys: T[]) {
+  front(...keys: T[]) {
     for (const key of keys.reverse()) {
       this.items.insertAt(key, 0)
     }
@@ -21,7 +21,7 @@ export class Queue<T> {
     return this
   }
 
-  pushBack(...keys: T[]) {
+  back(...keys: T[]) {
     for (const key of keys) {
       this.items.add(key)
     }
@@ -29,7 +29,7 @@ export class Queue<T> {
     return this
   }
 
-  pushBefore(before: T, ...keys: T[]) {
+  before(before: T, ...keys: T[]) {
     for (const key of keys.reverse()) {
       if (!this.items.has(before)) {
         this.unresolved.push({ key, relative: before, move: "before" })
@@ -43,7 +43,7 @@ export class Queue<T> {
     return this
   }
 
-  pushAfter(after: T, ...keys: T[]) {
+  after(after: T, ...keys: T[]) {
     for (const key of keys) {
       if (!this.items.has(after)) {
         this.unresolved.push({ key, relative: after, move: "after" })
@@ -97,7 +97,7 @@ export class Queue<T> {
     } else {
       let prev = replaced
       for (const key of keys) {
-        this.pushAfter(key, prev)
+        this.after(key, prev)
         prev = key
       }
       this.items.remove(replaced)
@@ -131,9 +131,9 @@ export class Queue<T> {
       }
 
       if (pending.move === "before") {
-        this.pushBefore(pending.relative, pending.key)
+        this.before(pending.relative, pending.key)
       } else if (pending.move === "after") {
-        this.pushAfter(pending.relative, pending.key)
+        this.after(pending.relative, pending.key)
       } else if (pending.move === "replace") {
         this.replace(pending.relative, pending.key)
       } else if (pending.move === "swap") {

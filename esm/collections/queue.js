@@ -6,21 +6,21 @@ export class Queue {
         this.items = new OrderedSet();
         this.onresolve = new Dispatcher();
     }
-    pushFront(...keys) {
+    front(...keys) {
         for (const key of keys.reverse()) {
             this.items.insertAt(key, 0);
         }
         this.resolveDependencies();
         return this;
     }
-    pushBack(...keys) {
+    back(...keys) {
         for (const key of keys) {
             this.items.add(key);
         }
         this.resolveDependencies();
         return this;
     }
-    pushBefore(before, ...keys) {
+    before(before, ...keys) {
         for (const key of keys.reverse()) {
             if (!this.items.has(before)) {
                 this.unresolved.push({ key, relative: before, move: "before" });
@@ -34,7 +34,7 @@ export class Queue {
         }
         return this;
     }
-    pushAfter(after, ...keys) {
+    after(after, ...keys) {
         for (const key of keys) {
             if (!this.items.has(after)) {
                 this.unresolved.push({ key, relative: after, move: "after" });
@@ -87,7 +87,7 @@ export class Queue {
         else {
             let prev = replaced;
             for (const key of keys) {
-                this.pushAfter(key, prev);
+                this.after(key, prev);
                 prev = key;
             }
             this.items.remove(replaced);
@@ -119,10 +119,10 @@ export class Queue {
                 continue;
             }
             if (pending.move === "before") {
-                this.pushBefore(pending.relative, pending.key);
+                this.before(pending.relative, pending.key);
             }
             else if (pending.move === "after") {
-                this.pushAfter(pending.relative, pending.key);
+                this.after(pending.relative, pending.key);
             }
             else if (pending.move === "replace") {
                 this.replace(pending.relative, pending.key);

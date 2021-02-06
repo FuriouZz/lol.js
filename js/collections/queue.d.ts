@@ -9,10 +9,10 @@ export declare class Queue<T> {
     unresolved: QueueUnresolvedEntry<T>[];
     items: OrderedSet<T>;
     onresolve: Dispatcher<QueueUnresolvedEntry<T>>;
-    pushFront(...keys: T[]): this;
-    pushBack(...keys: T[]): this;
-    pushBefore(before: T, ...keys: T[]): this;
-    pushAfter(after: T, ...keys: T[]): this;
+    front(...keys: T[]): this;
+    back(...keys: T[]): this;
+    before(before: T, ...keys: T[]): this;
+    after(after: T, ...keys: T[]): this;
     swap(first: T, second: T): this;
     replace(replaced: T, ...keys: T[]): this;
     remove(...keys: T[]): this;
