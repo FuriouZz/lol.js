@@ -60,7 +60,7 @@ var Fs = __importStar(require("fs"));
 var filelist_1 = require("filelist");
 var path_1 = require("path");
 var child_process_1 = require("child_process");
-filelist_1.FileList.debug = false;
+filelist_1.FileList.verbose = false;
 function isFile(path) {
     try {
         var stat = Fs.statSync(path);

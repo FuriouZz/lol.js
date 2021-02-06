@@ -3,7 +3,7 @@ import { FileList } from "filelist";
 import { normalize, dirname, isAbsolute, join } from "path";
 import { spawnSync } from "child_process";
 
-FileList.debug = false
+FileList.verbose = false
 
 export function isFile(path: string) {
 
