@@ -1,21 +1,30 @@
 import { Dispatcher } from "../dispatcher";
-import { OrderedSet } from "./ordered-set";
 export interface QueueUnresolvedEntry<T> {
     key: T;
     relative: T;
     move: "before" | "after" | "replace" | "swap" | "remove";
 }
 export declare class Queue<T> {
+    items: T[];
     unresolved: QueueUnresolvedEntry<T>[];
-    items: OrderedSet<T>;
     onresolve: Dispatcher<QueueUnresolvedEntry<T>>;
-    front(...keys: T[]): this;
-    back(...keys: T[]): this;
-    before(before: T, ...keys: T[]): this;
-    after(after: T, ...keys: T[]): this;
-    swap(first: T, second: T): this;
-    replace(replaced: T, ...keys: T[]): this;
-    remove(...keys: T[]): this;
+    indexOf(item: T): number;
+    has(item: T): boolean;
+    insert(...items: T[]): void;
+    insertAt(index: number, ...items: T[]): void;
+    remove(...items: T[]): void;
+    removeAt(index: number): void;
+    before(before: T, ...keys: T[]): void;
+    after(after: T, ...keys: T[]): void;
+    swap(first: T, second: T): void;
+    replace(replaced: T, ...items: T[]): this;
     resolveDependencies(): void;
-    toString(): T[];
+    [Symbol.iterator](): IterableIterator<T>;
+    values(): IterableIterator<T>;
+    keys(): IterableIterator<number>;
+    entries(): IterableIterator<[number, T]>;
+    filter<S extends T>(predicate: (value: T, index: number, array: Queue<T>) => value is S): Queue<S>;
+    filter(predicate: (value: T, index: number, array: Queue<T>) => unknown, thisArg?: any): Queue<T>;
+    map<U>(predicate: (value: T, index: number, array: Queue<T>) => U, thisArg?: any): Queue<U>;
+    forEach(callback: (value: T, index: number, array: Queue<T>) => void, thisArg?: any): void;
 }

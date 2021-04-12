@@ -1,80 +1,91 @@
 import { Dispatcher } from "../dispatcher";
-import { OrderedSet } from "./ordered-set";
 export class Queue {
     constructor() {
+        this.items = [];
         this.unresolved = [];
-        this.items = new OrderedSet();
         this.onresolve = new Dispatcher();
     }
-    front(...keys) {
-        for (const key of keys.reverse()) {
-            this.items.insertAt(key, 0);
-        }
-        this.resolveDependencies();
-        return this;
+    indexOf(item) {
+        return this.items.indexOf(item);
     }
-    back(...keys) {
-        for (const key of keys) {
-            this.items.add(key);
-        }
+    has(item) {
+        return this.items.includes(item);
+    }
+    insert(...items) {
+        this.items.push(...items);
         this.resolveDependencies();
-        return this;
+    }
+    insertAt(index, ...items) {
+        this.items.splice(index, 0, ...items);
+        this.resolveDependencies();
+    }
+    remove(...items) {
+        for (const item of items) {
+            if (this.has(item)) {
+                const index = this.indexOf(item);
+                this.removeAt(index);
+            }
+            else {
+                this.unresolved.push({ key: null, relative: item, move: "remove" });
+            }
+        }
+    }
+    removeAt(index) {
+        this.items.splice(index, 1);
+        this.resolveDependencies();
     }
     before(before, ...keys) {
         for (const key of keys.reverse()) {
-            if (!this.items.has(before)) {
+            if (!this.has(before)) {
                 this.unresolved.push({ key, relative: before, move: "before" });
             }
             else {
-                const index = this.items.index(before);
-                this.items.insertAt(key, index);
+                const index = this.indexOf(before);
+                this.insertAt(index, key);
                 this.resolveDependencies();
             }
             before = key;
         }
-        return this;
     }
     after(after, ...keys) {
         for (const key of keys) {
-            if (!this.items.has(after)) {
+            if (!this.has(after)) {
                 this.unresolved.push({ key, relative: after, move: "after" });
             }
             else {
-                const index = this.items.index(after) + 1;
-                this.items.insertAt(key, index);
+                const index = this.indexOf(after) + 1;
+                this.insertAt(index, key);
                 this.resolveDependencies();
             }
             after = key;
         }
-        return this;
     }
     swap(first, second) {
-        if (this.items.has(first) && this.items.has(second)) {
-            const i0 = this.items.index(first);
-            const i1 = this.items.index(second);
+        if (this.has(first) && this.has(second)) {
+            const i0 = this.indexOf(first);
+            const i1 = this.indexOf(second);
             const imin = Math.min(i0, i1);
             const imax = Math.max(i0, i1);
-            this.items.removeAt(imax);
-            this.items.removeAt(imin);
+            this.removeAt(imax);
+            this.removeAt(imin);
             if (i0 === imin) {
-                this.items.insertAt(second, i0);
-                this.items.insertAt(first, i1);
+                this.insertAt(i0, second);
+                this.insertAt(i1, first);
             }
             else {
-                this.items.insertAt(first, i1);
-                this.items.insertAt(second, i0);
+                this.insertAt(i1, first);
+                this.insertAt(i0, second);
             }
             this.resolveDependencies();
         }
         else {
             this.unresolved.push({ key: first, relative: second, move: "swap" });
         }
-        return this;
     }
-    replace(replaced, ...keys) {
-        if (!this.items.has(replaced)) {
+    replace(replaced, ...items) {
+        if (!this.has(replaced)) {
             let prev;
-            for (const key of keys) {
+            for (const key of items) {
                 if (prev) {
                     this.unresolved.push({ key, relative: prev, move: "after" });
                 }
@@ -86,23 +97,12 @@ export class Queue {
         }
         else {
             let prev = replaced;
-            for (const key of keys) {
+            for (const key of items) {
                 this.after(key, prev);
                 prev = key;
             }
-            this.items.remove(replaced);
+            this.remove(replaced);
             this.resolveDependencies();
-        }
-        return this;
-    }
-    remove(...keys) {
-        for (const key of keys) {
-            if (this.items.has(key)) {
-                this.items.remove(key);
-            }
-            else {
-                this.unresolved.push({ key: null, relative: key, move: "remove" });
-            }
         }
         return this;
     }
@@ -114,7 +114,7 @@ export class Queue {
             const pending = this.unresolved.shift();
             if (!pending)
                 return;
-            if (!this.items.has(pending.relative)) {
+            if (!this.has(pending.relative)) {
                 pendings.push(pending);
                 continue;
             }
@@ -139,7 +139,29 @@ export class Queue {
         }
         this.unresolved = pendings;
     }
-    toString() {
-        return this.items['items'];
+    [Symbol.iterator]() {
+        return this.items[Symbol.iterator]();
+    }
+    values() {
+        return this.items.values();
+    }
+    keys() {
+        return this.items.keys();
+    }
+    entries() {
+        return this.items.entries();
+    }
+    filter(predicate, thisArg) {
+        const q = new Queue();
+        q.items = this.items.filter((value, index) => (predicate.call(thisArg, value, index, this)));
+        return q;
+    }
+    map(predicate, thisArg) {
+        const q = new Queue();
+        q.items = this.items.map((value, index) => (predicate.call(thisArg, value, index, this)));
+        return q;
+    }
+    forEach(callback, thisArg) {
+        this.items.forEach((value, index) => (callback.call(thisArg, value, index, this)));
     }
 }
