@@ -29,14 +29,14 @@ var __read = (this && this.__read) || function (o, n) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.readEnvFile = void 0;
 var fs_1 = require("fs");
-function readEnvFile(global) {
+function readEnvFile(target, global) {
     var e_1, _a;
+    if (target === void 0) { target = process.env['NODE_ENV']; }
     if (global === void 0) { global = true; }
     var result = {};
-    var _env = process.env['NODE_ENV'];
     var filename = ".env";
-    if (_env)
-        filename += "." + _env;
+    if (target)
+        filename += "." + target;
     try {
         var lines = fs_1.readFileSync(filename, { encoding: "utf-8" }).split(/\r?\n/);
         try {
