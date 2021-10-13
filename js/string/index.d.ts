@@ -22,3 +22,7 @@ export declare function toCapitalize(str: string): string;
  * Capitalize first letter
  */
 export declare function toUCFirst(str: string): string;
+/**
+ * Capitalize first letter
+ */
+export declare function toLCFirst(str: string): string;
