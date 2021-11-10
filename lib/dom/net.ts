@@ -2,6 +2,7 @@ export interface IXHROptions {
   method?: string;
   responseType?: XMLHttpRequestResponseType;
   mimeType?: string;
+  timeout?: number;
   headers?: {
     [key: string]: string;
   };
@@ -13,7 +14,7 @@ export interface IXHRResponse {
   response: any
 }
 
-function response_format( request: XMLHttpRequest, options:IXHROptions ) {
+function response_format( request: XMLHttpRequest, options: IXHROptions ) {
   var response
 
   if (options.responseType && options.responseType.match(/json/gi) && request.hasOwnProperty('responseText')) {
@@ -66,6 +67,9 @@ export class Net {
         })
       }
 
+      if (typeof opts.timeout === 'number' && !isNaN(opts.timeout)) {
+        request.timeout = opts.timeout;
+      }
       request.send(opts.data)
     })
   }
