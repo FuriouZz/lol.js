@@ -8,13 +8,13 @@ export interface IXHROptions {
     };
     data?: any;
 }
-export interface IXHRResponse {
+export interface IXHRResponse<T = any> {
     request: XMLHttpRequest;
-    response: any;
+    response: T;
 }
 export declare class Net {
-    static xhr(url: string, options?: IXHROptions): Promise<IXHRResponse>;
-    static text(url: string, options?: IXHROptions): Promise<IXHRResponse>;
-    static json(url: string, options?: IXHROptions): Promise<IXHRResponse>;
-    static bytes(url: string, options?: IXHROptions): Promise<IXHRResponse>;
+    static xhr(url: string, options?: IXHROptions): Promise<IXHRResponse<any>>;
+    static text(url: string, options?: IXHROptions): Promise<IXHRResponse<string>>;
+    static json(url: string, options?: IXHROptions): Promise<IXHRResponse<object>>;
+    static bytes(url: string, options?: IXHROptions): Promise<IXHRResponse<ArrayBuffer>>;
 }
