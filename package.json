@@ -3,7 +3,8 @@
   "version": "0.0.27",
   "description": "LOL JS Utils",
   "scripts": {
-    "build": "tsc -p tsconfig.json && tsc -p tsconfig.esm.json"
+    "build": "tsc -p tsconfig.json && tsc -p tsconfig.esm.json",
+    "bump": "node bump.js"
   },
   "author": "Christophe Massolin",
   "license": "ISC",
