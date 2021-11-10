@@ -20,7 +20,7 @@ var __spread = (this && this.__spread) || function () {
     return ar;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.template3 = exports.template2 = exports.template = void 0;
+exports.template4 = exports.template3 = exports.template2 = exports.template = void 0;
 function _TEMPLATE_REGEX(key) {
     return new RegExp("\\$\\{" + key + "\\}", 'g');
 }
@@ -93,3 +93,18 @@ function template3(str, obj) {
     return f.apply(null, values);
 }
 exports.template3 = template3;
+/**
+ * Interpolate template with a list of arguments
+ */
+function template4(tmpl) {
+    var args = [];
+    for (var _i = 1; _i < arguments.length; _i++) {
+        args[_i - 1] = arguments[_i];
+    }
+    var str = tmpl;
+    args.forEach(function (s, index) {
+        str = str.replace(new RegExp("\\{" + index + "\\}", "g"), s);
+    });
+    return str.replace(/\{\}/, '');
+}
+exports.template4 = template4;

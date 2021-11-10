@@ -48,6 +48,9 @@ var Net = /** @class */ (function () {
                     request: request
                 });
             };
+            if (typeof opts.timeout === 'number' && !isNaN(opts.timeout)) {
+                request.timeout = opts.timeout;
+            }
             request.send(opts.data);
         });
     };

@@ -2,6 +2,7 @@ export interface IXHROptions {
     method?: string;
     responseType?: XMLHttpRequestResponseType;
     mimeType?: string;
+    timeout?: number;
     headers?: {
         [key: string]: string;
     };
