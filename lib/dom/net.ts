@@ -9,9 +9,9 @@ export interface IXHROptions {
   data?: any
 }
 
-export interface IXHRResponse {
+export interface IXHRResponse<T=any> {
   request: XMLHttpRequest;
-  response: any
+  response: T;
 }
 
 function response_format( request: XMLHttpRequest, options: IXHROptions ) {
@@ -30,7 +30,7 @@ function response_format( request: XMLHttpRequest, options: IXHROptions ) {
 
 export class Net {
 
-  static xhr(url:string, options?: IXHROptions) {
+  static xhr(url: string, options?: IXHROptions) {
     const opts: IXHROptions = Object.assign({
       method: 'GET',
       responseType: ''
@@ -74,22 +74,21 @@ export class Net {
     })
   }
 
-  static text(url: string, options?: IXHROptions) {
+  static text(url: string, options?: IXHROptions): Promise<IXHRResponse<string>> {
     return Net.xhr(url, Object.assign({
       responseType: 'text'
     }, options || {}))
   }
 
-  static json(url: string, options?: IXHROptions) {
+  static json(url: string, options?: IXHROptions): Promise<IXHRResponse<object>> {
     return Net.xhr(url, Object.assign({
       responseType: 'json'
     }, options || {}))
   }
 
-  static bytes(url: string, options?: IXHROptions) {
+  static bytes(url: string, options?: IXHROptions): Promise<IXHRResponse<ArrayBuffer>> {
     return Net.xhr(url, Object.assign({
       responseType: 'arraybuffer'
     }, options || {}))
   }
-
 }
