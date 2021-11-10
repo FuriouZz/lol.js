@@ -85,3 +85,14 @@ export function template3(str: string, obj: Record<string, any> = {}) {
   const f = new Function(...keys, `return \`${str}\``)
   return f.apply(null, values)
 }
+
+/**
+ * Interpolate template with a list of arguments
+ */
+export function template4(tmpl: string, ...args: string[]) {
+  let str = tmpl;
+  args.forEach((s, index) => {
+    str = str.replace(new RegExp(`\\{${index}\\}`, "g"), s);
+  });
+  return str.replace(/\{\}/, '');
+}
