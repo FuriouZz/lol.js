@@ -19,8 +19,8 @@ function _merge(obj0, obj1) {
             obj0[key] = obj0[key].concat(obj1[key].slice(0));
         }
         // Merge object
-        else if (typeof obj1[key] === 'object' && obj1[key] !== null) {
-            if (typeof obj0[key] === 'object' && obj0[key] !== null) {
+        else if (typeof obj1[key] === "object" && obj1[key] !== null) {
+            if (typeof obj0[key] === "object" && obj0[key] !== null) {
                 obj0[key] = merge(obj0[key], obj1[key]);
             }
             else {
@@ -90,10 +90,10 @@ exports.omit = omit;
 function flat(obj) {
     var xprt = {};
     for (var key in obj) {
-        if (typeof obj[key] === 'object' && !Array.isArray(obj[key])) {
+        if (typeof obj[key] === "object" && !Array.isArray(obj[key])) {
             var children = flat(obj[key]);
             for (var k in children) {
-                xprt[key + '.' + k] = children[k];
+                xprt[key + "." + k] = children[k];
             }
         }
         else {
@@ -109,7 +109,7 @@ exports.flat = flat;
 function deflat(obj) {
     var xprt = {};
     Object.keys(obj).forEach(function (id) {
-        var keys = id.split('.');
+        var keys = id.split(".");
         var current = xprt;
         keys.forEach(function (key, i) {
             if (i == keys.length - 1) {
@@ -131,7 +131,7 @@ function immutable(obj) {
     var propNames = Object.getOwnPropertyNames(obj);
     propNames.forEach(function (name) {
         var prop = obj[name];
-        if (typeof prop == 'object' && prop !== null) {
+        if (typeof prop == "object" && prop !== null) {
             immutable(prop);
         }
     });
@@ -147,13 +147,14 @@ function clone(obj) {
         // Clone array
         if (Array.isArray(obj[key])) {
             cloneObj[key] = [];
-            for (var i = 0; i < obj[key].length; i++) {
-                var element = obj[key][i];
+            var arr = obj[key];
+            for (var i = 0; i < arr.length; i++) {
+                var element = arr[i];
                 if (Array.isArray(element)) {
                     var n = clone({ array: element });
                     cloneObj[key].push(n.array);
                 }
-                else if (typeof element == 'object' && element !== null) {
+                else if (typeof element == "object" && element !== null) {
                     cloneObj[key].push(clone(element));
                 }
                 else {
@@ -162,7 +163,7 @@ function clone(obj) {
             }
         }
         // Clone object
-        else if (typeof obj[key] === 'object' && obj[key] !== null) {
+        else if (typeof obj[key] === "object" && obj[key] !== null) {
             cloneObj[key] = clone(obj[key]);
         }
         // Copy Number / String / Boolean
