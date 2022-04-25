@@ -7,7 +7,13 @@ async function main() {
   const options = { shell: true, stdio: "inherit" };
   spawnSync("node build.js", options);
   spawnSync("cp package.json dist/package.json", options);
-  spawnSync("npm publish ./dist", options);
+  const { editFileSync } = require("./dist/node/fs");
+  editFileSync("dist/package.json", (v) => {
+    const pkg = JSON.parse(v.toString("utf-8"));
+    delete pkg.scripts.publish;
+    return JSON.stringify(pkg, null, 2);
+  });
+  spawnSync("npm publish --access public", options);
 }
 
 main();
