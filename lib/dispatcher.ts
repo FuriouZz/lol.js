@@ -1,4 +1,4 @@
-export type DispatcherListener<T> = (value?: T) => void;
+export type DispatcherListener<T> = (value: T) => void;
 
 interface ListenerObject<T> {
   once: boolean;
