@@ -3,6 +3,7 @@ export type DispatcherListener<T> = (value?: T) => void;
 interface ListenerObject<T> {
   once: boolean;
   fn: DispatcherListener<T>;
+  caller?: object;
 }
 
 export class Dispatcher<T> {
@@ -12,13 +13,13 @@ export class Dispatcher<T> {
     this.listeners = [];
   }
 
-  on(listener: DispatcherListener<T>) {
-    this.listeners.push({ once: false, fn: listener });
+  on(listener: DispatcherListener<T>, caller?: object) {
+    this.listeners.push({ once: false, fn: listener, caller });
     return () => this.off(listener);
   }
 
-  once(listener: DispatcherListener<T>) {
-    this.listeners.push({ once: true, fn: listener });
+  once(listener: DispatcherListener<T>, caller?: object) {
+    this.listeners.push({ once: true, fn: listener, caller });
     return () => this.off(listener);
   }
 
@@ -38,7 +39,7 @@ export class Dispatcher<T> {
   dispatch(value: T) {
     const listeners = this.listeners.slice(0);
     for (const listener of listeners) {
-      listener.fn(value);
+      listener.fn.call(listener.caller, value);
       if (listener.once) {
         this.off(listener.fn);
       }

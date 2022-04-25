@@ -21,12 +21,12 @@ export class Emitter<T> {
     return this.dispatchers[name]!;
   }
 
-  on<K extends keyof T>(name: K, cb: EmitterCallback<T, K>) {
-    this.getOrCreateDispatcher(name).on(cb);
+  on<K extends keyof T>(name: K, cb: EmitterCallback<T, K>, caller?: object) {
+    this.getOrCreateDispatcher(name).on(cb, caller);
   }
 
-  once<K extends keyof T>(name: K, cb: EmitterCallback<T, K>) {
-    this.getOrCreateDispatcher(name).once(cb);
+  once<K extends keyof T>(name: K, cb: EmitterCallback<T, K>, caller?: object) {
+    this.getOrCreateDispatcher(name).once(cb, caller);
   }
 
   off<K extends keyof T>(name: K, cb: EmitterCallback<T, K>) {
