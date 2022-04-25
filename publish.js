@@ -13,7 +13,7 @@ async function main() {
     delete pkg.scripts.publish;
     return JSON.stringify(pkg, null, 2);
   });
-  spawnSync("npm publish --access public", options);
+  spawnSync("npm publish --access public", { ...options, cwd: "dist" });
 }
 
 main();
