@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es6",
     "moduleResolution": "Node",
-    "declaration": false,
+    "declaration": true,
     "lib": [
       "dom",
       "es6"
@@ -12,6 +12,8 @@
     "strict": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
+    "module": "CommonJS",
+    "outDir": "./dist"
   },
   "include": [
     "./lib/**/*"

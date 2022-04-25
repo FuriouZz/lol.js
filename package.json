@@ -2,17 +2,19 @@
   "name": "@furiouzz/lol",
   "version": "0.0.31",
   "type": "commonjs",
-  "main": "dist/cjs/index.js",
-  "types": "dist/types/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "typings": "dist",
   "description": "LOL JS Utils",
   "scripts": {
     "build": "node build.js",
     "bump": "node bump.js"
   },
   "files": [
-    "dist/**/*.js"
+    "dist/**/*.js",
+    "dist/**/*.d.ts"
   ],
-  "author": "Christophe Massolin <christophe.massolin@gmail.com> (https://chrsmsln.com)",
+  "author": "Christophe Massolin <frenchise93@gmail.com> (https://chrsmsln.com)",
   "license": "ISC",
   "repository": {
     "url": "https://github.com/FuriouZz/lol.js"
@@ -27,14 +29,14 @@
   },
   "exports": {
     ".": {
-      "require": "./dist/cjs/index.js",
-      "import": "./dist/cjs/index.js",
-      "types": "./dist/types/index.d.ts"
+      "require": "./dist/index.js",
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
     },
     "./*": {
-      "require": "./dist/cjs/*",
-      "import": "./dist/cjs/*",
-      "types": "./dist/types/*"
+      "require": "./dist/*",
+      "import": "./dist/*",
+      "types": "./dist/*"
     }
   }
 }
