@@ -1,6 +1,6 @@
 {
   "name": "@furiouzz/lol",
-  "version": "0.0.31",
+  "version": "0.0.32",
   "type": "commonjs",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
