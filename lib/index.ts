@@ -1,0 +1,11 @@
+// export * as array from "./array/index";
+// export * as collections from "./collections/index";
+// export * as dom from "./dom/index";
+// export * as function from "./function/index";
+// export * as math from "./math/index";
+// export * as node from "./node/index";
+// export * as object from "./object/index";
+// export * as promise from "./promise/index";
+// export * as string from "./string/index";
+export * from "./Dispatcher";
+export * from "./Emitter";

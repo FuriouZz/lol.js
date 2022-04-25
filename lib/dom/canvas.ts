@@ -1,4 +1,4 @@
-import { PI2 } from "../math";
+import { PI2 } from "../math/math";
 
 export function drawEllipse(ctx: CanvasRenderingContext2D, centerX: number, centerY: number, width: number, height: number) {
   ctx.save()

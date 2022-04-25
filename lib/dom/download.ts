@@ -1,4 +1,4 @@
-export function saveAs(data: any, filename = 'file.json', type = 'application/json') {
+export function saveAs(data: any, filename = 'fileon', type = 'application/json') {
   return new Promise<void>((resolve) => {
     const blob = new Blob([ data ], { type })
     const $a = document.createElement('a')

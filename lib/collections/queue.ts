@@ -1,4 +1,4 @@
-import { Dispatcher } from "../dispatcher"
+import { Dispatcher } from "../Dispatcher"
 
 export interface QueueUnresolvedEntry<T> {
   key: T

@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "moduleResolution": "Node",
+    "declaration": false,
+    "lib": [
+      "dom",
+      "es6"
+    ],
+    "downlevelIteration": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+  },
+  "include": [
+    "./lib/**/*"
+  ]
+}
