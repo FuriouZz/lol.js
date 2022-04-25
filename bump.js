@@ -1,4 +1,4 @@
-const { editFile, readFile, writeFile } = require("./js/node/fs");
+const { editFile, readFile, writeFile } = require("./dist/cjs/node/fs");
 const inc = require("semver/functions/inc")
 const { spawnSync } = require("child_process")
 
