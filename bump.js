@@ -18,6 +18,9 @@ function bump(version) {
 
 function getPackage(release = "patch", identifier = undefined) {
   const pkg = JSON.parse(readFileSync("package.json", { encoding: "utf-8" }));
+  if (identifier && pkg.version.includes(identifier)) {
+    release = "prerelease";
+  }
   const nextVersion = inc(pkg.version, release, undefined, identifier);
   return {
     pkg,
