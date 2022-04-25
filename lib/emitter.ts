@@ -1,68 +1,53 @@
-import { List } from "./collections/list"
+import { Dispatcher } from "./Dispatcher";
 
-export interface EmitterListener<K=any, V=any> {
-  once: boolean,
-  cb: EmitterCallback<K, V>
+export interface EmitterEvent<T, K extends keyof T> {
+  event: K;
+  value: T[K];
 }
 
-export interface EmitterEvent<K=string, V=any> {
-  event: K
-  value: V
-}
+export type EmitterCallback<T, K extends keyof T> = (
+  event: EmitterEvent<T, K>
+) => void;
 
-export type EmitterCallback<K=string, V=any> = (event: EmitterEvent<K, V>) => void
+export class Emitter<T> {
+  private dispatchers: Partial<Record<keyof T, Dispatcher<any>>>;
 
-export class Emitter<T=any> {
-  private listeners: Record<string, List<EmitterListener>> = {}
-
-  private getOrCreateListener<K extends keyof T>(name: K) {
-    let n = name as string
-    return this.listeners[n] = this.listeners[n] || new List<EmitterListener>()
+  constructor() {
+    this.dispatchers = {};
   }
 
-  /**
-   * Listen from native
-   */
-  on<K extends keyof T>(name: K, cb: EmitterCallback<K, T[K]>) {
-    this.getOrCreateListener(name).push({ once: false, cb })
+  private getOrCreateDispatcher<K extends keyof T>(name: K) {
+    this.dispatchers[name] = this.dispatchers[name] || new Dispatcher();
+    return this.dispatchers[name]!;
   }
 
-  /**
-   * Listen from native, once
-   */
-  once<K extends keyof T>(name: K, cb: EmitterCallback<K, T[K]>) {
-    this.getOrCreateListener(name).push({ once: true, cb })
+  on<K extends keyof T>(name: K, cb: EmitterCallback<T, K>) {
+    this.getOrCreateDispatcher(name).on(cb);
   }
 
-  /**
-   * Stop listening native event
-   */
-  off<K extends keyof T>(name: K, cb: EmitterCallback<K, T[K]>) {
-    const listeners = this.getOrCreateListener(name)
+  once<K extends keyof T>(name: K, cb: EmitterCallback<T, K>) {
+    this.getOrCreateDispatcher(name).once(cb);
+  }
 
-    for (const listener of listeners) {
-      if (listener.cb == cb) {
-        listeners.remove(listener)
-        break
+  off<K extends keyof T>(name: K, cb: EmitterCallback<T, K>) {
+    const dispatcher = this.dispatchers[name];
+    if (dispatcher !== undefined) {
+      dispatcher.off(cb);
+    }
+  }
+
+  removeListeners() {
+    for (const d in this.dispatchers) {
+      if (this.dispatchers[d]) {
+        this.dispatchers[d]!.removeListeners();
       }
     }
   }
 
-  /**
-   * Called by the native to dispatch an event
-   */
-  dispatch<K extends keyof T>(name: K, value?: T[K]) {
-    const n = name as string
-    const listeners = this.listeners[n]
-
-    if (listeners) {
-      for (const listener of listeners) {
-        listener.cb({
-          event: name,
-          value
-        })
-        if (listener.once) listeners.remove(listener)
-      }
+  emit<K extends keyof T>(name: K, value: T[K]) {
+    const dispatcher = this.dispatchers[name];
+    if (dispatcher !== undefined) {
+      dispatcher.dispatch(value);
     }
   }
 }

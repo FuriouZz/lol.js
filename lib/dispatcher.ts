@@ -1,40 +1,47 @@
-import { List } from "./collections/list";
-
-export type DispatcherListener<T> = (value?: T) => void
+export type DispatcherListener<T> = (value?: T) => void;
 
 interface ListenerObject<T> {
-  once: boolean,
-  fn: DispatcherListener<T>
+  once: boolean;
+  fn: DispatcherListener<T>;
 }
 
 export class Dispatcher<T> {
+  private listeners: ListenerObject<T>[];
 
-  listeners = new List<ListenerObject<T>>()
+  constructor() {
+    this.listeners = [];
+  }
 
   on(listener: DispatcherListener<T>) {
-    this.listeners.add({ once: false, fn: listener })
+    this.listeners.push({ once: false, fn: listener });
+    return () => this.off(listener);
   }
 
   once(listener: DispatcherListener<T>) {
-    this.listeners.add({ once: true, fn: listener })
+    this.listeners.push({ once: true, fn: listener });
+    return () => this.off(listener);
   }
 
   off(listener: DispatcherListener<T>) {
-    for (const l of this.listeners) {
-      if (l.fn == listener) {
-        this.listeners.remove(l)
-        break
-      }
+    const index = this.listeners.findIndex((l) => l.fn === listener);
+    if (index === -1) return;
+    this.listeners.splice(index, 1);
+  }
+
+  removeListeners() {
+    const listeners = this.listeners.slice(0);
+    for (const listener of listeners) {
+      this.off(listener.fn);
     }
   }
 
-  dispatch(value?: T) {
-    for (const listener of this.listeners) {
-      listener.fn(value)
+  dispatch(value: T) {
+    const listeners = this.listeners.slice(0);
+    for (const listener of listeners) {
+      listener.fn(value);
       if (listener.once) {
-        this.listeners.remove(listener)
+        this.off(listener.fn);
       }
     }
   }
-
 }
