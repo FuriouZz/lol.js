@@ -34,10 +34,50 @@
       "import": "./index.js",
       "types": "./index.d.ts"
     },
-    "./*": {
-      "require": "./*",
-      "import": "./*",
-      "types": "./*"
+    "./array": {
+      "require": "./array/index.js",
+      "import": "./array/index.js",
+      "types": "./array/index.d.ts"
+    },
+    "./collection": {
+      "require": "./collection/index.js",
+      "import": "./collection/index.js",
+      "types": "./collection/index.d.ts"
+    },
+    "./dom": {
+      "require": "./dom/index.js",
+      "import": "./dom/index.js",
+      "types": "./dom/index.d.ts"
+    },
+    "./function": {
+      "require": "./function/index.js",
+      "import": "./function/index.js",
+      "types": "./function/index.d.ts"
+    },
+    "./math": {
+      "require": "./math/index.js",
+      "import": "./math/index.js",
+      "types": "./math/index.d.ts"
+    },
+    "./node": {
+      "require": "./node/index.js",
+      "import": "./node/index.js",
+      "types": "./node/index.d.ts"
+    },
+    "./object": {
+      "require": "./object/index.js",
+      "import": "./object/index.js",
+      "types": "./object/index.d.ts"
+    },
+    "./promise": {
+      "require": "./promise/index.js",
+      "import": "./promise/index.js",
+      "types": "./promise/index.d.ts"
+    },
+    "./string": {
+      "require": "./string/index.js",
+      "import": "./string/index.js",
+      "types": "./string/index.d.ts"
     }
   }
 }
