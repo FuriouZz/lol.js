@@ -34,6 +34,11 @@
       "import": "./index.js",
       "types": "./index.d.ts"
     },
+    "./*": {
+      "require": "./*",
+      "import": "./*",
+      "types": "./*"
+    },
     "./array": {
       "require": "./array/index.js",
       "import": "./array/index.js",
