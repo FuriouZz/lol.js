@@ -43,7 +43,7 @@ const getRelease = () => {
 };
 
 async function main() {
-  const dryRun = process.argv.includes("--dry-run");
+  const run = process.argv.includes("--run");
   const { release, identifier } = getRelease();
 
   const buf0 = readFileSync("package.json");
@@ -55,9 +55,11 @@ async function main() {
     const pkg = getPackage(release, identifier);
     console.log(`Current version: ${pkg.currentVersion}`);
     console.log(`Next version: ${pkg.nextVersion}`);
-    if (!dryRun) {
+    if (run) {
       pkg.save();
       bump(pkg.nextVersion);
+    } else {
+      console.log("\n> Use --run to execute")
     }
   } catch (e) {
     // Restore version
