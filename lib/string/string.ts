@@ -34,6 +34,10 @@ export function toCamelCase(str: string) {
     .join("");
 }
 
+export function toPascalCase(str: string) {
+  return toUCFirst(toCamelCase(str));
+}
+
 /**
  * Slugify a string and replace tiret to underscore
  */
