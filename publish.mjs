@@ -1,5 +1,5 @@
 import { spawnSync } from "child_process";
-import { editFileSync } from "@furiouzz/lol/node/fs.js";
+import { readFileSync, writeFileSync } from "fs";
 
 async function main() {
   /**
@@ -9,11 +9,11 @@ async function main() {
   spawnSync("npm run build", options);
   spawnSync("cp package.json dist/package.json", options);
   spawnSync("cp README.md dist/README.md", options);
-  editFileSync("dist/package.json", (v) => {
-    const pkg = JSON.parse(v.toString("utf-8"));
-    delete pkg.scripts.publish;
-    return JSON.stringify(pkg, null, 2);
-  });
+
+  const pkg = JSON.parse(readFileSync("dist/package.json", "utf-8"));
+  delete pkg.scripts.publish;
+  writeFileSync("dist/package.json", JSON.stringify(pkg, null, 2));
+
   spawnSync("npm publish --access public", { ...options, cwd: "dist" });
 }
 

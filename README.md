@@ -1,0 +1,3 @@
+lol.js
+
+Some utils
