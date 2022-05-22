@@ -7,7 +7,7 @@ async function main() {
   const options = { shell: true, stdio: "inherit" };
   spawnSync("rm -rf dist", options);
   spawnSync("tsc -p tsconfig.json", options);
-  spawnSync("tsc -p tsconfig.cjs.json", options);
+  // spawnSync("tsc -p tsconfig.esm.json", options);
 }
 
 main();

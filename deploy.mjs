@@ -6,6 +6,7 @@ async function main() {
    */
   const options = { shell: true, stdio: "inherit" };
   spawnSync("npm run build", options);
+  spawnSync("node exports.mjs", options);
   spawnSync("cp package.json dist/package.json", options);
   spawnSync("cp README.md dist/README.md", options);
   spawnSync("npm publish --access public", { ...options, cwd: "dist" });
