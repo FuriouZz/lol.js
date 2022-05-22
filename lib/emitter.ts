@@ -10,7 +10,9 @@ export type EmitterCallback<T, K extends keyof T> = (
 ) => void;
 
 export class Emitter<T> {
-  private dispatchers: Partial<Record<keyof T, Dispatcher<any>>>;
+  private dispatchers: {
+    [K in keyof T]?: Dispatcher<EmitterEvent<T, K>>
+  }
 
   constructor() {
     this.dispatchers = {};
@@ -44,10 +46,13 @@ export class Emitter<T> {
     }
   }
 
-  emit<K extends keyof T>(name: K, value: T[K]) {
-    const dispatcher = this.dispatchers[name];
+  emit<K extends keyof T>(event: K, value: T[K]) {
+    const dispatcher = this.dispatchers[event];
     if (dispatcher !== undefined) {
-      dispatcher.dispatch(value);
+      dispatcher.dispatch({
+        event,
+        value,
+      });
     }
   }
 }
