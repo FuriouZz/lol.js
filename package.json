@@ -1,6 +1,6 @@
 {
   "name": "@furiouzz/lol",
-  "version": "0.0.36-beta.5",
+  "version": "0.0.36-beta.6",
   "type": "module",
   "main": "./esm/index.js",
   "types": "./types/index.d.ts",
