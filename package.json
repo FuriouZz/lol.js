@@ -9,7 +9,7 @@
   "scripts": {
     "build": "node build.mjs",
     "bump": "node bump.mjs",
-    "publish": "node publish.mjs"
+    "deploy": "node deploy.mjs"
   },
   "files": [
     "**/*.js",
