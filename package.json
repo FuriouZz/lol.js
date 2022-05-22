@@ -1,15 +1,15 @@
 {
   "name": "@furiouzz/lol",
   "version": "0.0.36-beta.3",
-  "type": "commonjs",
-  "main": "index.js",
-  "types": "index.d.ts",
-  "typings": "dist",
+  "type": "module",
+  "main": "./esm/index.js",
+  "types": "./types/index.d.ts",
+  "typings": "./types",
   "description": "LOL JS Utils",
   "scripts": {
-    "build": "node build.js",
-    "bump": "node bump.js",
-    "publish": "node publish.js"
+    "build": "node build.mjs",
+    "bump": "node bump.mjs",
+    "publish": "node publish.mjs"
   },
   "files": [
     "**/*.js",
@@ -30,59 +30,59 @@
   },
   "exports": {
     ".": {
-      "require": "./index.js",
-      "import": "./index.js",
-      "types": "./index.d.ts"
+      "require": "./cjs/index.js",
+      "import": "./esm/index.js",
+      "types": "./types/index.d.ts"
     },
     "./*": {
-      "require": "./*",
-      "import": "./*",
-      "types": "./*"
+      "require": "./cjs/*",
+      "import": "./esm/*",
+      "types": "./types/*"
     },
     "./array": {
-      "require": "./array/index.js",
-      "import": "./array/index.js",
-      "types": "./array/index.d.ts"
+      "require": "./cjs/array/index.js",
+      "import": "./esm/array/index.js",
+      "types": "./types/array/index.d.ts"
     },
     "./collection": {
-      "require": "./collection/index.js",
-      "import": "./collection/index.js",
-      "types": "./collection/index.d.ts"
+      "require": "./cjs/collection/index.js",
+      "import": "./esm/collection/index.js",
+      "types": "./types/collection/index.d.ts"
     },
     "./dom": {
-      "require": "./dom/index.js",
-      "import": "./dom/index.js",
-      "types": "./dom/index.d.ts"
+      "require": "./cjs/dom/index.js",
+      "import": "./esm/dom/index.js",
+      "types": "./types/dom/index.d.ts"
     },
     "./function": {
-      "require": "./function/index.js",
-      "import": "./function/index.js",
-      "types": "./function/index.d.ts"
+      "require": "./cjs/function/index.js",
+      "import": "./esm/function/index.js",
+      "types": "./types/function/index.d.ts"
     },
     "./math": {
-      "require": "./math/index.js",
-      "import": "./math/index.js",
-      "types": "./math/index.d.ts"
+      "require": "./cjs/math/index.js",
+      "import": "./esm/math/index.js",
+      "types": "./types/math/index.d.ts"
     },
     "./node": {
-      "require": "./node/index.js",
-      "import": "./node/index.js",
-      "types": "./node/index.d.ts"
+      "require": "./cjs/node/index.js",
+      "import": "./esm/node/index.js",
+      "types": "./types/node/index.d.ts"
     },
     "./object": {
-      "require": "./object/index.js",
-      "import": "./object/index.js",
-      "types": "./object/index.d.ts"
+      "require": "./cjs/object/index.js",
+      "import": "./esm/object/index.js",
+      "types": "./types/object/index.d.ts"
     },
     "./promise": {
-      "require": "./promise/index.js",
-      "import": "./promise/index.js",
-      "types": "./promise/index.d.ts"
+      "require": "./cjs/promise/index.js",
+      "import": "./esm/promise/index.js",
+      "types": "./types/promise/index.d.ts"
     },
     "./string": {
-      "require": "./string/index.js",
-      "import": "./string/index.js",
-      "types": "./string/index.d.ts"
+      "require": "./cjs/string/index.js",
+      "import": "./esm/string/index.js",
+      "types": "./types/string/index.d.ts"
     }
   }
 }

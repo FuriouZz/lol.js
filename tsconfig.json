@@ -1,19 +1,19 @@
 {
   "compilerOptions": {
     "target": "es6",
+    "module": "es2015",
     "moduleResolution": "Node",
-    "declaration": true,
     "lib": [
-      "dom",
-      "es6"
+      "es5",
+      "es6",
+      "dom"
     ],
     "downlevelIteration": true,
     "skipLibCheck": true,
     "strict": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "module": "CommonJS",
-    "outDir": "./dist"
+    "outDir": "./dist/esm"
   },
   "include": [
     "./lib/**/*"

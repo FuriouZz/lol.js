@@ -1,6 +1,6 @@
-const { readFileSync, writeFileSync } = require("fs");
-const inc = require("semver/functions/inc");
-const { spawnSync } = require("child_process");
+import { readFileSync, writeFileSync } from "fs";
+import semver from "semver";
+import { spawnSync } from "child_process";
 
 const Options = { shell: true, stdio: "inherit" };
 
@@ -21,7 +21,7 @@ function getPackage(release = "patch", identifier = undefined) {
   if (identifier && pkg.version.includes(identifier)) {
     release = "prerelease";
   }
-  const nextVersion = inc(pkg.version, release, undefined, identifier);
+  const nextVersion = semver.inc(pkg.version, release, undefined, identifier);
   return {
     pkg,
     currentVersion: pkg.version,
@@ -59,7 +59,7 @@ async function main() {
       pkg.save();
       bump(pkg.nextVersion);
     } else {
-      console.log("\n> Use --run to execute")
+      console.log("\n> Use --run to execute");
     }
   } catch (e) {
     // Restore version

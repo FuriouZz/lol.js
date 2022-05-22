@@ -1,13 +1,14 @@
-const { spawnSync } = require("child_process");
+import { spawnSync } from "child_process";
+import { editFileSync } from "@furiouzz/lol/node/fs.js";
 
 async function main() {
   /**
    * @type {import("child_process").SpawnOptions}
    */
   const options = { shell: true, stdio: "inherit" };
-  spawnSync("node build.js", options);
+  spawnSync("npm run build", options);
   spawnSync("cp package.json dist/package.json", options);
-  const { editFileSync } = require("./dist/node/fs");
+  spawnSync("cp README.md dist/README.md", options);
   editFileSync("dist/package.json", (v) => {
     const pkg = JSON.parse(v.toString("utf-8"));
     delete pkg.scripts.publish;

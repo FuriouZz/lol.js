@@ -1,4 +1,4 @@
-const { spawnSync } = require("child_process");
+import { spawnSync } from "child_process";
 
 async function main() {
   /**
@@ -7,6 +7,7 @@ async function main() {
   const options = { shell: true, stdio: "inherit" };
   spawnSync("rm -rf dist", options);
   spawnSync("tsc -p tsconfig.json", options);
+  spawnSync("tsc -p tsconfig.cjs.json", options);
 }
 
 main();
