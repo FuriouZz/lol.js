@@ -8,30 +8,62 @@ export interface CancelablePromise<T> {
 export function cancelable<T = unknown>(
   executor: (resolve: (value: T) => void, reject: (reason: any) => void) => {}
 ) {
-  return makeCancelable(new Promise<T>(executor));
-}
-
-export function makeCancelable<T>(promise: Promise<T>) {
   let hasCanceled = false;
-  const wrappedPromise = new Promise((resolve, reject) => {
-    promise.then((value) => {
+
+  const promise = new Promise<T>((resolve, reject) => {
+    const _resolve = (value: T) => {
       if (hasCanceled) {
         reject({ isCanceled: true });
       } else {
         resolve(value);
       }
-    });
-    promise.catch((reason) => {
+    };
+
+    const _reject = (reason: any) => {
       if (hasCanceled) {
         reject({ isCanceled: true });
       } else {
-        reject(reason);
+        _reject(reason);
       }
-    });
+    };
+
+    executor(_resolve, _reject);
+  });
+
+  return {
+    promise: promise,
+    cancel: () => {
+      hasCanceled = true;
+    },
+  };
+}
+
+export function makeCancelable<T>(promise: Promise<T>) {
+  let hasCanceled = false;
+
+  const wrappedPromise = new Promise<T>((resolve, reject) => {
+    promise.then(
+      (value) => {
+        if (hasCanceled) {
+          reject({ isCanceled: true });
+        } else {
+          resolve(value);
+        }
+      },
+      (reason) => {
+        if (hasCanceled) {
+          reject({ isCanceled: true });
+        } else {
+          reject(reason);
+        }
+      }
+    );
   });
 
   return {
     promise: wrappedPromise,
-    cancel: () => (hasCanceled = true),
+    cancel: () => {
+      hasCanceled = true;
+    },
   };
 }
