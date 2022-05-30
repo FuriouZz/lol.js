@@ -1,6 +1,6 @@
 {
   "name": "@furiouzz/lol",
-  "version": "0.0.36-beta.10",
+  "version": "0.0.36-beta.11",
   "type": "commonjs",
   "main": "./index.js",
   "types": "./index.d.ts",
