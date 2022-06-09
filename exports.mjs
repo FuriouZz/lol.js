@@ -1,4 +1,4 @@
-import { sep, posix, join } from "path";
+import { basename, extname, join } from "path";
 import { readdirSync, readFileSync, statSync, writeFileSync } from "fs";
 
 const isFile = (path) => {
@@ -13,18 +13,30 @@ const dirs = readdirSync("./lib", { withFileTypes: false });
 
 const exports = {
   ".": {
-    import: `./index.js`,
+    require: `./index.js`,
+    default: `./index.js`,
   },
   "./*": {
-    import: `./*`,
+    require: `./*`,
+    default: `./*`
   },
 };
 
 for (const dir of dirs) {
   if (!isFile(join("./lib", dir, "index.ts"))) continue;
   exports[`./${dir}`] = {
-    import: `./${dir}/index.js`,
+    require: `./${dir}/index.js`,
+    default: `./${dir}/index.js`,
   };
+  const files = readdirSync(join("./lib", dir));
+  for (const file of files) {
+    if (!isFile(join("./lib", dir, file))) continue;
+    const name = basename(file, extname(file));
+    exports[`./${dir}/${name}`] = {
+      require: `./${dir}/${name}.js`,
+      default: `./${dir}/${name}.js`,
+    };
+  }
 }
 
 const pkg = JSON.parse(readFileSync("package.json", "utf-8"));

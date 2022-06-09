@@ -26,5 +26,219 @@
   "devDependencies": {
     "@types/node": "^14.14.22",
     "typescript": "^4.7.1-rc"
+  },
+  "exports": {
+    ".": {
+      "require": "./index.js",
+      "default": "./index.js"
+    },
+    "./*": {
+      "require": "./*",
+      "default": "./*"
+    },
+    "./array": {
+      "require": "./array/index.js",
+      "default": "./array/index.js"
+    },
+    "./array/array": {
+      "require": "./array/array.js",
+      "default": "./array/array.js"
+    },
+    "./array/index": {
+      "require": "./array/index.js",
+      "default": "./array/index.js"
+    },
+    "./array/iterator": {
+      "require": "./array/iterator.js",
+      "default": "./array/iterator.js"
+    },
+    "./collections": {
+      "require": "./collections/index.js",
+      "default": "./collections/index.js"
+    },
+    "./collections/index": {
+      "require": "./collections/index.js",
+      "default": "./collections/index.js"
+    },
+    "./collections/list": {
+      "require": "./collections/list.js",
+      "default": "./collections/list.js"
+    },
+    "./collections/ordered-set": {
+      "require": "./collections/ordered-set.js",
+      "default": "./collections/ordered-set.js"
+    },
+    "./collections/queue": {
+      "require": "./collections/queue.js",
+      "default": "./collections/queue.js"
+    },
+    "./dom": {
+      "require": "./dom/index.js",
+      "default": "./dom/index.js"
+    },
+    "./dom/audio": {
+      "require": "./dom/audio.js",
+      "default": "./dom/audio.js"
+    },
+    "./dom/canvas": {
+      "require": "./dom/canvas.js",
+      "default": "./dom/canvas.js"
+    },
+    "./dom/download": {
+      "require": "./dom/download.js",
+      "default": "./dom/download.js"
+    },
+    "./dom/elements": {
+      "require": "./dom/elements.js",
+      "default": "./dom/elements.js"
+    },
+    "./dom/file": {
+      "require": "./dom/file.js",
+      "default": "./dom/file.js"
+    },
+    "./dom/image": {
+      "require": "./dom/image.js",
+      "default": "./dom/image.js"
+    },
+    "./dom/index": {
+      "require": "./dom/index.js",
+      "default": "./dom/index.js"
+    },
+    "./dom/net": {
+      "require": "./dom/net.js",
+      "default": "./dom/net.js"
+    },
+    "./dom/raf": {
+      "require": "./dom/raf.js",
+      "default": "./dom/raf.js"
+    },
+    "./dom/video": {
+      "require": "./dom/video.js",
+      "default": "./dom/video.js"
+    },
+    "./function": {
+      "require": "./function/index.js",
+      "default": "./function/index.js"
+    },
+    "./function/function": {
+      "require": "./function/function.js",
+      "default": "./function/function.js"
+    },
+    "./function/index": {
+      "require": "./function/index.js",
+      "default": "./function/index.js"
+    },
+    "./math": {
+      "require": "./math/index.js",
+      "default": "./math/index.js"
+    },
+    "./math/index": {
+      "require": "./math/index.js",
+      "default": "./math/index.js"
+    },
+    "./math/math": {
+      "require": "./math/math.js",
+      "default": "./math/math.js"
+    },
+    "./node": {
+      "require": "./node/index.js",
+      "default": "./node/index.js"
+    },
+    "./node/env": {
+      "require": "./node/env.js",
+      "default": "./node/env.js"
+    },
+    "./node/exec": {
+      "require": "./node/exec.js",
+      "default": "./node/exec.js"
+    },
+    "./node/fs": {
+      "require": "./node/fs.js",
+      "default": "./node/fs.js"
+    },
+    "./node/index": {
+      "require": "./node/index.js",
+      "default": "./node/index.js"
+    },
+    "./node/memory-stream": {
+      "require": "./node/memory-stream.js",
+      "default": "./node/memory-stream.js"
+    },
+    "./node/require-string": {
+      "require": "./node/require-string.js",
+      "default": "./node/require-string.js"
+    },
+    "./object": {
+      "require": "./object/index.js",
+      "default": "./object/index.js"
+    },
+    "./object/argv": {
+      "require": "./object/argv.js",
+      "default": "./object/argv.js"
+    },
+    "./object/index": {
+      "require": "./object/index.js",
+      "default": "./object/index.js"
+    },
+    "./object/object": {
+      "require": "./object/object.js",
+      "default": "./object/object.js"
+    },
+    "./object/url": {
+      "require": "./object/url.js",
+      "default": "./object/url.js"
+    },
+    "./promise": {
+      "require": "./promise/index.js",
+      "default": "./promise/index.js"
+    },
+    "./promise/cancelable": {
+      "require": "./promise/cancelable.js",
+      "default": "./promise/cancelable.js"
+    },
+    "./promise/defer": {
+      "require": "./promise/defer.js",
+      "default": "./promise/defer.js"
+    },
+    "./promise/index": {
+      "require": "./promise/index.js",
+      "default": "./promise/index.js"
+    },
+    "./promise/loadable": {
+      "require": "./promise/loadable.js",
+      "default": "./promise/loadable.js"
+    },
+    "./promise/time": {
+      "require": "./promise/time.js",
+      "default": "./promise/time.js"
+    },
+    "./string": {
+      "require": "./string/index.js",
+      "default": "./string/index.js"
+    },
+    "./string/generate": {
+      "require": "./string/generate.js",
+      "default": "./string/generate.js"
+    },
+    "./string/guid": {
+      "require": "./string/guid.js",
+      "default": "./string/guid.js"
+    },
+    "./string/index": {
+      "require": "./string/index.js",
+      "default": "./string/index.js"
+    },
+    "./string/path": {
+      "require": "./string/path.js",
+      "default": "./string/path.js"
+    },
+    "./string/string": {
+      "require": "./string/string.js",
+      "default": "./string/string.js"
+    },
+    "./string/template": {
+      "require": "./string/template.js",
+      "default": "./string/template.js"
+    }
   }
 }
