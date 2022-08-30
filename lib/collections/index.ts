@@ -1,3 +1,3 @@
-export * from "./list";
-export * from "./ordered-set";
-export * from "./queue";
+export * from "./list.js";
+export * from "./ordered-set.js";
+export * from "./queue.js";

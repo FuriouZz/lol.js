@@ -1,4 +1,4 @@
-import { Dispatcher } from "./Dispatcher";
+import { Dispatcher } from "./Dispatcher.js";
 
 export interface EmitterEvent<T, K extends keyof T> {
   event: K;

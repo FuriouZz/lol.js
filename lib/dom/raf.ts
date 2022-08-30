@@ -1,4 +1,4 @@
-import { guid } from "../string/guid"
+import { guid } from "../string/guid.js"
 
 export type RAFListener = (dt: number, now: number) => void
 

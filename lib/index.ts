@@ -7,5 +7,5 @@
 // export * as object from "./object/index";
 // export * as promise from "./promise/index";
 // export * as string from "./string/index";
-export * from "./Dispatcher";
-export * from "./Emitter";
+export * from "./Dispatcher.js";
+export * from "./Emitter.js";

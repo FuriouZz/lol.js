@@ -1,6 +1,6 @@
 import { spawn, SpawnOptions } from "child_process";
-import { defer } from "../promise/defer";
 import { Readable, Writable } from "stream";
+import { defer } from "../promise/defer.js";
 
 export interface ExecOptions extends SpawnOptions {
   throwOnError?: boolean;

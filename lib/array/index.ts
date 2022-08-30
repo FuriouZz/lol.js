@@ -1,2 +1,2 @@
-export * from "./array";
-export * from "./iterator";
+export * from "./array.js";
+export * from "./iterator.js";

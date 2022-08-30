@@ -1,4 +1,4 @@
-import { shuffle } from "./array";
+import { shuffle } from "./array.js";
 
 export function createIterator<T>(
   arr: T[],

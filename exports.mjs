@@ -36,6 +36,10 @@ for (const dir of dirs) {
       require: `./${dir}/${name}.js`,
       default: `./${dir}/${name}.js`,
     };
+    exports[`./${dir}/${name}.js`] = {
+      require: `./${dir}/${name}.js`,
+      default: `./${dir}/${name}.js`,
+    };
   }
 }
 

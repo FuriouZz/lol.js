@@ -1,4 +1,4 @@
-import { createIterator } from "../array/iterator"
+import { createIterator } from "../array/iterator.js"
 
 export function word(min = 2, max = 15) {
   const vowels = createIterator("aeiouy".split(""), { loop: true, random: true })

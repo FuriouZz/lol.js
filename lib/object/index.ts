@@ -1,3 +1,3 @@
-export * from "./argv";
-export * from "./object";
-export * from "./url";
+export * from "./argv.js";
+export * from "./object.js";
+export * from "./url.js";
