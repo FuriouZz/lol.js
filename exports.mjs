@@ -13,32 +13,32 @@ const dirs = readdirSync("./lib", { withFileTypes: false });
 
 const exports = {
   ".": {
-    require: `./index.js`,
-    default: `./index.js`,
+    import: `./index.js`,
+    types: `./index.d.ts`,
   },
   "./*": {
-    require: `./*`,
-    default: `./*`
+    import: `./*`,
+    types: `./*`
   },
 };
 
 for (const dir of dirs) {
   if (!isFile(join("./lib", dir, "index.ts"))) continue;
   exports[`./${dir}`] = {
-    require: `./${dir}/index.js`,
-    default: `./${dir}/index.js`,
+    import: `./${dir}/index.js`,
+    types: `./${dir}/index.d.ts`,
   };
   const files = readdirSync(join("./lib", dir));
   for (const file of files) {
     if (!isFile(join("./lib", dir, file))) continue;
     const name = basename(file, extname(file));
     exports[`./${dir}/${name}`] = {
-      require: `./${dir}/${name}.js`,
-      default: `./${dir}/${name}.js`,
+      import: `./${dir}/${name}.js`,
+      types: `./${dir}/${name}.d.ts`,
     };
     exports[`./${dir}/${name}.js`] = {
-      require: `./${dir}/${name}.js`,
-      default: `./${dir}/${name}.js`,
+      import: `./${dir}/${name}.js`,
+      types: `./${dir}/${name}.d.ts`,
     };
   }
 }

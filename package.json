@@ -29,216 +29,384 @@
   },
   "exports": {
     ".": {
-      "require": "./index.js",
-      "default": "./index.js"
+      "import": "./index.js",
+      "types": "./index.d.ts"
     },
     "./*": {
-      "require": "./*",
-      "default": "./*"
+      "import": "./*",
+      "types": "./*"
     },
     "./array": {
-      "require": "./array/index.js",
-      "default": "./array/index.js"
+      "import": "./array/index.js",
+      "types": "./array/index.d.ts"
     },
     "./array/array": {
-      "require": "./array/array.js",
-      "default": "./array/array.js"
+      "import": "./array/array.js",
+      "types": "./array/array.d.ts"
+    },
+    "./array/array.js": {
+      "import": "./array/array.js",
+      "types": "./array/array.d.ts"
     },
     "./array/index": {
-      "require": "./array/index.js",
-      "default": "./array/index.js"
+      "import": "./array/index.js",
+      "types": "./array/index.d.ts"
+    },
+    "./array/index.js": {
+      "import": "./array/index.js",
+      "types": "./array/index.d.ts"
     },
     "./array/iterator": {
-      "require": "./array/iterator.js",
-      "default": "./array/iterator.js"
+      "import": "./array/iterator.js",
+      "types": "./array/iterator.d.ts"
+    },
+    "./array/iterator.js": {
+      "import": "./array/iterator.js",
+      "types": "./array/iterator.d.ts"
     },
     "./collections": {
-      "require": "./collections/index.js",
-      "default": "./collections/index.js"
+      "import": "./collections/index.js",
+      "types": "./collections/index.d.ts"
     },
     "./collections/index": {
-      "require": "./collections/index.js",
-      "default": "./collections/index.js"
+      "import": "./collections/index.js",
+      "types": "./collections/index.d.ts"
+    },
+    "./collections/index.js": {
+      "import": "./collections/index.js",
+      "types": "./collections/index.d.ts"
     },
     "./collections/list": {
-      "require": "./collections/list.js",
-      "default": "./collections/list.js"
+      "import": "./collections/list.js",
+      "types": "./collections/list.d.ts"
+    },
+    "./collections/list.js": {
+      "import": "./collections/list.js",
+      "types": "./collections/list.d.ts"
     },
     "./collections/ordered-set": {
-      "require": "./collections/ordered-set.js",
-      "default": "./collections/ordered-set.js"
+      "import": "./collections/ordered-set.js",
+      "types": "./collections/ordered-set.d.ts"
+    },
+    "./collections/ordered-set.js": {
+      "import": "./collections/ordered-set.js",
+      "types": "./collections/ordered-set.d.ts"
     },
     "./collections/queue": {
-      "require": "./collections/queue.js",
-      "default": "./collections/queue.js"
+      "import": "./collections/queue.js",
+      "types": "./collections/queue.d.ts"
+    },
+    "./collections/queue.js": {
+      "import": "./collections/queue.js",
+      "types": "./collections/queue.d.ts"
     },
     "./dom": {
-      "require": "./dom/index.js",
-      "default": "./dom/index.js"
+      "import": "./dom/index.js",
+      "types": "./dom/index.d.ts"
     },
     "./dom/audio": {
-      "require": "./dom/audio.js",
-      "default": "./dom/audio.js"
+      "import": "./dom/audio.js",
+      "types": "./dom/audio.d.ts"
+    },
+    "./dom/audio.js": {
+      "import": "./dom/audio.js",
+      "types": "./dom/audio.d.ts"
     },
     "./dom/canvas": {
-      "require": "./dom/canvas.js",
-      "default": "./dom/canvas.js"
+      "import": "./dom/canvas.js",
+      "types": "./dom/canvas.d.ts"
+    },
+    "./dom/canvas.js": {
+      "import": "./dom/canvas.js",
+      "types": "./dom/canvas.d.ts"
     },
     "./dom/download": {
-      "require": "./dom/download.js",
-      "default": "./dom/download.js"
+      "import": "./dom/download.js",
+      "types": "./dom/download.d.ts"
+    },
+    "./dom/download.js": {
+      "import": "./dom/download.js",
+      "types": "./dom/download.d.ts"
     },
     "./dom/elements": {
-      "require": "./dom/elements.js",
-      "default": "./dom/elements.js"
+      "import": "./dom/elements.js",
+      "types": "./dom/elements.d.ts"
+    },
+    "./dom/elements.js": {
+      "import": "./dom/elements.js",
+      "types": "./dom/elements.d.ts"
     },
     "./dom/file": {
-      "require": "./dom/file.js",
-      "default": "./dom/file.js"
+      "import": "./dom/file.js",
+      "types": "./dom/file.d.ts"
+    },
+    "./dom/file.js": {
+      "import": "./dom/file.js",
+      "types": "./dom/file.d.ts"
     },
     "./dom/image": {
-      "require": "./dom/image.js",
-      "default": "./dom/image.js"
+      "import": "./dom/image.js",
+      "types": "./dom/image.d.ts"
+    },
+    "./dom/image.js": {
+      "import": "./dom/image.js",
+      "types": "./dom/image.d.ts"
     },
     "./dom/index": {
-      "require": "./dom/index.js",
-      "default": "./dom/index.js"
+      "import": "./dom/index.js",
+      "types": "./dom/index.d.ts"
+    },
+    "./dom/index.js": {
+      "import": "./dom/index.js",
+      "types": "./dom/index.d.ts"
     },
     "./dom/net": {
-      "require": "./dom/net.js",
-      "default": "./dom/net.js"
+      "import": "./dom/net.js",
+      "types": "./dom/net.d.ts"
+    },
+    "./dom/net.js": {
+      "import": "./dom/net.js",
+      "types": "./dom/net.d.ts"
     },
     "./dom/raf": {
-      "require": "./dom/raf.js",
-      "default": "./dom/raf.js"
+      "import": "./dom/raf.js",
+      "types": "./dom/raf.d.ts"
+    },
+    "./dom/raf.js": {
+      "import": "./dom/raf.js",
+      "types": "./dom/raf.d.ts"
     },
     "./dom/video": {
-      "require": "./dom/video.js",
-      "default": "./dom/video.js"
+      "import": "./dom/video.js",
+      "types": "./dom/video.d.ts"
+    },
+    "./dom/video.js": {
+      "import": "./dom/video.js",
+      "types": "./dom/video.d.ts"
     },
     "./function": {
-      "require": "./function/index.js",
-      "default": "./function/index.js"
+      "import": "./function/index.js",
+      "types": "./function/index.d.ts"
     },
     "./function/function": {
-      "require": "./function/function.js",
-      "default": "./function/function.js"
+      "import": "./function/function.js",
+      "types": "./function/function.d.ts"
+    },
+    "./function/function.js": {
+      "import": "./function/function.js",
+      "types": "./function/function.d.ts"
     },
     "./function/index": {
-      "require": "./function/index.js",
-      "default": "./function/index.js"
+      "import": "./function/index.js",
+      "types": "./function/index.d.ts"
+    },
+    "./function/index.js": {
+      "import": "./function/index.js",
+      "types": "./function/index.d.ts"
     },
     "./math": {
-      "require": "./math/index.js",
-      "default": "./math/index.js"
+      "import": "./math/index.js",
+      "types": "./math/index.d.ts"
     },
     "./math/index": {
-      "require": "./math/index.js",
-      "default": "./math/index.js"
+      "import": "./math/index.js",
+      "types": "./math/index.d.ts"
+    },
+    "./math/index.js": {
+      "import": "./math/index.js",
+      "types": "./math/index.d.ts"
     },
     "./math/math": {
-      "require": "./math/math.js",
-      "default": "./math/math.js"
+      "import": "./math/math.js",
+      "types": "./math/math.d.ts"
+    },
+    "./math/math.js": {
+      "import": "./math/math.js",
+      "types": "./math/math.d.ts"
     },
     "./node": {
-      "require": "./node/index.js",
-      "default": "./node/index.js"
+      "import": "./node/index.js",
+      "types": "./node/index.d.ts"
     },
     "./node/env": {
-      "require": "./node/env.js",
-      "default": "./node/env.js"
+      "import": "./node/env.js",
+      "types": "./node/env.d.ts"
+    },
+    "./node/env.js": {
+      "import": "./node/env.js",
+      "types": "./node/env.d.ts"
     },
     "./node/exec": {
-      "require": "./node/exec.js",
-      "default": "./node/exec.js"
+      "import": "./node/exec.js",
+      "types": "./node/exec.d.ts"
+    },
+    "./node/exec.js": {
+      "import": "./node/exec.js",
+      "types": "./node/exec.d.ts"
     },
     "./node/fs": {
-      "require": "./node/fs.js",
-      "default": "./node/fs.js"
+      "import": "./node/fs.js",
+      "types": "./node/fs.d.ts"
+    },
+    "./node/fs.js": {
+      "import": "./node/fs.js",
+      "types": "./node/fs.d.ts"
     },
     "./node/index": {
-      "require": "./node/index.js",
-      "default": "./node/index.js"
+      "import": "./node/index.js",
+      "types": "./node/index.d.ts"
+    },
+    "./node/index.js": {
+      "import": "./node/index.js",
+      "types": "./node/index.d.ts"
     },
     "./node/memory-stream": {
-      "require": "./node/memory-stream.js",
-      "default": "./node/memory-stream.js"
+      "import": "./node/memory-stream.js",
+      "types": "./node/memory-stream.d.ts"
+    },
+    "./node/memory-stream.js": {
+      "import": "./node/memory-stream.js",
+      "types": "./node/memory-stream.d.ts"
     },
     "./node/require-string": {
-      "require": "./node/require-string.js",
-      "default": "./node/require-string.js"
+      "import": "./node/require-string.js",
+      "types": "./node/require-string.d.ts"
+    },
+    "./node/require-string.js": {
+      "import": "./node/require-string.js",
+      "types": "./node/require-string.d.ts"
     },
     "./object": {
-      "require": "./object/index.js",
-      "default": "./object/index.js"
+      "import": "./object/index.js",
+      "types": "./object/index.d.ts"
     },
     "./object/argv": {
-      "require": "./object/argv.js",
-      "default": "./object/argv.js"
+      "import": "./object/argv.js",
+      "types": "./object/argv.d.ts"
+    },
+    "./object/argv.js": {
+      "import": "./object/argv.js",
+      "types": "./object/argv.d.ts"
     },
     "./object/index": {
-      "require": "./object/index.js",
-      "default": "./object/index.js"
+      "import": "./object/index.js",
+      "types": "./object/index.d.ts"
+    },
+    "./object/index.js": {
+      "import": "./object/index.js",
+      "types": "./object/index.d.ts"
     },
     "./object/object": {
-      "require": "./object/object.js",
-      "default": "./object/object.js"
+      "import": "./object/object.js",
+      "types": "./object/object.d.ts"
+    },
+    "./object/object.js": {
+      "import": "./object/object.js",
+      "types": "./object/object.d.ts"
     },
     "./object/url": {
-      "require": "./object/url.js",
-      "default": "./object/url.js"
+      "import": "./object/url.js",
+      "types": "./object/url.d.ts"
+    },
+    "./object/url.js": {
+      "import": "./object/url.js",
+      "types": "./object/url.d.ts"
     },
     "./promise": {
-      "require": "./promise/index.js",
-      "default": "./promise/index.js"
+      "import": "./promise/index.js",
+      "types": "./promise/index.d.ts"
     },
     "./promise/cancelable": {
-      "require": "./promise/cancelable.js",
-      "default": "./promise/cancelable.js"
+      "import": "./promise/cancelable.js",
+      "types": "./promise/cancelable.d.ts"
+    },
+    "./promise/cancelable.js": {
+      "import": "./promise/cancelable.js",
+      "types": "./promise/cancelable.d.ts"
     },
     "./promise/defer": {
-      "require": "./promise/defer.js",
-      "default": "./promise/defer.js"
+      "import": "./promise/defer.js",
+      "types": "./promise/defer.d.ts"
+    },
+    "./promise/defer.js": {
+      "import": "./promise/defer.js",
+      "types": "./promise/defer.d.ts"
     },
     "./promise/index": {
-      "require": "./promise/index.js",
-      "default": "./promise/index.js"
+      "import": "./promise/index.js",
+      "types": "./promise/index.d.ts"
+    },
+    "./promise/index.js": {
+      "import": "./promise/index.js",
+      "types": "./promise/index.d.ts"
     },
     "./promise/loadable": {
-      "require": "./promise/loadable.js",
-      "default": "./promise/loadable.js"
+      "import": "./promise/loadable.js",
+      "types": "./promise/loadable.d.ts"
+    },
+    "./promise/loadable.js": {
+      "import": "./promise/loadable.js",
+      "types": "./promise/loadable.d.ts"
     },
     "./promise/time": {
-      "require": "./promise/time.js",
-      "default": "./promise/time.js"
+      "import": "./promise/time.js",
+      "types": "./promise/time.d.ts"
+    },
+    "./promise/time.js": {
+      "import": "./promise/time.js",
+      "types": "./promise/time.d.ts"
     },
     "./string": {
-      "require": "./string/index.js",
-      "default": "./string/index.js"
+      "import": "./string/index.js",
+      "types": "./string/index.d.ts"
     },
     "./string/generate": {
-      "require": "./string/generate.js",
-      "default": "./string/generate.js"
+      "import": "./string/generate.js",
+      "types": "./string/generate.d.ts"
+    },
+    "./string/generate.js": {
+      "import": "./string/generate.js",
+      "types": "./string/generate.d.ts"
     },
     "./string/guid": {
-      "require": "./string/guid.js",
-      "default": "./string/guid.js"
+      "import": "./string/guid.js",
+      "types": "./string/guid.d.ts"
+    },
+    "./string/guid.js": {
+      "import": "./string/guid.js",
+      "types": "./string/guid.d.ts"
     },
     "./string/index": {
-      "require": "./string/index.js",
-      "default": "./string/index.js"
+      "import": "./string/index.js",
+      "types": "./string/index.d.ts"
+    },
+    "./string/index.js": {
+      "import": "./string/index.js",
+      "types": "./string/index.d.ts"
     },
     "./string/path": {
-      "require": "./string/path.js",
-      "default": "./string/path.js"
+      "import": "./string/path.js",
+      "types": "./string/path.d.ts"
+    },
+    "./string/path.js": {
+      "import": "./string/path.js",
+      "types": "./string/path.d.ts"
     },
     "./string/string": {
-      "require": "./string/string.js",
-      "default": "./string/string.js"
+      "import": "./string/string.js",
+      "types": "./string/string.d.ts"
+    },
+    "./string/string.js": {
+      "import": "./string/string.js",
+      "types": "./string/string.d.ts"
     },
     "./string/template": {
-      "require": "./string/template.js",
-      "default": "./string/template.js"
+      "import": "./string/template.js",
+      "types": "./string/template.d.ts"
+    },
+    "./string/template.js": {
+      "import": "./string/template.js",
+      "types": "./string/template.d.ts"
     }
   }
 }
