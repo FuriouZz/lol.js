@@ -1,7 +1,7 @@
 {
   "name": "@furiouzz/lol",
-  "version": "0.0.36-beta.15",
-  "type": "commonjs",
+  "version": "0.0.36-beta.16",
+  "type": "module",
   "main": "./index.js",
   "types": "./index.d.ts",
   "description": "LOL JS Utils",
