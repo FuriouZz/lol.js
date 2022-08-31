@@ -1,6 +1,6 @@
 {
   "name": "@furiouzz/lol",
-  "version": "0.0.36-beta.17",
+  "version": "0.0.36-beta.18",
   "type": "module",
   "main": "./index.js",
   "types": "./index.d.ts",
