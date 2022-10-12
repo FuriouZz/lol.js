@@ -13,49 +13,70 @@ const dirs = readdirSync("./lib", { withFileTypes: false });
 
 const exports = {
   ".": {
-    "import": {
+    import: {
       types: `./dist/esm/index.d.ts`,
-      default: `./dist/esm/index.js`
+      default: `./dist/esm/index.js`,
     },
-    "require": {
+    require: {
       types: `./dist/cjs/index.d.ts`,
-      default: `./dist/cjs/index.js`
-    }
+      default: `./dist/cjs/index.js`,
+    },
   },
   "./*": {
-    "import": {
+    import: {
       types: `./dist/esm/*.d.ts`,
-      default: `./dist/esm/*.js`
+      default: `./dist/esm/*.js`,
     },
-    "require": {
+    require: {
       types: `./dist/cjs/*.d.ts`,
-      default: `./dist/cjs/*.js`
-    }
+      default: `./dist/cjs/*.js`,
+    },
+  },
+  "./*.js": {
+    import: {
+      types: `./dist/esm/*.d.ts`,
+      default: `./dist/esm/*.js`,
+    },
+    require: {
+      types: `./dist/cjs/*.d.ts`,
+      default: `./dist/cjs/*.js`,
+    },
   },
 };
 
 for (let dir of dirs) {
   if (!isFile(join("./lib", dir, "index.ts"))) continue;
   exports[`./${dir}`] = {
-    "import": {
+    import: {
       types: `./dist/esm/${dir}/index.d.ts`,
       default: `./dist/esm/${dir}/index.js`,
     },
-    "require": {
+    require: {
       types: `./dist/cjs/${dir}/index.d.ts`,
       default: `./dist/cjs/${dir}/index.js`,
-    }
+    },
   };
 
   exports[`./${dir}/*`] = {
-    "import": {
+    import: {
       types: `./dist/esm/${dir}/*.d.ts`,
       default: `./dist/esm/${dir}/*.js`,
     },
-    "require": {
+    require: {
       types: `./dist/cjs/${dir}/*.d.ts`,
       default: `./dist/cjs/${dir}/*.js`,
-    }
+    },
+  };
+
+  exports[`./${dir}/*.js`] = {
+    import: {
+      types: `./dist/esm/${dir}/*.d.ts`,
+      default: `./dist/esm/${dir}/*.js`,
+    },
+    require: {
+      types: `./dist/cjs/${dir}/*.d.ts`,
+      default: `./dist/cjs/${dir}/*.js`,
+    },
   };
 }
 

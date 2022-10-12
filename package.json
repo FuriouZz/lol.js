@@ -49,6 +49,16 @@
         "default": "./dist/cjs/*.js"
       }
     },
+    "./*.js": {
+      "import": {
+        "types": "./dist/esm/*.d.ts",
+        "default": "./dist/esm/*.js"
+      },
+      "require": {
+        "types": "./dist/cjs/*.d.ts",
+        "default": "./dist/cjs/*.js"
+      }
+    },
     "./array": {
       "import": {
         "types": "./dist/esm/array/index.d.ts",
@@ -60,6 +70,16 @@
       }
     },
     "./array/*": {
+      "import": {
+        "types": "./dist/esm/array/*.d.ts",
+        "default": "./dist/esm/array/*.js"
+      },
+      "require": {
+        "types": "./dist/cjs/array/*.d.ts",
+        "default": "./dist/cjs/array/*.js"
+      }
+    },
+    "./array/*.js": {
       "import": {
         "types": "./dist/esm/array/*.d.ts",
         "default": "./dist/esm/array/*.js"
@@ -89,6 +109,16 @@
         "default": "./dist/cjs/collections/*.js"
       }
     },
+    "./collections/*.js": {
+      "import": {
+        "types": "./dist/esm/collections/*.d.ts",
+        "default": "./dist/esm/collections/*.js"
+      },
+      "require": {
+        "types": "./dist/cjs/collections/*.d.ts",
+        "default": "./dist/cjs/collections/*.js"
+      }
+    },
     "./dom": {
       "import": {
         "types": "./dist/esm/dom/index.d.ts",
@@ -100,6 +130,16 @@
       }
     },
     "./dom/*": {
+      "import": {
+        "types": "./dist/esm/dom/*.d.ts",
+        "default": "./dist/esm/dom/*.js"
+      },
+      "require": {
+        "types": "./dist/cjs/dom/*.d.ts",
+        "default": "./dist/cjs/dom/*.js"
+      }
+    },
+    "./dom/*.js": {
       "import": {
         "types": "./dist/esm/dom/*.d.ts",
         "default": "./dist/esm/dom/*.js"
@@ -129,6 +169,16 @@
         "default": "./dist/cjs/function/*.js"
       }
     },
+    "./function/*.js": {
+      "import": {
+        "types": "./dist/esm/function/*.d.ts",
+        "default": "./dist/esm/function/*.js"
+      },
+      "require": {
+        "types": "./dist/cjs/function/*.d.ts",
+        "default": "./dist/cjs/function/*.js"
+      }
+    },
     "./math": {
       "import": {
         "types": "./dist/esm/math/index.d.ts",
@@ -140,6 +190,16 @@
       }
     },
     "./math/*": {
+      "import": {
+        "types": "./dist/esm/math/*.d.ts",
+        "default": "./dist/esm/math/*.js"
+      },
+      "require": {
+        "types": "./dist/cjs/math/*.d.ts",
+        "default": "./dist/cjs/math/*.js"
+      }
+    },
+    "./math/*.js": {
       "import": {
         "types": "./dist/esm/math/*.d.ts",
         "default": "./dist/esm/math/*.js"
@@ -169,6 +229,16 @@
         "default": "./dist/cjs/node/*.js"
       }
     },
+    "./node/*.js": {
+      "import": {
+        "types": "./dist/esm/node/*.d.ts",
+        "default": "./dist/esm/node/*.js"
+      },
+      "require": {
+        "types": "./dist/cjs/node/*.d.ts",
+        "default": "./dist/cjs/node/*.js"
+      }
+    },
     "./object": {
       "import": {
         "types": "./dist/esm/object/index.d.ts",
@@ -180,6 +250,16 @@
       }
     },
     "./object/*": {
+      "import": {
+        "types": "./dist/esm/object/*.d.ts",
+        "default": "./dist/esm/object/*.js"
+      },
+      "require": {
+        "types": "./dist/cjs/object/*.d.ts",
+        "default": "./dist/cjs/object/*.js"
+      }
+    },
+    "./object/*.js": {
       "import": {
         "types": "./dist/esm/object/*.d.ts",
         "default": "./dist/esm/object/*.js"
@@ -209,6 +289,16 @@
         "default": "./dist/cjs/promise/*.js"
       }
     },
+    "./promise/*.js": {
+      "import": {
+        "types": "./dist/esm/promise/*.d.ts",
+        "default": "./dist/esm/promise/*.js"
+      },
+      "require": {
+        "types": "./dist/cjs/promise/*.d.ts",
+        "default": "./dist/cjs/promise/*.js"
+      }
+    },
     "./string": {
       "import": {
         "types": "./dist/esm/string/index.d.ts",
@@ -220,6 +310,16 @@
       }
     },
     "./string/*": {
+      "import": {
+        "types": "./dist/esm/string/*.d.ts",
+        "default": "./dist/esm/string/*.js"
+      },
+      "require": {
+        "types": "./dist/cjs/string/*.d.ts",
+        "default": "./dist/cjs/string/*.js"
+      }
+    },
+    "./string/*.js": {
       "import": {
         "types": "./dist/esm/string/*.d.ts",
         "default": "./dist/esm/string/*.js"
