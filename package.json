@@ -1,6 +1,6 @@
 {
   "name": "@furiouzz/lol",
-  "version": "0.0.36-beta.22",
+  "version": "0.0.36-beta.23",
   "type": "module",
   "description": "LOL JS Utils",
   "scripts": {
