@@ -83,6 +83,6 @@ for (let dir of dirs) {
 const pkg = JSON.parse(readFileSync("package.json", "utf-8"));
 pkg.main = `./dist/cjs/index.js`;
 pkg.module = "./dist/esm/index.js";
-pkg.types = "./dist/types/index.d.ts";
+pkg.types = "./dist/esm/index.d.ts";
 pkg.exports = exports;
 writeFileSync("package.json", JSON.stringify(pkg, null, 2));
