@@ -1,5 +1,6 @@
 import { join } from "path";
-import { readdirSync, readFileSync, statSync, writeFileSync } from "fs";
+import { readdirSync, statSync, writeFileSync } from "fs";
+import { getConfigs, pathJoin } from "./common.mjs";
 
 const isFile = (path) => {
   try {
@@ -11,35 +12,37 @@ const isFile = (path) => {
 
 const dirs = readdirSync("./lib", { withFileTypes: false });
 
+const { esmDir, esmTypesDir, cjsDir, cjsTypesDir, pkg } = getConfigs();
+
 const exports = {
   ".": {
     import: {
-      types: `./dist/esm/index.d.ts`,
-      default: `./dist/esm/index.js`,
+      types: pathJoin(`${esmTypesDir}/index.d.ts`),
+      default: pathJoin(`${esmDir}/index.js`),
     },
     require: {
-      types: `./dist/cjs/index.d.ts`,
-      default: `./dist/cjs/index.js`,
+      types: pathJoin(`${cjsTypesDir}/index.d.ts`),
+      default: pathJoin(`${cjsDir}/index.js`),
     },
   },
   "./*": {
     import: {
-      types: `./dist/esm/*.d.ts`,
-      default: `./dist/esm/*.js`,
+      types: pathJoin(`${esmTypesDir}/*.d.ts`),
+      default: pathJoin(`${esmDir}/*.js`),
     },
     require: {
-      types: `./dist/cjs/*.d.ts`,
-      default: `./dist/cjs/*.js`,
+      types: pathJoin(`${cjsTypesDir}/*.d.ts`),
+      default: pathJoin(`${cjsDir}/*.js`),
     },
   },
   "./*.js": {
     import: {
-      types: `./dist/esm/*.d.ts`,
-      default: `./dist/esm/*.js`,
+      types: pathJoin(`${esmTypesDir}/*.d.ts`),
+      default: pathJoin(`${esmDir}/*.js`),
     },
     require: {
-      types: `./dist/cjs/*.d.ts`,
-      default: `./dist/cjs/*.js`,
+      types: pathJoin(`${cjsTypesDir}/*.d.ts`),
+      default: pathJoin(`${cjsDir}/*.js`),
     },
   },
 };
@@ -48,41 +51,40 @@ for (let dir of dirs) {
   if (!isFile(join("./lib", dir, "index.ts"))) continue;
   exports[`./${dir}`] = {
     import: {
-      types: `./dist/esm/${dir}/index.d.ts`,
-      default: `./dist/esm/${dir}/index.js`,
+      types: pathJoin(`${esmTypesDir}/${dir}/index.d.ts`),
+      default: pathJoin(`${esmDir}/${dir}/index.js`),
     },
     require: {
-      types: `./dist/cjs/${dir}/index.d.ts`,
-      default: `./dist/cjs/${dir}/index.js`,
+      types: pathJoin(`${cjsTypesDir}/${dir}/index.d.ts`),
+      default: pathJoin(`${cjsDir}/${dir}/index.js`),
     },
   };
 
   exports[`./${dir}/*`] = {
     import: {
-      types: `./dist/esm/${dir}/*.d.ts`,
-      default: `./dist/esm/${dir}/*.js`,
+      types: pathJoin(`${esmTypesDir}/${dir}/*.d.ts`),
+      default: pathJoin(`${esmDir}/${dir}/*.js`),
     },
     require: {
-      types: `./dist/cjs/${dir}/*.d.ts`,
-      default: `./dist/cjs/${dir}/*.js`,
+      types: pathJoin(`${cjsTypesDir}/${dir}/*.d.ts`),
+      default: pathJoin(`${cjsDir}/${dir}/*.js`),
     },
   };
 
   exports[`./${dir}/*.js`] = {
     import: {
-      types: `./dist/esm/${dir}/*.d.ts`,
-      default: `./dist/esm/${dir}/*.js`,
+      types: pathJoin(`${esmTypesDir}/${dir}/*.d.ts`),
+      default: pathJoin(`${esmDir}/${dir}/*.js`),
     },
     require: {
-      types: `./dist/cjs/${dir}/*.d.ts`,
-      default: `./dist/cjs/${dir}/*.js`,
+      types: pathJoin(`${cjsTypesDir}/${dir}/*.d.ts`),
+      default: pathJoin(`${cjsDir}/${dir}/*.js`),
     },
   };
 }
 
-const pkg = JSON.parse(readFileSync("package.json", "utf-8"));
-pkg.main = `./dist/cjs/index.js`;
-pkg.module = "./dist/esm/index.js";
-pkg.types = "./dist/esm/index.d.ts";
-pkg.exports = exports;
+pkg.publishConfig.main = pathJoin(`${cjsDir}/index.js`);
+pkg.publishConfig.module = pathJoin(`${esmDir}/index.js`);
+pkg.publishConfig.types = pathJoin(`${esmTypesDir}/index.d.ts`);
+pkg.publishConfig.exports = exports;
 writeFileSync("package.json", JSON.stringify(pkg, null, 2));

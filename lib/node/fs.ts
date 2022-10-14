@@ -203,19 +203,20 @@ export async function writeFile(file: string, content: string | Buffer) {
 
 export function readFile(
   file: string,
-  options?: { encoding: "utf8"; flag?: string } | string | undefined | null
-): Promise<string>;
+  options?: { encoding?: null | undefined; flag?: string | undefined }
+): Promise<Buffer>;
 export function readFile(
   file: string,
-  options?: { encoding: "utf-8"; flag?: string } | string | undefined | null
+  options?: { encoding: BufferEncoding; flag?: string | undefined }
 ): Promise<string>;
 export function readFile(
   file: string,
   options?:
-    | { encoding?: BufferEncoding; flag?: string }
-    | string
-    | undefined
+    | { encoding?: null | undefined; flag?: string | undefined }
+    | { encoding: BufferEncoding; flag?: string | undefined }
+    | BufferEncoding
     | null
+    | undefined
 ) {
   if (!isFile(file)) throw "This is not a file.";
 
@@ -354,18 +355,38 @@ export function ensureDirSync(path: string) {
   }
 }
 
-export function writeFileSync(file: string, content: string | Buffer) {
+export function writeFileSync(
+  file: string,
+  data: string | NodeJS.ArrayBufferView,
+  options?: Fs.WriteFileOptions
+) {
   ensureDirSync(dirname(file));
-  Fs.writeFileSync(file, content);
+  Fs.writeFileSync(file, data, options);
 }
 
 export function editFileSync(
   file: string,
-  callback: (value: string | Buffer) => string | Buffer
+  callback: (value: Buffer) => string | Buffer,
+  options?: { encoding?: null | undefined; flag?: string | undefined } | null
+): void;
+export function editFileSync(
+  file: string,
+  callback: (value: string) => string | Buffer,
+  options: { encoding: BufferEncoding; flag?: string | undefined }
+): void;
+export function editFileSync(
+  file: string,
+  callback: (value: any) => string | Buffer,
+  options?:
+    | { encoding?: null | undefined; flag?: string | undefined }
+    | { encoding: BufferEncoding; flag?: string | undefined }
+    | BufferEncoding
+    | null
+    | undefined
 ) {
-  const content = Fs.readFileSync(file);
+  const content = Fs.readFileSync(file, options);
   const modified = callback(content);
-  return writeFileSync(file, modified);
+  writeFileSync(file, modified);
 }
 
 export function removeSync(path: string) {
@@ -374,7 +395,7 @@ export function removeSync(path: string) {
   Fs.unlinkSync(path);
 }
 
-export function removeDirSync(dir: string) {
+export function removeDirSync(dir: string, options?: Fs.RmDirOptions) {
   const files = fetch(join(dir, "**/*"));
 
   for (let i = 0; i < files.length; i++) {
@@ -384,8 +405,8 @@ export function removeDirSync(dir: string) {
   const dirs = fetchDirs(join(dir, "**/*")).reverse();
 
   for (let j = 0; j < dirs.length; j++) {
-    Fs.rmdirSync(dirs[j]);
+    Fs.rmdirSync(dirs[j], options);
   }
 
-  Fs.rmdirSync(dir);
+  Fs.rmdirSync(dir, options);
 }

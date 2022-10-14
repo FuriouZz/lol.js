@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "target": "ES6",
-    "module": "ES2020",
     "moduleResolution": "Node16",
     "lib": [
       "es5",
@@ -14,7 +13,6 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "declaration": true,
-    "outDir": "./dist/esm"
   },
   "include": [
     "./lib/**/*"
