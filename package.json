@@ -10,7 +10,8 @@
   "files": [
     "**/*.ts",
     "**/*.js",
-    "**/*.d.ts"
+    "**/*.d.ts",
+    "**/package.json"
   ],
   "author": "Christophe Massolin <frenchise93@gmail.com> (https://chrsmsln.com)",
   "license": "ISC",
