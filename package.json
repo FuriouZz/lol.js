@@ -19,7 +19,7 @@
     "url": "https://github.com/FuriouZz/lol.js"
   },
   "dependencies": {
-    "filelist": "github:FuriouZz/filelist",
+    "filelist": "1.0.4",
     "semver": "^7.3.8"
   },
   "devDependencies": {
